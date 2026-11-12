@@ -1,24 +1,27 @@
-# Strategi og Ledelse – Økonomilab
-Norsk kunnskapsbase for mikro- og makroøkonomi, laget som selvstendig øvingsverktøy i forbindelse med masterstudier ved Nord universitet. Innholdet er ikke kontrollert mot en bestemt emneplan og er ikke offisielt materiale fra universitetet.
+# MBA NORD – Strategi og Ledelse
 
-## Start
-Fra prosjektmappen:
+Norsk kunnskapsbase for mikro- og makroøkonomi. Selvstendig øvingsverktøy, ikke offisielt materiale eller kontrollert pensum fra Nord universitet.
 
-```sh
-python3 -m http.server 8000 --directory dist
-```
+## Åpne på PC
+1. Last ned repositoryet med **Code → Download ZIP**.
+2. Pakk ut hele ZIP-filen.
+3. Dobbeltklikk **index.html** i hovedmappen. Appen åpnes i nettleseren uten installasjon eller lokal server.
 
-Åpne http://localhost:8000. Bruk HTTP-server: direkte åpning av index.html kan blokkere lasting av JSON.
+Alle temaer, quiz, flashkort og økonomilab fungerer også ved direkte filåpning. Nettleseren kan begrense lagring ved filåpning; bruk samme nettleser og filplassering for fremdrift. Ingen innlogging eller synkronisering. Nettskriftene krever nett, med lokale reservefonter.
 
 ## Filer
-- `dist/index.html`: tilgjengelig, responsiv applikasjonsstruktur
-- `dist/style.css`: design og mobiltilpasning (systemfont som reserve hvis Google Fonts er utilgjengelig)
-- `dist/app.js`: navigasjon, søk, fagfilter, quiz, flashkort og interaktiv modell
-- `dist/data.json`: 12 fagtemaer og 12 spørsmål med fasit og forklaringer
+- `index.html`: startside og innebygd kopi av fagstoffet for filåpning
+- `style.css`: design og mobiltilpasning
+- `app.js`: navigasjon, søk, quiz, flashkort og økonomimodell
+- `data.json`: 12 fagtemaer og 12 spørsmål med fasit
 
-Ingen byggeverktøy eller tredjeparts JavaScript-avhengigheter. Publiser innholdet i `dist` på en statisk vert. Fremdrift lagres i localStorage per nettleser; sletting av nettleserdata fjerner den. Ingen synkronisering eller innlogging.
+På en webserver lastes data.json; ved direkte filåpning brukes den innebygde kopien i HTML. Ved endring av data.json må også JSON-blokken med id="study-data" i index.html oppdateres. Visningen har faste antall på 12; tilpass disse hvis antallet temaer eller spørsmål endres.
 
-Oppdater `topics` og `questions` i JSON for å utvide fagstoffet. Hvert spørsmål refererer til et tema via `topic`. Antallet 12 er brukt i visningen og må oppdateres ved endring av antall temaer/spørsmål.
+## Lokal server (valgfritt)
+```sh
+python3 -m http.server 8000
+```
+Åpne http://localhost:8000.
 
-## Faglig bruk
-Eksemplene forenkler virkeligheten. Vurder alltid modellforutsetninger. Bruk sammen med emneplan, pensumbøker og forelesninger. Temaene dekker tilbud/etterspørsel, elastisitet, kostnader, markedsformer, spillteori, eksternaliteter, BNP, inflasjon, pengepolitikk, finanspolitikk, arbeidsledighet og valutakurs.
+## GitHub Pages
+For publisering via GitHub Pages, velg **Settings → Pages → Deploy from a branch → main → / (root)** og lagre. Filene ligger klare i hovedmappen. Aktivering av Pages er en separat innstilling i GitHub.
