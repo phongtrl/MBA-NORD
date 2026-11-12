@@ -919,6 +919,240 @@
       ],
       "area": "makro",
       "category": "makro"
+    },
+    {
+      "id": "n1",
+      "title": "Forelesningsguide: begreper og presisjon",
+      "subtitle": "Start her: slik er notatene renskrevet og brukt.",
+      "body": "Notatene handler foreløpig om spillteori og mikroøkonomisk atferd. De oppgir at eksamen har både mikro- og makrodel, men inneholder ikke den kommende makroteorien, pensumliste eller Canvas-oppgavene. Forelesningsløypen tar derfor utgangspunkt i de konkrete spillene, regnemetodene og trekkrekkefølgene som faktisk er omtalt.",
+      "formula": "Gevinstpar skrives alltid (spiller 1, spiller 2), også når spiller 2 velger først.",
+      "example": "H og L er spiller 1s handlinger; h og l er spiller 2s. Notatenes tabeller har mistet noe formatering. Tallene her er rekonstruert fra forventningsuttrykk og oppgitte sluttgevinster, og er gjort eksplisitte slik at de kan sammenlignes med originallysbildene.",
+      "strategy": "Bruk de oppgitte gevinstene og oppgi hvem som velger først. Skill mellom en handling, en fullstendig strategi, et utfall og en likevekt.",
+      "sections": [
+        {
+          "title": "Hva er rettet?",
+          "text": "Avskrifts- og fortegnsfeil er rettet når de motsies av samme notats øvrige tall. Uoverensstemmelser vises i rettelsesoversikten. Dette er en faglig renskriving, ikke en bekreftelse fra foreleseren eller en garanti for eksamensdekning."
+        },
+        {
+          "title": "Pareto",
+          "text": "En Pareto-forbedring krever at minst én får det bedre uten at noen får det verre. Begge kan få det bedre, men dette er ikke nødvendig. Nash tester i stedet lønnsomme ensidige avvik."
+        },
+        {
+          "title": "En praktisk eksamensstruktur",
+          "text": "1: Identifiser spillere og gevinster. 2: Avklar simultant eller sekvensielt spill og observasjon. 3: Finn beste responser. 4: Finn alle rene Nash. 5: Regn eventuell blanding ved indifferens. 6: Ved observerte sekvensielle valg, bruk baklengs induksjon og oppgi fullstendig strategiprofil. 7: Forklar økonomisk intuisjon og forutsetninger."
+        }
+      ],
+      "area": "spill",
+      "category": "mikro",
+      "lecture": true
+    },
+    {
+      "id": "n2",
+      "title": "Forelesning: Fangens dilemma med H og L",
+      "subtitle": "Notatenes egne gevinster: 3, 4, 1 og 0.",
+      "body": "Gevinstmatrisen er Hh=(3,3), Hl=(0,4), Lh=(4,0), Ll=(1,1). Spiller 1 foretrekker L mot både h og l. Spiller 2 foretrekker l mot både H og L. Dette gir én Nash-likevekt, (L,l), med utfall (1,1).",
+      "formula": "BR₁(h)=L, BR₁(l)=L · BR₂(H)=l, BR₂(L)=l",
+      "example": "Mot h gir L 4 fremfor 3. Mot l gir L 1 fremfor 0. For spiller 2 gir l 4 fremfor 3 etter H, og 1 fremfor 0 etter L. Hh=(3,3) Pareto-dominerer Ll=(1,1), men hver kan øke sin egen gevinst ved å avvike fra Hh.",
+      "strategy": "Bruk de oppgitte gevinstene og oppgi hvem som velger først. Skill mellom en handling, en fullstendig strategi, et utfall og en likevekt.",
+      "sections": [
+        {
+          "title": "Når spiller 1 velger først",
+          "text": "Spiller 2 velger l etter både H og L, altså den fullstendige strategien ll. Spiller 1 forutser dette og velger L, fordi 1>0. Delspillperfekt profil er (L,ll), utfall (1,1)."
+        },
+        {
+          "title": "Når spiller 2 velger først",
+          "text": "Spiller 1 velger L etter både h og l, altså LL. Spiller 2 velger l fordi 1>0. Profilen oppgitt i fast spillerrekkefølge er (LL,l), og utfallet er fortsatt (1,1)."
+        },
+        {
+          "title": "Dominans og timing",
+          "text": "I dette spillet endrer ikke den observerte trekkrekkefølgen sluttutfallet. Det er derfor ikke riktig å anta at førstetrekk alltid gir en fordel."
+        }
+      ],
+      "area": "spill",
+      "category": "mikro",
+      "lecture": true
+    },
+    {
+      "id": "n3",
+      "title": "Forelesning: Battle of the Sexes – blandet likevekt",
+      "subtitle": "Notatenes løsning er p=3/4 og q=1/4.",
+      "body": "Matrisen er Hh=(3,2), Hl=(1,1), Lh=(0,0), Ll=(2,3). Begge ønsker koordinering, men spiller 1 foretrekker Hh og spiller 2 foretrekker Ll. Det finnes to rene Nash-likevekter, (H,h) og (L,l), samt en indre blandet likevekt.",
+      "formula": "p=Pr(H)=3/4 · q=Pr(h)=1/4",
+      "example": "For spiller 1: U(H)=3q+1(1−q)=1+2q og U(L)=0q+2(1−q)=2−2q. Indifferens gir 4q=1, q=1/4. For spiller 2: U(h)=2p og U(l)=p+3(1−p)=3−2p. Indifferens gir 4p=3, p=3/4.",
+      "strategy": "Bruk de oppgitte gevinstene og oppgi hvem som velger først. Skill mellom en handling, en fullstendig strategi, et utfall og en likevekt.",
+      "sections": [
+        {
+          "title": "Hvem bestemmes av likningen?",
+          "text": "Spiller 1s indifferens bestemmer q, som er spiller 2s blanding. Spiller 2s indifferens bestemmer p, som er spiller 1s blanding. Ikke bytt disse om."
+        },
+        {
+          "title": "Utfallsannsynligheter",
+          "text": "Ved uavhengig blanding er Pr(Hh)=pq=3/16, Pr(Hl)=p(1−q)=9/16, Pr(Lh)=(1−p)q=1/16 og Pr(Ll)=(1−p)(1−q)=3/16. De summerer til 1."
+        },
+        {
+          "title": "Forventet nytte og loddtrekning",
+          "text": "Spiller 1 får 3·3/16+1·9/16+0·1/16+2·3/16=1,5. Spiller 2 får også 1,5. Fordelingen beskriver sannsynligheter, ikke garanterte antall ved fire gjentakelser. En fast bunke som trekkes uten tilbakelegging er ikke en uavhengig ny trekning fra samme fordeling hver periode."
+        }
+      ],
+      "area": "spill",
+      "category": "mikro",
+      "lecture": true
+    },
+    {
+      "id": "n4",
+      "title": "Forelesning: Chicken – blanding og forventet nytte",
+      "subtitle": "Notatenes asymmetriske Chicken gir p=1/2 og q=4/5.",
+      "body": "Matrisen er Hh=(1,0), Hl=(4,2), Lh=(2,3), Ll=(0,1). Spillerne foretrekker ulike handlinger i de rene likevektene: (H,l) og (L,h). Ingen har en strengt dominant strategi.",
+      "formula": "p=Pr(H)=1/2 · q=Pr(h)=4/5 · E[u₁]=1,6 · E[u₂]=1,5",
+      "example": "Spiller 1: U(H)=q+4(1−q)=4−3q og U(L)=2q+0(1−q)=2q. Likhet gir 4=5q, q=4/5. Spiller 2: U(h)=3(1−p) og U(l)=2p+(1−p)=1+p. Likhet gir 3−3p=1+p, altså p=1/2.",
+      "strategy": "Bruk de oppgitte gevinstene og oppgi hvem som velger først. Skill mellom en handling, en fullstendig strategi, et utfall og en likevekt.",
+      "sections": [
+        {
+          "title": "Sannsynlighetene",
+          "text": "Pr(Hh)=0,5·0,8=0,4; Pr(Hl)=0,5·0,2=0,1; Pr(Lh)=0,5·0,8=0,4; Pr(Ll)=0,5·0,2=0,1."
+        },
+        {
+          "title": "To metoder som skal gi samme svar",
+          "text": "Fra indifferens: U₁(H)=4−3·0,8=1,6 og U₂(h)=3·0,5=1,5. Fra hele matrisen: E[u₁]=1·0,4+4·0,1+2·0,4+0·0,1=1,6; E[u₂]=0·0,4+2·0,1+3·0,4+1·0,1=1,5."
+        },
+        {
+          "title": "Fortegn og nullgevinster",
+          "text": "Notatene har enkelte linjer der 4(1−q) utvides med feil fortegn, eller der 0(1−q) blir borte på feil måte. Bruk 4−4q og behold at L,l gir spiller 1 null. Sluttsannsynlighetene i notatene er likevel riktige."
+        }
+      ],
+      "area": "spill",
+      "category": "mikro",
+      "lecture": true
+    },
+    {
+      "id": "n5",
+      "title": "Forelesning: Matching Pennies med egne gevinster",
+      "subtitle": "Ingen ren Nash, men blandet likevekt finnes.",
+      "body": "Matrisen er Hh=(6,1), Hl=(1,5), Lh=(3,4), Ll=(4,2). Spiller 1s beste responser er H mot h og L mot l; spiller 2s er l mot H og h mot L. Ingen celle er gjensidig beste respons. Spillet har derfor ingen ren Nash-likevekt, men en indre blandet likevekt.",
+      "formula": "p=Pr(H)=1/3 · q=Pr(h)=1/2 · E[u₁]=3,5 · E[u₂]=3",
+      "example": "Spiller 1: 6q+1(1−q)=3q+4(1−q) gir 5q+1=4−q, altså q=1/2. Spiller 2: p+4(1−p)=5p+2(1−p) gir 4−3p=2+3p, altså −6p=−2 og p=1/3.",
+      "strategy": "Bruk de oppgitte gevinstene og oppgi hvem som velger først. Skill mellom en handling, en fullstendig strategi, et utfall og en likevekt.",
+      "sections": [
+        {
+          "title": "Dette er ikke et nullsumspill",
+          "text": "Spillet har samme kvalitative beste-respons-syklus som Matching Pennies, men de konkrete gevinstene summerer ikke til samme konstant i alle celler. Ikke bruk standard nullsumgevinster (1,−1) eller automatisk p=q=1/2 her."
+        },
+        {
+          "title": "Kontroll av forventet nytte",
+          "text": "Mot q=1/2 gir H 6·0,5+1·0,5=3,5 og L 3·0,5+4·0,5=3,5. Mot p=1/3 gir h 1/3+4·2/3=3 og l 5/3+2·2/3=3."
+        },
+        {
+          "title": "Rettelse av et fortegn",
+          "text": "Notatlinjen −6p=2 skal være −6p=−2. Sluttsvaret p=1/3 er riktig. «Ingen Nash-likevekt» må presiseres til «ingen Nash-likevekt i rene strategier»."
+        }
+      ],
+      "area": "spill",
+      "category": "mikro",
+      "lecture": true
+    },
+    {
+      "id": "n6",
+      "title": "Forelesning: strategier, normalform og spilltrær",
+      "subtitle": "hh, hl, lh og ll er fullstendige planer.",
+      "body": "Når spiller 1 velger H eller L først og spiller 2 observerer dette, har spiller 2 fire rene strategier. Første bokstav beskriver valget etter H; andre bokstav valget etter L. Strategien hl betyr h etter H og l etter L, ikke et samtidig valg av begge handlingene.",
+      "formula": "Spiller 1 først: S₁={H,L}, S₂={hh,hl,lh,ll}",
+      "example": "I Battle of the Sexes gir (H,hl) utfallet Hh=(3,2), mens (L,hl) gir Ll=(2,3). Planen hl er den samme i begge profiler, men den realiserte handlingen avhenger av hva spiller 1 velger.",
+      "strategy": "Bruk de oppgitte gevinstene og oppgi hvem som velger først. Skill mellom en handling, en fullstendig strategi, et utfall og en likevekt.",
+      "sections": [
+        {
+          "title": "Når spiller 2 velger først",
+          "text": "Da har spiller 2 strategiene h og l, mens spiller 1 må planlegge respons etter begge: HH, HL, LH, LL. I HL betyr første bokstav H etter h og andre bokstav L etter l. Gevinstparene beholder fortsatt rekkefølgen (spiller 1, spiller 2)."
+        },
+        {
+          "title": "Nash i normalformen",
+          "text": "Bygg 2×4- eller 4×2-matrisen ved å finne det realiserte handlingsparet for hver fullstendige profil. Finn deretter beste responser som vanlig. Noen Nash-profiler kan bygge på en ikke-optimal handling utenfor banen."
+        },
+        {
+          "title": "Delspillperfeksjon",
+          "text": "Ved perfekt observasjon må den andre aktørens plan være optimal etter hvert mulig førstetrekk, også det som ikke faktisk spilles. Deretter velger første aktør optimalt gitt denne planen. Dette er baklengs induksjon."
+        }
+      ],
+      "area": "spill",
+      "category": "mikro",
+      "lecture": true
+    },
+    {
+      "id": "n7",
+      "title": "Forelesning: Battle of the Sexes og førstetrekk",
+      "subtitle": "Rett spilleridentitet gir riktig delspillperfekt løsning.",
+      "body": "Bruk Hh=(3,2), Hl=(1,1), Lh=(0,0), Ll=(2,3). Når spiller 1 velger først, velger spiller 2 h etter H og l etter L: hl. Spiller 1 sammenligner da 3 ved H med 2 ved L og velger H. Delspillperfekt profil er (H,hl) og utfall (3,2).",
+      "formula": "1 først: (H,hl) → (3,2) · 2 først: (HL,l) → (2,3)",
+      "example": "Når spiller 2 velger først, svarer spiller 1 H etter h (3>0) og L etter l (2>1): HL. Spiller 2 får 2 ved h og 3 ved l og velger derfor l. Utfallet er (2,3), ikke (3,2).",
+      "strategy": "Bruk de oppgitte gevinstene og oppgi hvem som velger først. Skill mellom en handling, en fullstendig strategi, et utfall og en likevekt.",
+      "sections": [
+        {
+          "title": "Vanlige Nash versus delspillperfekt, 1 først",
+          "text": "Normalformen har Nash-profilene (H,hh), (H,hl) og (L,ll). Bare (H,hl) er delspillperfekt. I hh er h etter L ikke optimalt for spiller 2; i ll er l etter H ikke optimalt."
+        },
+        {
+          "title": "Vanlige Nash versus delspillperfekt, 2 først",
+          "text": "I fast spillerrekkefølge er Nash-profilene (HH,h), (HL,l) og (LL,l). Bare (HL,l) er delspillperfekt. Ved h svarer spiller 1 optimalt H; ved l optimalt L."
+        },
+        {
+          "title": "Rettelse av sammendraget",
+          "text": "Det innlimte Copilot-sammendraget bytter om spilleridentiteter og ender med at førstetrekkende spiller 2 velger h. Med disse gevinstene velger spiller 2 l, fordi dens egen gevinst er 3 fremfor 2. Spillet gir førstetrekkfordel til den som faktisk velger først."
+        }
+      ],
+      "area": "spill",
+      "category": "mikro",
+      "lecture": true
+    },
+    {
+      "id": "n8",
+      "title": "Forelesning: Chicken med omvendt trekkrekkefølge",
+      "subtitle": "Løs leksen med baklengs induksjon, ikke simultan blanding.",
+      "body": "Bruk Hh=(1,0), Hl=(4,2), Lh=(2,3), Ll=(0,1). Når spiller 1 velger først, svarer spiller 2 l etter H og h etter L: lh. Spiller 1 velger H fordi 4>2. Delspillperfekt profil er (H,lh), med utfall (4,2).",
+      "formula": "1 først: (H,lh) → (4,2) · 2 først: (LH,h) → (2,3)",
+      "example": "Når spiller 2 velger først, svarer spiller 1 L etter h (2>1) og H etter l (4>0), altså LH. Spiller 2 sammenligner egen gevinst 3 ved h med 2 ved l og velger h. Profilen er (LH,h) i fast spillerrekkefølge, eller (h,LH) dersom førstetrekkeren listes først.",
+      "strategy": "Bruk de oppgitte gevinstene og oppgi hvem som velger først. Skill mellom en handling, en fullstendig strategi, et utfall og en likevekt.",
+      "sections": [
+        {
+          "title": "Hva leksen spør om",
+          "text": "Å snu trekkrekkefølgen endrer observasjon og strategisett. Det krever et nytt spilltre eller en ny normalform. Å gjenta p=1/2 og q=4/5 fra det simultane spillet løser ikke det sekvensielle spillet."
+        },
+        {
+          "title": "Tom trussel",
+          "text": "Med spiller 1 først er (H,ll) Nash i normalform, men l etter L gir spiller 2 bare 1 mot 3 ved h. Med spiller 2 først er (HH,l) Nash, men H etter h gir spiller 1 bare 1 mot 2 ved L. Disse planene er ikke delspillperfekte."
+        },
+        {
+          "title": "Fordel av å velge først",
+          "text": "Spiller 1 får 4 hvis den velger først, men 2 hvis den svarer. Spiller 2 får 3 hvis den velger først, men 2 hvis den svarer. Begge foretrekker å være først i dette konkrete Chicken-spillet."
+        }
+      ],
+      "area": "spill",
+      "category": "mikro",
+      "lecture": true
+    },
+    {
+      "id": "n9",
+      "title": "Forelesning: andretrekkfordel og endret gevinst",
+      "subtitle": "Matching Pennies og varianten som skaper enighet om rekkefølgen.",
+      "body": "I notatenes første Matching Pennies-lignende spill gir spiller 1 først delspillperfekt profil (L,lh) med (3,4). Spiller 2 først gir (HL,l) med (4,2). Spiller 1 vil derfor helst svare, og spiller 2 vil også helst svare. Begge ønsker å vente på den andre.",
+      "formula": "Original: 1 først → (3,4), 2 først → (4,2) · Variant: 1 først → (5,4), 2 først → (4,2)",
+      "example": "Varianten endrer bare Lh fra (3,4) til (5,4). Hvis spiller 1 velger først, svarer spiller 2 fortsatt l etter H og h etter L; spiller 1 velger L og får 5. Hvis spiller 2 velger først, svarer spiller 1 fortsatt H etter h (6>5) og L etter l (4>1); spiller 2 velger l, og utfallet er (4,2).",
+      "strategy": "Bruk de oppgitte gevinstene og oppgi hvem som velger først. Skill mellom en handling, en fullstendig strategi, et utfall og en likevekt.",
+      "sections": [
+        {
+          "title": "Hvorfor begge vil svare i originalen",
+          "text": "Spiller 1 sammenligner egen gevinst 3 som førstetrekker med 4 som andretrekker. Spiller 2 sammenligner egen gevinst 2 som førstetrekker med 4 som andretrekker. Hold aktøren fast når du sammenligner."
+        },
+        {
+          "title": "Harmoni om rekkefølgen i varianten",
+          "text": "Spiller 1 foretrekker nå å velge først (5>4). Spiller 2 foretrekker å velge sist (4>2). Begge ønsker dermed at spiller 1 velger først. Det betyr enighet om rekkefølgen, ikke at alle interessekonflikter i selve spillet forsvinner."
+        },
+        {
+          "title": "Førstetrekk er ingen naturlov",
+          "text": "Sammenlign egne gevinster i de to delspillperfekte utfallene. Ikke bruk navn på spill eller et generelt slagord for å avgjøre om første- eller andretrekk er best."
+        }
+      ],
+      "area": "spill",
+      "category": "mikro",
+      "lecture": true
     }
   ],
   "questions": [
@@ -2685,6 +2919,629 @@
       "answer": 1,
       "explanation": "5−4=1 prosentpoeng. Relativ økning er (5−4)/4=25 %, som er et annet mål.",
       "level": "middels"
+    },
+    {
+      "id": "q133",
+      "topic": "n2",
+      "question": "Forelesning · Fangens dilemma · simultant: Hvilke er ALLE rene Nash-likevekter?",
+      "options": [
+        "(L, l)",
+        "(H, h)",
+        "(H, l)"
+      ],
+      "answer": 0,
+      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (L, l). Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "level": "middels",
+      "game": "notes-pd"
+    },
+    {
+      "id": "q134",
+      "topic": "n6",
+      "question": "Forelesning · Fangens dilemma · spiller 1 først: Hvilke er ALLE rene Nash-likevekter?",
+      "options": [
+        "(H, hh)",
+        "(H, hl)",
+        "(L, ll)"
+      ],
+      "answer": 2,
+      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (L, ll). Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (L, ll) er delspillperfekt. Utfall (1, 1). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "level": "middels",
+      "game": "notes-pd-first1"
+    },
+    {
+      "id": "q135",
+      "topic": "n6",
+      "question": "Forelesning · Fangens dilemma · spiller 1 først: Hvilken profil er delspillperfekt?",
+      "options": [
+        "(H, hl)",
+        "(L, ll)",
+        "(H, hh)"
+      ],
+      "answer": 1,
+      "explanation": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (L, ll) er delspillperfekt. Utfall (1, 1). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L. Løs siste aktørs valg ved hver gren, også utenfor likevektsbanen. Velg deretter første aktørs beste handling.",
+      "level": "fordypning",
+      "game": "notes-pd-first1"
+    },
+    {
+      "id": "q136",
+      "topic": "n6",
+      "question": "Forelesning · Fangens dilemma · spiller 2 først: Hvilke er ALLE rene Nash-likevekter?",
+      "options": [
+        "(LL, l)",
+        "(HH, h)",
+        "(HH, l)"
+      ],
+      "answer": 0,
+      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (LL, l). Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (LL, l) er delspillperfekt. Utfall (1, 1). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "level": "middels",
+      "game": "notes-pd-first2"
+    },
+    {
+      "id": "q137",
+      "topic": "n6",
+      "question": "Forelesning · Fangens dilemma · spiller 2 først: Hvilken profil er delspillperfekt?",
+      "options": [
+        "(HH, h)",
+        "(HH, l)",
+        "(LL, l)"
+      ],
+      "answer": 2,
+      "explanation": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (LL, l) er delspillperfekt. Utfall (1, 1). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L. Løs siste aktørs valg ved hver gren, også utenfor likevektsbanen. Velg deretter første aktørs beste handling.",
+      "level": "fordypning",
+      "game": "notes-pd-first2"
+    },
+    {
+      "id": "q138",
+      "topic": "n3",
+      "question": "Forelesning · Battle of the Sexes · simultant: Hvilke er ALLE rene Nash-likevekter?",
+      "options": [
+        "(H, l)",
+        "(H, h), (L, l)",
+        "(H, h)"
+      ],
+      "answer": 1,
+      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (H, h), (L, l). Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "level": "middels",
+      "game": "notes-bos"
+    },
+    {
+      "id": "q139",
+      "topic": "n7",
+      "question": "Forelesning · Battle of the Sexes · spiller 1 først: Hvilke er ALLE rene Nash-likevekter?",
+      "options": [
+        "(H, hh), (H, hl), (L, ll)",
+        "(H, hh)",
+        "(H, hl)"
+      ],
+      "answer": 0,
+      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (H, hh), (H, hl), (L, ll). Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (H, hl) er delspillperfekt. Utfall (3, 2). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "level": "middels",
+      "game": "notes-bos-first1"
+    },
+    {
+      "id": "q140",
+      "topic": "n7",
+      "question": "Forelesning · Battle of the Sexes · spiller 1 først: Hvilken profil er delspillperfekt?",
+      "options": [
+        "(H, hh)",
+        "(H, lh)",
+        "(H, hl)"
+      ],
+      "answer": 2,
+      "explanation": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (H, hl) er delspillperfekt. Utfall (3, 2). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L. Løs siste aktørs valg ved hver gren, også utenfor likevektsbanen. Velg deretter første aktørs beste handling.",
+      "level": "fordypning",
+      "game": "notes-bos-first1"
+    },
+    {
+      "id": "q141",
+      "topic": "n7",
+      "question": "Forelesning · Battle of the Sexes · spiller 2 først: Hvilke er ALLE rene Nash-likevekter?",
+      "options": [
+        "(HH, l)",
+        "(HH, h), (HL, l), (LL, l)",
+        "(HH, h)"
+      ],
+      "answer": 1,
+      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (HH, h), (HL, l), (LL, l). Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (HL, l) er delspillperfekt. Utfall (2, 3). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "level": "middels",
+      "game": "notes-bos-first2"
+    },
+    {
+      "id": "q142",
+      "topic": "n7",
+      "question": "Forelesning · Battle of the Sexes · spiller 2 først: Hvilken profil er delspillperfekt?",
+      "options": [
+        "(HL, l)",
+        "(HH, h)",
+        "(HH, l)"
+      ],
+      "answer": 0,
+      "explanation": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (HL, l) er delspillperfekt. Utfall (2, 3). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L. Løs siste aktørs valg ved hver gren, også utenfor likevektsbanen. Velg deretter første aktørs beste handling.",
+      "level": "fordypning",
+      "game": "notes-bos-first2"
+    },
+    {
+      "id": "q143",
+      "topic": "n4",
+      "question": "Forelesning · Chicken · simultant: Hvilke er ALLE rene Nash-likevekter?",
+      "options": [
+        "(H, h)",
+        "(H, l)",
+        "(H, l), (L, h)"
+      ],
+      "answer": 2,
+      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (H, l), (L, h). Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "level": "middels",
+      "game": "notes-chicken"
+    },
+    {
+      "id": "q144",
+      "topic": "n8",
+      "question": "Forelesning · Chicken · spiller 1 først: Hvilke er ALLE rene Nash-likevekter?",
+      "options": [
+        "(H, hl)",
+        "(H, lh), (H, ll), (L, hh)",
+        "(H, hh)"
+      ],
+      "answer": 1,
+      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (H, lh), (H, ll), (L, hh). Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (H, lh) er delspillperfekt. Utfall (4, 2). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "level": "middels",
+      "game": "notes-chicken-first1"
+    },
+    {
+      "id": "q145",
+      "topic": "n8",
+      "question": "Forelesning · Chicken · spiller 1 først: Hvilken profil er delspillperfekt?",
+      "options": [
+        "(H, lh)",
+        "(H, hh)",
+        "(H, hl)"
+      ],
+      "answer": 0,
+      "explanation": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (H, lh) er delspillperfekt. Utfall (4, 2). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L. Løs siste aktørs valg ved hver gren, også utenfor likevektsbanen. Velg deretter første aktørs beste handling.",
+      "level": "fordypning",
+      "game": "notes-chicken-first1"
+    },
+    {
+      "id": "q146",
+      "topic": "n8",
+      "question": "Forelesning · Chicken · spiller 2 først: Hvilke er ALLE rene Nash-likevekter?",
+      "options": [
+        "(HH, h)",
+        "(HH, l)",
+        "(HH, l), (LH, h), (LL, h)"
+      ],
+      "answer": 2,
+      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (HH, l), (LH, h), (LL, h). Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (LH, h) er delspillperfekt. Utfall (2, 3). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "level": "middels",
+      "game": "notes-chicken-first2"
+    },
+    {
+      "id": "q147",
+      "topic": "n8",
+      "question": "Forelesning · Chicken · spiller 2 først: Hvilken profil er delspillperfekt?",
+      "options": [
+        "(HH, l)",
+        "(LH, h)",
+        "(HH, h)"
+      ],
+      "answer": 1,
+      "explanation": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (LH, h) er delspillperfekt. Utfall (2, 3). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L. Løs siste aktørs valg ved hver gren, også utenfor likevektsbanen. Velg deretter første aktørs beste handling.",
+      "level": "fordypning",
+      "game": "notes-chicken-first2"
+    },
+    {
+      "id": "q148",
+      "topic": "n5",
+      "question": "Forelesning · Matching Pennies-lignende · simultant: Hvilke er ALLE rene Nash-likevekter?",
+      "options": [
+        "Ingen rene Nash-likevekter",
+        "(H, h)",
+        "(H, l)"
+      ],
+      "answer": 0,
+      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: Ingen rene Nash-likevekter. Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "level": "middels",
+      "game": "notes-mp"
+    },
+    {
+      "id": "q149",
+      "topic": "n9",
+      "question": "Forelesning · Matching Pennies-lignende · spiller 1 først: Hvilke er ALLE rene Nash-likevekter?",
+      "options": [
+        "(H, hh)",
+        "(H, hl)",
+        "(L, lh)"
+      ],
+      "answer": 2,
+      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (L, lh). Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (L, lh) er delspillperfekt. Utfall (3, 4). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "level": "middels",
+      "game": "notes-mp-first1"
+    },
+    {
+      "id": "q150",
+      "topic": "n9",
+      "question": "Forelesning · Matching Pennies-lignende · spiller 1 først: Hvilken profil er delspillperfekt?",
+      "options": [
+        "(H, hl)",
+        "(L, lh)",
+        "(H, hh)"
+      ],
+      "answer": 1,
+      "explanation": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (L, lh) er delspillperfekt. Utfall (3, 4). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L. Løs siste aktørs valg ved hver gren, også utenfor likevektsbanen. Velg deretter første aktørs beste handling.",
+      "level": "fordypning",
+      "game": "notes-mp-first1"
+    },
+    {
+      "id": "q151",
+      "topic": "n9",
+      "question": "Forelesning · Matching Pennies-lignende · spiller 2 først: Hvilke er ALLE rene Nash-likevekter?",
+      "options": [
+        "(HL, l)",
+        "(HH, h)",
+        "(HH, l)"
+      ],
+      "answer": 0,
+      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (HL, l). Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (HL, l) er delspillperfekt. Utfall (4, 2). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "level": "middels",
+      "game": "notes-mp-first2"
+    },
+    {
+      "id": "q152",
+      "topic": "n9",
+      "question": "Forelesning · Matching Pennies-lignende · spiller 2 først: Hvilken profil er delspillperfekt?",
+      "options": [
+        "(HH, h)",
+        "(HH, l)",
+        "(HL, l)"
+      ],
+      "answer": 2,
+      "explanation": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (HL, l) er delspillperfekt. Utfall (4, 2). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L. Løs siste aktørs valg ved hver gren, også utenfor likevektsbanen. Velg deretter første aktørs beste handling.",
+      "level": "fordypning",
+      "game": "notes-mp-first2"
+    },
+    {
+      "id": "q153",
+      "topic": "n9",
+      "question": "Forelesning · Matching Pennies, variant · simultant: Hvilke er ALLE rene Nash-likevekter?",
+      "options": [
+        "(H, l)",
+        "Ingen rene Nash-likevekter",
+        "(H, h)"
+      ],
+      "answer": 1,
+      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: Ingen rene Nash-likevekter. Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "level": "middels",
+      "game": "notes-variant"
+    },
+    {
+      "id": "q154",
+      "topic": "n9",
+      "question": "Forelesning · Matching Pennies, variant · spiller 1 først: Hvilke er ALLE rene Nash-likevekter?",
+      "options": [
+        "(L, lh)",
+        "(H, hh)",
+        "(H, hl)"
+      ],
+      "answer": 0,
+      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (L, lh). Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (L, lh) er delspillperfekt. Utfall (5, 4). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "level": "middels",
+      "game": "notes-variant-first1"
+    },
+    {
+      "id": "q155",
+      "topic": "n9",
+      "question": "Forelesning · Matching Pennies, variant · spiller 1 først: Hvilken profil er delspillperfekt?",
+      "options": [
+        "(H, hh)",
+        "(H, hl)",
+        "(L, lh)"
+      ],
+      "answer": 2,
+      "explanation": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (L, lh) er delspillperfekt. Utfall (5, 4). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L. Løs siste aktørs valg ved hver gren, også utenfor likevektsbanen. Velg deretter første aktørs beste handling.",
+      "level": "fordypning",
+      "game": "notes-variant-first1"
+    },
+    {
+      "id": "q156",
+      "topic": "n9",
+      "question": "Forelesning · Matching Pennies, variant · spiller 2 først: Hvilke er ALLE rene Nash-likevekter?",
+      "options": [
+        "(HH, l)",
+        "(HL, l)",
+        "(HH, h)"
+      ],
+      "answer": 1,
+      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (HL, l). Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (HL, l) er delspillperfekt. Utfall (4, 2). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "level": "middels",
+      "game": "notes-variant-first2"
+    },
+    {
+      "id": "q157",
+      "topic": "n9",
+      "question": "Forelesning · Matching Pennies, variant · spiller 2 først: Hvilken profil er delspillperfekt?",
+      "options": [
+        "(HL, l)",
+        "(HH, h)",
+        "(HH, l)"
+      ],
+      "answer": 0,
+      "explanation": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (HL, l) er delspillperfekt. Utfall (4, 2). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L. Løs siste aktørs valg ved hver gren, også utenfor likevektsbanen. Velg deretter første aktørs beste handling.",
+      "level": "fordypning",
+      "game": "notes-variant-first2"
+    },
+    {
+      "id": "q158",
+      "topic": "n1",
+      "question": "Hvilket utsagn om eksamensdekning støttes av disse notatene?",
+      "options": [
+        "Notatene dekker hele makropensumet",
+        "Canvas-oppgavene er allerede inkludert",
+        "Både mikro og makro omtales som eksamensdeler, men makrostoffet er ikke med her"
+      ],
+      "answer": 2,
+      "explanation": "Notatene sier at makro kommer, og viser til Canvas. Verken emneplan, pensumliste eller selve Canvas-oppgavene fulgte med.",
+      "level": "middels"
+    },
+    {
+      "id": "q159",
+      "topic": "n2",
+      "question": "I forelesningens fangens dilemma: hvorfor er L dominant for spiller 1?",
+      "options": [
+        "Bare fordi spilleren velger først",
+        "4>3 mot h og 1>0 mot l",
+        "Fordi alle summer er like"
+      ],
+      "answer": 1,
+      "explanation": "Sammenlign spiller 1s egne tall i hver fast kolonne. L er best uansett motpartens valg.",
+      "level": "middels"
+    },
+    {
+      "id": "q160",
+      "topic": "n3",
+      "question": "Hva er q i forelesningens blandede Battle of the Sexes?",
+      "options": [
+        "1/4",
+        "2/5",
+        "3/4"
+      ],
+      "answer": 0,
+      "explanation": "3q+1(1−q)=0q+2(1−q) gir 1+2q=2−2q, så 4q=1 og q=1/4.",
+      "level": "middels"
+    },
+    {
+      "id": "q161",
+      "topic": "n3",
+      "question": "Hva er p i forelesningens blandede Battle of the Sexes?",
+      "options": [
+        "1/4",
+        "3/5",
+        "3/4"
+      ],
+      "answer": 2,
+      "explanation": "2p=p+3(1−p) gir 2p=3−2p og p=3/4. Disse gevinstene er ulike det tidligere standardeksemplet i appen.",
+      "level": "middels"
+    },
+    {
+      "id": "q162",
+      "topic": "n3",
+      "question": "Med p=3/4 og q=1/4, hva er Pr(H,l) ved uavhengig blanding?",
+      "options": [
+        "1/16",
+        "9/16",
+        "3/16"
+      ],
+      "answer": 1,
+      "explanation": "Pr(H,l)=p(1−q)=(3/4)(3/4)=9/16.",
+      "level": "middels"
+    },
+    {
+      "id": "q163",
+      "topic": "n3",
+      "question": "Hva er forventet nytte til spiller 1 i denne blandede likevekten?",
+      "options": [
+        "1,5",
+        "3",
+        "2"
+      ],
+      "answer": 0,
+      "explanation": "U(H)=3·1/4+1·3/4=1,5. U(L)=0·1/4+2·3/4=1,5, som kontrollerer indifferens.",
+      "level": "middels"
+    },
+    {
+      "id": "q164",
+      "topic": "n4",
+      "question": "Hva er korrekt uttrykk for spiller 1s nytte ved L i notatenes Chicken?",
+      "options": [
+        "2q+1(1−q)",
+        "3q+1(1−q)",
+        "2q+0(1−q)"
+      ],
+      "answer": 2,
+      "explanation": "Gevinsten for spiller 1 er 2 i Lh og 0 i Ll. Bruk eget tall, ikke spiller 2s gevinst 1 ved Ll.",
+      "level": "middels"
+    },
+    {
+      "id": "q165",
+      "topic": "n4",
+      "question": "Løs 4−3q=2q i forelesningens Chicken.",
+      "options": [
+        "q=2/5",
+        "q=4/5",
+        "q=1/2"
+      ],
+      "answer": 1,
+      "explanation": "Legg til 3q på begge sider: 4=5q. Del på 5: q=4/5.",
+      "level": "middels"
+    },
+    {
+      "id": "q166",
+      "topic": "n4",
+      "question": "Hva er forventet nytte til spiller 2 når p=1/2 og q=4/5?",
+      "options": [
+        "1,5",
+        "1,6",
+        "0,6"
+      ],
+      "answer": 0,
+      "explanation": "U(h)=0·1/2+3·1/2=1,5. U(l)=2·1/2+1·1/2=1,5. Full kontroll: 0·0,4+2·0,1+3·0,4+1·0,1=1,5.",
+      "level": "middels"
+    },
+    {
+      "id": "q167",
+      "topic": "n4",
+      "question": "Hva er Pr(L,h) ved p=1/2 og q=4/5?",
+      "options": [
+        "1/10",
+        "1/5",
+        "4/10"
+      ],
+      "answer": 2,
+      "explanation": "(1−p)q=(1/2)(4/5)=4/10.",
+      "level": "middels"
+    },
+    {
+      "id": "q168",
+      "topic": "n5",
+      "question": "Hva er riktig konklusjon for notatenes simultane Matching Pennies-lignende spill?",
+      "options": [
+        "Ren Nash ved Hh",
+        "Ingen ren Nash, men en blandet likevekt",
+        "Ingen Nash-likevekt overhodet"
+      ],
+      "answer": 1,
+      "explanation": "Alle fire rene profiler har et lønnsomt avvik. Indifferens gir en gyldig blanding p=1/3, q=1/2.",
+      "level": "middels"
+    },
+    {
+      "id": "q169",
+      "topic": "n5",
+      "question": "Er notatenes konkrete Matching Pennies-matrise et nullsumspill?",
+      "options": [
+        "Nei",
+        "Ja, fordi navnet er Matching Pennies",
+        "Ja, fordi ingen ren Nash finnes"
+      ],
+      "answer": 0,
+      "explanation": "Gevinstsummene varierer: Hh=7, Hl=6, Lh=7, Ll=6. Det er ikke nullsum eller konstantsum med disse tallene.",
+      "level": "middels"
+    },
+    {
+      "id": "q170",
+      "topic": "n5",
+      "question": "Løs 4−3p=2+3p.",
+      "options": [
+        "p=−1/3",
+        "p=1/2",
+        "p=1/3"
+      ],
+      "answer": 2,
+      "explanation": "Flytt ledd: 2=6p, altså p=1/3. Alternativt −6p=−2. Begge gir samme svar.",
+      "level": "middels"
+    },
+    {
+      "id": "q171",
+      "topic": "n5",
+      "question": "Hva er forventet nytte til spiller 1 ved q=1/2 i forelesningens spill?",
+      "options": [
+        "3",
+        "3,5",
+        "0"
+      ],
+      "answer": 1,
+      "explanation": "H gir 6·1/2+1·1/2=3,5; L gir 3·1/2+4·1/2=3,5.",
+      "level": "middels"
+    },
+    {
+      "id": "q172",
+      "topic": "n6",
+      "question": "Spiller 1 velger først. Hva betyr spiller 2s strategi lh?",
+      "options": [
+        "l etter H og h etter L",
+        "l etter h og h etter l",
+        "At begge handlingene utføres samtidig"
+      ],
+      "answer": 0,
+      "explanation": "Første bokstav gjelder respons etter H, andre etter L. Det er en fullstendig plan, ikke et realisert handlingspar.",
+      "level": "middels"
+    },
+    {
+      "id": "q173",
+      "topic": "n6",
+      "question": "Spiller 2 velger først. Hva betyr spiller 1s strategi HL?",
+      "options": [
+        "H først og L senere uansett observasjon",
+        "En blanding med p=1/2",
+        "H etter h og L etter l"
+      ],
+      "answer": 2,
+      "explanation": "Første bokstav gjelder h-grenen og andre l-grenen. Planen er en ren strategi.",
+      "level": "middels"
+    },
+    {
+      "id": "q174",
+      "topic": "n7",
+      "question": "Når spiller 2 velger først i notatenes Battle of the Sexes, hva blir delspillperfekt utfall?",
+      "options": [
+        "(1,1)",
+        "(2,3)",
+        "(3,2)"
+      ],
+      "answer": 1,
+      "explanation": "Spiller 1 svarer H etter h og L etter l. Spiller 2 velger l fordi dens egen gevinst er 3 i stedet for 2.",
+      "level": "middels"
+    },
+    {
+      "id": "q175",
+      "topic": "n8",
+      "question": "Hva blir delspillperfekt utfall når spiller 2 velger først i notatenes Chicken?",
+      "options": [
+        "(2,3)",
+        "(4,2)",
+        "(1,0)"
+      ],
+      "answer": 0,
+      "explanation": "Spiller 1 svarer L etter h og H etter l. Spiller 2 sammenligner egen gevinst 3 ved h med 2 ved l og velger h.",
+      "level": "middels"
+    },
+    {
+      "id": "q176",
+      "topic": "n8",
+      "question": "Kan blandingen p=1/2, q=4/5 alene besvare leksen om å snu trekkrekkefølgen?",
+      "options": [
+        "Ja, rekkefølge spiller aldri noen rolle",
+        "Ja, hvis sannsynlighetene summerer til 1",
+        "Nei, observasjon og strategisett må endres"
+      ],
+      "answer": 2,
+      "explanation": "Sekvensielle observerte valg må løses i den nye spillstrukturen, normalt med baklengs induksjon her.",
+      "level": "middels"
+    },
+    {
+      "id": "q177",
+      "topic": "n9",
+      "question": "Hvem har andretrekkfordel i originalens Matching Pennies-lignende spill?",
+      "options": [
+        "Ingen",
+        "Begge aktører, vurdert hver for seg",
+        "Bare spiller 1"
+      ],
+      "answer": 1,
+      "explanation": "Spiller 1 får 4 som svarer mot 3 som førstetrekker. Spiller 2 får 4 som svarer mot 2 som førstetrekker.",
+      "level": "middels"
+    },
+    {
+      "id": "q178",
+      "topic": "n9",
+      "question": "Når Lh endres til (5,4), hvilken rekkefølge foretrekker begge?",
+      "options": [
+        "Spiller 1 først, spiller 2 sist",
+        "Spiller 2 først, spiller 1 sist",
+        "Begge vil velge sist"
+      ],
+      "answer": 0,
+      "explanation": "Spiller 1 får 5 ved å velge først mot 4 som svarer. Spiller 2 får 4 som svarer mot 2 som førstetrekker. De er enige om rekkefølgen.",
+      "level": "middels"
     }
   ],
   "games": [
@@ -3181,9 +4038,925 @@
         "0-0",
         "1-1"
       ]
+    },
+    {
+      "id": "notes-pd",
+      "title": "Forelesning · Fangens dilemma · simultant",
+      "rows": [
+        "H",
+        "L"
+      ],
+      "cols": [
+        "h",
+        "l"
+      ],
+      "payoffs": [
+        [
+          [
+            3,
+            3
+          ],
+          [
+            0,
+            4
+          ]
+        ],
+        [
+          [
+            4,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "topic": "n2",
+      "note": "Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "equilibria": [
+        "1-1"
+      ],
+      "lecture": true
+    },
+    {
+      "id": "notes-pd-first1",
+      "title": "Forelesning · Fangens dilemma · spiller 1 først",
+      "rows": [
+        "H",
+        "L"
+      ],
+      "cols": [
+        "hh",
+        "hl",
+        "lh",
+        "ll"
+      ],
+      "payoffs": [
+        [
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            4
+          ]
+        ],
+        [
+          [
+            4,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "topic": "n6",
+      "note": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (L, ll) er delspillperfekt. Utfall (1, 1). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "equilibria": [
+        "1-3"
+      ],
+      "lecture": true,
+      "first": 1,
+      "base": "notes-pd",
+      "spe": "1-3",
+      "speProfile": [
+        "L",
+        "ll"
+      ],
+      "speOutcome": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "notes-pd-first2",
+      "title": "Forelesning · Fangens dilemma · spiller 2 først",
+      "rows": [
+        "HH",
+        "HL",
+        "LH",
+        "LL"
+      ],
+      "cols": [
+        "h",
+        "l"
+      ],
+      "payoffs": [
+        [
+          [
+            3,
+            3
+          ],
+          [
+            0,
+            4
+          ]
+        ],
+        [
+          [
+            3,
+            3
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          [
+            4,
+            0
+          ],
+          [
+            0,
+            4
+          ]
+        ],
+        [
+          [
+            4,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "topic": "n6",
+      "note": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (LL, l) er delspillperfekt. Utfall (1, 1). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "equilibria": [
+        "3-1"
+      ],
+      "lecture": true,
+      "first": 2,
+      "base": "notes-pd",
+      "spe": "3-1",
+      "speProfile": [
+        "LL",
+        "l"
+      ],
+      "speOutcome": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "notes-bos",
+      "title": "Forelesning · Battle of the Sexes · simultant",
+      "rows": [
+        "H",
+        "L"
+      ],
+      "cols": [
+        "h",
+        "l"
+      ],
+      "payoffs": [
+        [
+          [
+            3,
+            2
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "topic": "n3",
+      "note": "Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "equilibria": [
+        "0-0",
+        "1-1"
+      ],
+      "lecture": true
+    },
+    {
+      "id": "notes-bos-first1",
+      "title": "Forelesning · Battle of the Sexes · spiller 1 først",
+      "rows": [
+        "H",
+        "L"
+      ],
+      "cols": [
+        "hh",
+        "hl",
+        "lh",
+        "ll"
+      ],
+      "payoffs": [
+        [
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "topic": "n7",
+      "note": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (H, hl) er delspillperfekt. Utfall (3, 2). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "equilibria": [
+        "0-0",
+        "0-1",
+        "1-3"
+      ],
+      "lecture": true,
+      "first": 1,
+      "base": "notes-bos",
+      "spe": "0-1",
+      "speProfile": [
+        "H",
+        "hl"
+      ],
+      "speOutcome": [
+        3,
+        2
+      ]
+    },
+    {
+      "id": "notes-bos-first2",
+      "title": "Forelesning · Battle of the Sexes · spiller 2 først",
+      "rows": [
+        "HH",
+        "HL",
+        "LH",
+        "LL"
+      ],
+      "cols": [
+        "h",
+        "l"
+      ],
+      "payoffs": [
+        [
+          [
+            3,
+            2
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          [
+            3,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "topic": "n7",
+      "note": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (HL, l) er delspillperfekt. Utfall (2, 3). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "equilibria": [
+        "0-0",
+        "1-1",
+        "3-1"
+      ],
+      "lecture": true,
+      "first": 2,
+      "base": "notes-bos",
+      "spe": "1-1",
+      "speProfile": [
+        "HL",
+        "l"
+      ],
+      "speOutcome": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "notes-chicken",
+      "title": "Forelesning · Chicken · simultant",
+      "rows": [
+        "H",
+        "L"
+      ],
+      "cols": [
+        "h",
+        "l"
+      ],
+      "payoffs": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        [
+          [
+            2,
+            3
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "topic": "n4",
+      "note": "Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "equilibria": [
+        "0-1",
+        "1-0"
+      ],
+      "lecture": true
+    },
+    {
+      "id": "notes-chicken-first1",
+      "title": "Forelesning · Chicken · spiller 1 først",
+      "rows": [
+        "H",
+        "L"
+      ],
+      "cols": [
+        "hh",
+        "hl",
+        "lh",
+        "ll"
+      ],
+      "payoffs": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        [
+          [
+            2,
+            3
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "topic": "n8",
+      "note": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (H, lh) er delspillperfekt. Utfall (4, 2). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "equilibria": [
+        "0-2",
+        "0-3",
+        "1-0"
+      ],
+      "lecture": true,
+      "first": 1,
+      "base": "notes-chicken",
+      "spe": "0-2",
+      "speProfile": [
+        "H",
+        "lh"
+      ],
+      "speOutcome": [
+        4,
+        2
+      ]
+    },
+    {
+      "id": "notes-chicken-first2",
+      "title": "Forelesning · Chicken · spiller 2 først",
+      "rows": [
+        "HH",
+        "HL",
+        "LH",
+        "LL"
+      ],
+      "cols": [
+        "h",
+        "l"
+      ],
+      "payoffs": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        [
+          [
+            2,
+            3
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "topic": "n8",
+      "note": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (LH, h) er delspillperfekt. Utfall (2, 3). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "equilibria": [
+        "0-1",
+        "2-0",
+        "3-0"
+      ],
+      "lecture": true,
+      "first": 2,
+      "base": "notes-chicken",
+      "spe": "2-0",
+      "speProfile": [
+        "LH",
+        "h"
+      ],
+      "speOutcome": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "notes-mp",
+      "title": "Forelesning · Matching Pennies-lignende · simultant",
+      "rows": [
+        "H",
+        "L"
+      ],
+      "cols": [
+        "h",
+        "l"
+      ],
+      "payoffs": [
+        [
+          [
+            6,
+            1
+          ],
+          [
+            1,
+            5
+          ]
+        ],
+        [
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ]
+      ],
+      "topic": "n5",
+      "note": "Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "equilibria": [],
+      "lecture": true
+    },
+    {
+      "id": "notes-mp-first1",
+      "title": "Forelesning · Matching Pennies-lignende · spiller 1 først",
+      "rows": [
+        "H",
+        "L"
+      ],
+      "cols": [
+        "hh",
+        "hl",
+        "lh",
+        "ll"
+      ],
+      "payoffs": [
+        [
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            1,
+            5
+          ]
+        ],
+        [
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ]
+      ],
+      "topic": "n9",
+      "note": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (L, lh) er delspillperfekt. Utfall (3, 4). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "equilibria": [
+        "1-2"
+      ],
+      "lecture": true,
+      "first": 1,
+      "base": "notes-mp",
+      "spe": "1-2",
+      "speProfile": [
+        "L",
+        "lh"
+      ],
+      "speOutcome": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": "notes-mp-first2",
+      "title": "Forelesning · Matching Pennies-lignende · spiller 2 først",
+      "rows": [
+        "HH",
+        "HL",
+        "LH",
+        "LL"
+      ],
+      "cols": [
+        "h",
+        "l"
+      ],
+      "payoffs": [
+        [
+          [
+            6,
+            1
+          ],
+          [
+            1,
+            5
+          ]
+        ],
+        [
+          [
+            6,
+            1
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        [
+          [
+            3,
+            4
+          ],
+          [
+            1,
+            5
+          ]
+        ],
+        [
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ]
+      ],
+      "topic": "n9",
+      "note": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (HL, l) er delspillperfekt. Utfall (4, 2). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "equilibria": [
+        "1-1"
+      ],
+      "lecture": true,
+      "first": 2,
+      "base": "notes-mp",
+      "spe": "1-1",
+      "speProfile": [
+        "HL",
+        "l"
+      ],
+      "speOutcome": [
+        4,
+        2
+      ]
+    },
+    {
+      "id": "notes-variant",
+      "title": "Forelesning · Matching Pennies, variant · simultant",
+      "rows": [
+        "H",
+        "L"
+      ],
+      "cols": [
+        "h",
+        "l"
+      ],
+      "payoffs": [
+        [
+          [
+            6,
+            1
+          ],
+          [
+            1,
+            5
+          ]
+        ],
+        [
+          [
+            5,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ]
+      ],
+      "topic": "n9",
+      "note": "Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "equilibria": [],
+      "lecture": true
+    },
+    {
+      "id": "notes-variant-first1",
+      "title": "Forelesning · Matching Pennies, variant · spiller 1 først",
+      "rows": [
+        "H",
+        "L"
+      ],
+      "cols": [
+        "hh",
+        "hl",
+        "lh",
+        "ll"
+      ],
+      "payoffs": [
+        [
+          [
+            6,
+            1
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            1,
+            5
+          ]
+        ],
+        [
+          [
+            5,
+            4
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ]
+      ],
+      "topic": "n9",
+      "note": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (L, lh) er delspillperfekt. Utfall (5, 4). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "equilibria": [
+        "1-2"
+      ],
+      "lecture": true,
+      "first": 1,
+      "base": "notes-variant",
+      "spe": "1-2",
+      "speProfile": [
+        "L",
+        "lh"
+      ],
+      "speOutcome": [
+        5,
+        4
+      ]
+    },
+    {
+      "id": "notes-variant-first2",
+      "title": "Forelesning · Matching Pennies, variant · spiller 2 først",
+      "rows": [
+        "HH",
+        "HL",
+        "LH",
+        "LL"
+      ],
+      "cols": [
+        "h",
+        "l"
+      ],
+      "payoffs": [
+        [
+          [
+            6,
+            1
+          ],
+          [
+            1,
+            5
+          ]
+        ],
+        [
+          [
+            6,
+            1
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        [
+          [
+            5,
+            4
+          ],
+          [
+            1,
+            5
+          ]
+        ],
+        [
+          [
+            5,
+            4
+          ],
+          [
+            4,
+            2
+          ]
+        ]
+      ],
+      "topic": "n9",
+      "note": "Observerte sekvensielle valg. Alle markerte celler er Nash i normalformen; bare profilen (HL, l) er delspillperfekt. Utfall (4, 2). Første bokstav i en responsplan gjelder h/H, andre gjelder l/L.",
+      "equilibria": [
+        "1-1"
+      ],
+      "lecture": true,
+      "first": 2,
+      "base": "notes-variant",
+      "spe": "1-1",
+      "speProfile": [
+        "HL",
+        "l"
+      ],
+      "speOutcome": [
+        4,
+        2
+      ]
     }
   ],
-  "version": 2,
+  "version": 3,
   "written": [
     {
       "id": "w1",
@@ -3347,6 +5120,157 @@
         "Ved A fra motparten er A best, og ved B er B best. Dermed er begge diagonalene Nash. (A,A) Pareto-dominerer (B,B), men det alene garanterer ikke at A velges.",
         "En felles standardbeslutning, troverdig fremdriftsplan eller pilot som gjør forventningene samstemte kan redusere koordineringsproblemet. Begrunn antakelser om gevinster, byttekostnader og hvem som beslutter."
       ]
+    },
+    {
+      "id": "notes-w1",
+      "title": "Regn ut blandingen i forelesningens Battle of the Sexes",
+      "topic": "n3",
+      "game": "notes-bos",
+      "prompt": "Finn alle rene likevekter, p og q i den blandede likevekten, alle fire utfallsannsynligheter og forventet nytte til begge.",
+      "solution": [
+        "Rene Nash er Hh og Ll. Sett 3q+1(1−q)=0q+2(1−q): 4q=1 gir q=1/4.",
+        "Sett 2p+0(1−p)=p+3(1−p): 4p=3 gir p=3/4.",
+        "Pr(Hh)=3/16, Pr(Hl)=9/16, Pr(Lh)=1/16, Pr(Ll)=3/16. Summen er 16/16.",
+        "Forventet nytte til spiller 1 er 3·3/16+1·9/16+0·1/16+2·3/16=1,5. Til spiller 2: 2·3/16+1·9/16+0·1/16+3·3/16=1,5."
+      ],
+      "level": "fordypning"
+    },
+    {
+      "id": "notes-w2",
+      "title": "Chicken: utled og kontroller forventet nytte",
+      "topic": "n4",
+      "game": "notes-chicken",
+      "prompt": "Finn rene og blandede likevekter. Regn forventet nytte på to måter og finn avskriftsfeilen i notatenes vekting for spiller 2.",
+      "solution": [
+        "Rene Nash: (H,l) og (L,h). Spiller 1 er indifferent når 4−3q=2q, altså q=4/5.",
+        "Spiller 2 er indifferent når 3−3p=1+p, altså p=1/2.",
+        "Utfallsvekter Hh, Hl, Lh, Ll er 0,4; 0,1; 0,4; 0,1. Ved indifferens får spiller 1 1,6 og spiller 2 1,5.",
+        "Fra matrisen: E[u₁]=1·0,4+4·0,1+2·0,4+0·0,1=1,6. E[u₂]=0·0,4+2·0,1+3·0,4+1·0,1=1,5. Lh må vektes med 0,4, ikke 0,1."
+      ],
+      "level": "fordypning"
+    },
+    {
+      "id": "notes-w3",
+      "title": "Matching Pennies: en presis konklusjon",
+      "topic": "n5",
+      "game": "notes-mp",
+      "prompt": "Forklar hvorfor ingen ren Nash finnes, regn den blandede likevekten, og vurder om dette er et nullsumspill.",
+      "solution": [
+        "Rad svarer H mot h og L mot l. Kolonne svarer l mot H og h mot L. Ingen celle har begge beste responser.",
+        "Spiller 1: 6q+1(1−q)=3q+4(1−q), altså 6q=3 og q=1/2.",
+        "Spiller 2: p+4(1−p)=5p+2(1−p), altså 4−3p=2+3p og p=1/3.",
+        "Forventet nytte er 3,5 til spiller 1 og 3 til spiller 2. Summene i cellene er 7,6,7,6, så de konkrete gevinstene er ikke nullsum. Konklusjonen er «ingen ren Nash», ikke «ingen Nash»."
+      ],
+      "level": "fordypning"
+    },
+    {
+      "id": "notes-w4",
+      "title": "Bygg 2×4-normalform fra et spilltre",
+      "topic": "n6",
+      "game": "notes-bos-first1",
+      "prompt": "Forklar kolonnene hh, hl, lh og ll i dette spillet. Finn alle Nash og bare de delspillperfekte. Forklar hvorfor én realisert handling ikke er en full strategi.",
+      "solution": [
+        "hh betyr h etter både H og L; hl betyr h etter H, l etter L; lh betyr l etter H, h etter L; ll betyr l etter begge.",
+        "Normalformen gir Nash (H,hh), (H,hl) og (L,ll). Disse finnes ved å holde den andre aktørens fullstendige plan fast.",
+        "Etter H vil spiller 2 velge h fordi 2>1. Etter L vil spiller 2 velge l fordi 3>0. Bare hl er optimal i alle delspill.",
+        "Spiller 1 velger H fordi 3>2. Delspillperfekt profil (H,hl), utfall (3,2). Det er ikke nok å oppgi bare «spiller 2 valgte h»; planen må også dekke L-grenen."
+      ],
+      "level": "fordypning"
+    },
+    {
+      "id": "notes-w5",
+      "title": "Rett sammendraget når spiller 2 velger først",
+      "topic": "n7",
+      "game": "notes-bos-first2",
+      "prompt": "Finn delspillperfekt løsning med spiller 2 først i Battle of the Sexes. Behold gevinstrekkefølgen (spiller 1, spiller 2), og forklar feilen i det innlimte Copilot-sammendraget.",
+      "solution": [
+        "Spiller 1 svarer H etter h fordi 3>0 og L etter l fordi 2>1. Responsplanen er HL.",
+        "Spiller 2 sammenligner sin egen gevinst 2 ved h med 3 ved l. Den velger l.",
+        "Profilen er (HL,l) i fast spillerrekkefølge, eller (l,HL) hvis førstetrekkeren oppgis først. Utfallet er (2,3).",
+        "Sammendraget som velger h fordi 3>2 bruker spiller 1s gevinster som om de var spiller 2s. At spiller 2 velger først bytter ikke plass på tallene i gevinstparet."
+      ],
+      "level": "fordypning"
+    },
+    {
+      "id": "notes-w6",
+      "title": "Leksen: snu trekkrekkefølgen i Chicken",
+      "topic": "n8",
+      "game": "notes-chicken-first2",
+      "prompt": "Spiller 2 velger først og spiller 1 observerer. Tegn de to responsene, finn alle rene Nash i normalformen, og vis hvorfor delspillperfekt utfall er (2,3).",
+      "solution": [
+        "Etter h velger spiller 1 L fordi 2>1. Etter l velger spiller 1 H fordi 4>0. Planen er LH.",
+        "Spiller 2 får 3 hvis den velger h og 2 hvis den velger l. Derfor velger den h.",
+        "Delspillperfekt profil er (LH,h), med utfall Lh=(2,3). De rene Nash i normalformen er (HH,l), (LH,h) og (LL,h).",
+        "(HH,l) krever at spiller 1 svarer H etter h, som er dårligere enn L. (LL,h) krever L etter l, som er dårligere enn H. Begge har ikke-optimale planer utenfor banen og er ikke delspillperfekte."
+      ],
+      "level": "fordypning"
+    },
+    {
+      "id": "notes-w7",
+      "title": "Hvem ønsker å sitte på gjerdet?",
+      "topic": "n9",
+      "game": "notes-mp",
+      "prompt": "Løs det opprinnelige Matching Pennies-lignende spillet med hver av de to spillerne først. Hvem har fordel av å vente?",
+      "solution": [
+        "1 først: spiller 2 svarer l etter H og h etter L, altså lh. Spiller 1 sammenligner 1 ved H med 3 ved L og velger L. Utfallet er (3,4).",
+        "2 først: spiller 1 svarer H etter h og L etter l, altså HL. Spiller 2 sammenligner 1 ved h med 2 ved l og velger l. Utfallet er (4,2).",
+        "Spiller 1 foretrekker å svare: 4>3. Spiller 2 foretrekker også å svare: 4>2. Begge ønsker at den andre velger først."
+      ],
+      "level": "fordypning"
+    },
+    {
+      "id": "notes-w8",
+      "title": "En endret gevinst gir enighet om rekkefølgen",
+      "topic": "n9",
+      "game": "notes-variant",
+      "prompt": "Endre bare Lh fra (3,4) til (5,4). Finn delspillperfekt utfall for hver rekkefølge og forklar notatenes spørsmål om harmoni.",
+      "solution": [
+        "1 først: spiller 2 velger fortsatt l etter H og h etter L. Spiller 1 velger L fordi 5>1. Utfallet er (5,4).",
+        "2 først: spiller 1 velger H etter h fordi 6>5, og L etter l fordi 4>1. Spiller 2 velger l fordi 2>1. Utfallet er (4,2).",
+        "Spiller 1 ønsker å være først: 5>4. Spiller 2 ønsker å være sist: 4>2. Begge foretrekker rekkefølgen 1 først og 2 sist. Det er harmoni om rekkefølgen, ikke nødvendigvis om alle andre aspekter ved spillet."
+      ],
+      "level": "fordypning"
+    }
+  ],
+  "lectureBaseGames": [
+    "notes-pd",
+    "notes-bos",
+    "notes-chicken",
+    "notes-mp",
+    "notes-variant"
+  ],
+  "lectureCorrections": [
+    {
+      "title": "Pareto krever ikke at begge får det bedre",
+      "text": "Det er tilstrekkelig at minst én får det bedre uten at noen andre får det verre. Begges forbedring er et spesialtilfelle."
+    },
+    {
+      "title": "Matching Pennies: ingen ren Nash",
+      "text": "Notatenes spill har en blandet likevekt med p=1/3 og q=1/2. De oppgitte gevinstene er ikke nullsum, selv om beste-respons-strukturen ligner standardspillet."
+    },
+    {
+      "title": "Blandet Battle of the Sexes",
+      "text": "4p=3 løses ved å dele begge sider på 4, ikke på p. p=3/4 og q=1/4 er riktige. Uavhengig blanding gir sannsynligheter, ikke sikre antall utfall i fire runder."
+    },
+    {
+      "title": "Chicken: fortegn og nullledd",
+      "text": "4(1−q)=4−4q, og spiller 1 får 0 ved L,l. Riktig indifferens er q+4(1−q)=2q+0(1−q). Kolonnes uttrykk for l er 2p+1(1−p)."
+    },
+    {
+      "title": "Chicken: forventet nytte til spiller 2",
+      "text": "Bruk vektene 0,4; 0,1; 0,4; 0,1 for Hh, Hl, Lh, Ll. Da er forventet nytte 0·0,4+2·0,1+3·0,4+1·0,1=1,5. Ett mellomuttrykk i notatene bruker feil vekt på Lh."
+    },
+    {
+      "title": "Matching Pennies: minus foran begge sider",
+      "text": "4−3p=2+3p gir −6p=−2, ikke −6p=2. Riktig løsning er fortsatt p=1/3."
+    },
+    {
+      "title": "Sekvensielt Battle of the Sexes",
+      "text": "Vi bruker Ll=(2,3), slik den opprinnelige matrisen og likevektsbeskrivelsen angir. Ett spilltre skriver (3,2). Når spiller 2 velger først, velger den l og får 3: delspillperfekt profil (HL,l), utfall (2,3). Det innlimte Copilot-sammendraget har her byttet spilleridentiteter."
+    },
+    {
+      "title": "Trekkrekkefølgen må faktisk snus",
+      "text": "Chicken-leksen løses med spiller 2 i første node og spiller 1 som observatør. Delspillperfekt profil er (LH,h), utfall (2,3). Blanding fra det simultane spillet er ikke løsningen på det nye sekvensielle spillet."
     }
   ]
 }
