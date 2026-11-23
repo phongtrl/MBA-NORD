@@ -20,8 +20,45 @@ function go(p){
  if(p!=='oppgaver')examOnly=false;
  if(['mikro','makro','oversikt'].includes(p))studyArea=p==='oversikt'?'':p;
  if(studyArea){cardArea=studyArea;deck=0;flipped=false}else if(p==='oversikt'){cardArea='alle';deck=0;flipped=false}
- page=p;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===(studyArea||p)));render();if(studyArea&&!['mikro','makro'].includes(p))app.insertAdjacentHTML('afterbegin',`<button class="text-button" data-go="${studyArea}">← Til ${category(studyArea).toLowerCase()}</button>`);window.scrollTo(0,0)}
-function render(){if(!data)return;switch(page){case 'mikro':subjectPage('mikro');break;case 'makro':subjectPage('makro');break;case 'oversikt':overview();break;case 'forelesning':lecturePage();break;case 'fagstoff':library();break;case 'quiz':quizSetup();break;case 'kort':showCard();break;case 'spill':matrixPage();break;case 'oppgaver':writtenPage();break;case 'modell':modelPage();break}}
+ page=p;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===(p==='assistent'?p:studyArea||p)));render();if(studyArea&&!['mikro','makro'].includes(p))app.insertAdjacentHTML('afterbegin',`<button class="text-button" data-go="${studyArea}">← Til ${category(studyArea).toLowerCase()}</button>`);window.scrollTo(0,0)}
+function render(){if(!data)return;switch(page){case 'assistent':studyAssistantPage();break;case 'mikro':subjectPage('mikro');break;case 'makro':subjectPage('makro');break;case 'oversikt':overview();break;case 'forelesning':lecturePage();break;case 'fagstoff':library();break;case 'quiz':quizSetup();break;case 'kort':showCard();break;case 'spill':matrixPage();break;case 'oppgaver':writtenPage();break;case 'modell':modelPage();break}}
+
+const studyWords = value => value.toLocaleLowerCase('nb').match(/[\p{L}\p{N}]+/gu) || [];
+const studyStopWords = new Set('hva hvordan hvorfor hvem hvor når kan skal jeg du det dette med som for man til fra ved hvilken hvilke betyr forklar meg om en et er og i på av'.split(' '));
+function findStudyTopics(question, subject) {
+ const terms = [...new Set(studyWords(question).filter(word => !studyStopWords.has(word)))];
+ if (!terms.length) return [];
+ return data.topics.filter(topic => subject === 'alle' || topic.category === subject).map(topic => {
+  const title = new Set(studyWords(topic.title));
+  const content = new Set(studyWords([topic.subtitle, topic.body, topic.formula, topic.example].join(' ')));
+  let score = 0;
+  for (const term of terms) {
+   if (title.has(term)) score += 6;
+   else if (term.length >= 4 && [...title].some(word => word.startsWith(term) || (word.length >= 4 && term.startsWith(word)))) score += 4;
+   else if (content.has(term)) score += 1;
+  }
+  return {topic, score};
+ }).filter(match => match.score > 0).sort((a,b) => b.score - a.score).slice(0,3).map(match => match.topic);
+}
+function studyAssistantPage() {
+ app.innerHTML = head('ECO 5026','Studieassistent','Still et fagspørsmål. Assistenten søker i teorien og viser forklaringer og eksempler fra appen.') +
+ `<section class="card"><form id="study-form">
+ <label for="study-question">Hva vil du ha hjelp med?</label>
+ <textarea id="study-question" rows="3" maxlength="500" required placeholder="For eksempel: Hvordan finner jeg en blandet Nash-likevekt?"></textarea>
+ <div class="actions"><select id="study-subject" aria-label="Velg fag"><option value="alle">Begge fag</option><option value="mikro">Mikroøkonomi</option><option value="makro">Makroøkonomi</option></select><button class="primary" type="submit">Finn forklaring</button></div>
+ </form><div id="study-answer" aria-live="polite"></div></section>`;
+ if (studyArea) document.querySelector('#study-subject').value = studyArea;
+ document.querySelector('#study-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const question = document.querySelector('#study-question').value.trim();
+  const topics = findStudyTopics(question, document.querySelector('#study-subject').value);
+  document.querySelector('#study-answer').innerHTML = topics.length ? topics.map((topic,index) =>
+   `<article class="study-result"><h2>${esc(topic.title)}</h2>${index===0 ? `<p>${esc(topic.body)}</p>${topic.formula ? `<div class="formula">${esc(topic.formula)}</div>` : ''}${topic.example ? `<p>${esc(topic.example)}</p>` : ''}` : ''}
+   <button class="text-button" type="button" data-topic="${esc(topic.id)}">Les temaet →</button></article>`
+  ).join('') : '<p>Jeg fant ingen forklaring som passet. Prøv et fagbegrep som Nash-likevekt, multiplikator eller renteparitet.</p>';
+ });
+}
+
 function overview(){
  app.innerHTML=head('ECO 5026','Økonomiske beslutninger','Velg hvilken del av faget du vil jobbe med.')+ `<p class="hint">${data.topics.length} temaer · ${data.questions.length} quizoppgaver</p>`+
  '<div class="grid"><section class="card"><h2>Mikroøkonomi</h2><p>Markeder, bedrifters beslutninger og spillteori. Her finner du Nash-likevekt, spillverksted og forelesningsløypen.</p><button class="primary" data-go="mikro">Åpne mikroøkonomi →</button></section><section class="card"><h2>Makroøkonomi</h2><p>Samlet produksjon, multiplikatormodellen, valutakurs og pengepolitikk.</p><button class="primary" data-go="makro">Åpne makroøkonomi →</button></section></div>';

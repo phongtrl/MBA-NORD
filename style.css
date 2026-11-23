@@ -77,3 +77,8 @@ footer { color: #54655f; }
 .solution-visual meter { display:block; width: 100%; height: 18px; }
 .solution-visual p { margin-bottom: 4px; }
 .solution-flow { background: #edf2e9; border-radius: 8px; padding: 12px; line-height: 1.8; margin-bottom: 10px; }
+
+#study-form textarea { display:block; width:100%; margin-top:8px; border:1px solid var(--line); border-radius:8px; padding:12px; color:var(--ink); font:inherit; resize:vertical; }
+#study-form select { padding:8px; border:1px solid var(--line); border-radius:8px; background:white; }
+.study-result { margin-top:20px; padding-top:14px; border-top:1px solid var(--line); }
+@media (max-width:420px) { nav { flex-wrap:wrap; } nav button { flex:1 0 45%; } }
