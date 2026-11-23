@@ -5736,6 +5736,82 @@
         "Drøft svakere etterspørsel, eventuell appresiering og lavere importprisvekst, samt hvordan forventninger kan påvirke lønns- og prisvekst.",
         "Forklar avveiingen mellom inflasjon og realaktivitet og hvorfor virkningene kommer med etterslep."
       ]
+    },
+    {
+      "id": "exam-dilemma",
+      "topic": "n2",
+      "title": "Oppgave 1 · Fangens dilemma",
+      "prompt": "To aktører velger H eller L og h eller l. Bruk gevinstmatrisen. Gevinstene er oppgitt i spillerrekkefølge.",
+      "parts": [
+        "Finn alle Nash-likevekter i rene strategier. Drøft om utfallet er Pareto-effektivt.",
+        "Spiller 1 velger først. Sett opp spillet i ekstensiv form og finn delspillperfekt likevekt.",
+        "Anta uendelig gjentakelse og perfekt observasjon. Utled betingelsen for samarbeid med grim trigger."
+      ],
+      "solution": [
+        "Spiller 1 foretrekker L mot h (4 > 3) og l (1 > 0). Spiller 2 foretrekker l mot H (4 > 3) og L (1 > 0). Eneste Nash-likevekt er (L,l), med (1,1). Begge får 3 ved (H,h), så likevektsutfallet er ikke Pareto-effektivt.",
+        "Tegn H og L fra første node. Etter H gir h og l henholdsvis (3,3) og (0,4). Etter L gir de (4,0) og (1,1). Spiller 2 velger l i begge delspill. Spiller 1 velger L fordi 1 > 0. Profilen er (L,ll).",
+        "Samarbeid gir 3/(1−δ). Avvik gir 4 nå og 1 i alle senere perioder, altså 4+δ/(1−δ). Samarbeid krever 3 ≥ 4−3δ, som gir δ ≥ 1/3. Straffen er troverdig fordi (L,l) er Nash i engangsspillet."
+      ],
+      "game": "notes-pd",
+      "level": "fordypning",
+      "exam": true
+    },
+    {
+      "id": "exam-chicken",
+      "topic": "n4",
+      "title": "Oppgave 2 · Simultane og sekvensielle valg",
+      "prompt": "Bruk den oppgitte Chicken-matrisen. La p være sannsynligheten for H og q for h.",
+      "parts": [
+        "Finn alle rene Nash-likevekter ved å angi beste responser.",
+        "Utled blandet likevekt og beregn forventet nytte for begge.",
+        "Finn delspillperfekt likevekt når spiller 2 velger først. Sammenlign med spiller 1 først."
+      ],
+      "solution": [
+        "Rad svarer L mot h og H mot l. Kolonne svarer l mot H og h mot L. Det gir (H,l) med (4,2) og (L,h) med (2,3).",
+        "Rad er indifferent når 4−3q=2q, så q=4/5. Kolonne er indifferent når 3−3p=1+p, så p=1/2. Sett inn i indifferensuttrykkene. Rad får 2q=1,6 og kolonne 1+p=1,5.",
+        "Spiller 1 svarer L etter h og H etter l. Spiller 2 velger h fordi 3 > 2. Profil (LH,h), utfall (2,3). Når spiller 1 velger først, svarer spiller 2 l etter H og h etter L. Spiller 1 velger H fordi 4 > 2. Profil (H,lh), utfall (4,2)."
+      ],
+      "game": "notes-chicken",
+      "level": "fordypning",
+      "exam": true
+    },
+    {
+      "id": "exam-mult",
+      "topic": "macro-rate",
+      "title": "Oppgave 3 · Multiplikatormodellen i lukket og åpen økonomi",
+      "prompt": "En økonomi har Y=C+I+G, C=40+0,75(Y−T)−2r og I=20+0,15Y−3r. Sett G=60, T=40 og r=2. Renten måles i prosentpoeng. Prisnivået ligger fast, og sysselsettingen øker med produksjonen.",
+      "parts": [
+        "Angi endogene og eksogene variabler. Vis sammenhengene i et flytdiagram og utled redusert form.",
+        "Renten øker ett prosentpoeng. Finn direkte og indirekte virkninger på produksjon og virkningen på sysselsetting.",
+        "Åpne økonomien med NX=30−0,20Y−4r. Utled endringsformen og sammenlign rentevirkningene."
+      ],
+      "solution": [
+        "G, T og r er gitt utenfra. Y, C og I bestemmes sammen. Pilene er T→C, r→C og I, Y→C og I, og C, I og G→Y. Ved innsetting får vi 0,10Y=60+40+20−0,75T−5r. Med oppgitte tall er Y=800.",
+        "Direkte faller C med 2 og I med 3. Samlet ΔY=−5/0,10=−50. Den indirekte virkningen er −50−(−5)=−45. Sysselsettingen faller under den oppgitte antakelsen.",
+        "Når NX legges til, øker nevneren fra 0,10 til 0,30 på grunn av importlekkasjen. Endringsformen er ΔY=(ΔG−0,75ΔT−9Δr)/0,30. Når Δr=1, er direkte effekt −9 og samlet effekt −30. Her dominerer importlekkasjen den ekstra direkte rentevirkningen, slik at samlet produksjonsfall er mindre enn i lukket økonomi."
+      ],
+      "game": null,
+      "level": "fordypning",
+      "exam": true
+    },
+    {
+      "id": "exam-policy",
+      "topic": "macro-trans",
+      "title": "Oppgave 4 · Renten, kronekursen og inflasjonen",
+      "prompt": "Norges Bank hever renten etter en periode med høy inflasjon. Kursen E måles i NOK per euro. Utenlandsk rente er 3 %, forventet framtidig kurs er 12, og norsk rente stiger fra 3 % til 5 %. Anta udekket renteparitet uten risikopremie i a).",
+      "parts": [
+        "Beregn kursen før og etter renteøkningen. Forklar kursendringen og forventet videre kursbevegelse.",
+        "Drøft hvordan høyere rente påvirker inflasjonen gjennom etterspørsels-, valuta- og forventningskanalen.",
+        "Forklar hva sentralbanken må avveie dersom inflasjonen hovedsakelig skyldes et negativt tilbudssjokk."
+      ],
+      "solution": [
+        "E=(1+i*)Eᵉ/(1+i). Før er E=12. Etter er E=12·1,03/1,05≈11,77. Kronen appresierer i dag. Med uendret forventet kurs på 12 innebærer dette forventet depresiering fra det nye nivået.",
+        "Høyere lånekostnader og svakere etterspørsel kan dempe kapasitets-, lønns- og prispress. En sterkere krone kan redusere importprisene og svekke nettoeksporten, som demper etterspørselen videre. En troverdig reaksjon kan dempe forventet inflasjon og påvirke lønns- og prissetting. Effektene kommer med ulikt etterslep.",
+        "Et negativt tilbudssjokk kan samtidig øke prispresset og svekke aktiviteten. Renteøkningen kan dempe etterspørselen og stabilisere forventningene, men kan også forsterke produksjonsfallet. Drøft hvor varig sjokket er og hvor mye inflasjonsforventningene har endret seg."
+      ],
+      "game": null,
+      "level": "fordypning",
+      "exam": true
     }
   ],
   "lectureBaseGames": [
