@@ -129,6 +129,36 @@ function refreshStudyAssistant() {
  document.querySelector('#study-enable').disabled = loadingStudyModel || Boolean(studyModel);
  document.querySelector('#study-enable').hidden = !globalThis.LanguageModel || Boolean(studyModel);
 }
+
+function planStudyReply(question, subject, history) {
+ const exam = /\b(?:eksamen\p{L}*|løsningsforslag\p{L}*|fasit\p{L}*|øvingsoppgav\p{L}*)/iu.test(question);
+ const cleaned = question.replace(/\b(?:eksamen|løsningsforslag|eksamensløsning|fasit|oppgav|øvingsoppgav)\p{L}*/giu,'')
+  .replace(/\b(?:koble|opp|mot|fag|faget|her|har|eksempel|eksempler|gi|vis|løsning|løsningen)\b/giu,'');
+ const prior = (history.at(-1)?.topicIds || []).map(id=>data.topics.find(topic=>topic.id===id))
+  .filter(topic=>topic && (subject==='alle' || topic.category===subject));
+ const direct = findStudyTopics(cleaned,subject);
+ const topic = direct[0] || prior[0];
+ const area = topic?.category || subject;
+ const topics = direct.length ? direct.filter(t=>t.category===area) : prior;
+ if (!exam) return {topics};
+ const cycle = topic?.id==='11' || /\bkonjunktur/iu.test(cleaned);
+ const aliases = {'e5':['w11','exam-policy'],'macro-uip':['exam-policy'],'e8':['w10'],'g3':['exam-dilemma','exam-chicken'],'g10':['w2','exam-chicken']};
+ const preferred = cycle ? ['w11','exam-mult','exam-policy'] : aliases[topic?.id] || [];
+ const exercises = data.written.filter(w=>area==='alle'||data.topics.some(t=>t.id===w.topic&&t.category===area));
+ const ranked = exercises.map(w=>({w,score:preferred.includes(w.id)?100-preferred.indexOf(w.id):w.topic===topic?.id?50:!topic&&w.exam?20:0}))
+  .filter(item=>item.score>0).sort((a,b)=>b.score-a.score).slice(0,2).map(item=>item.w);
+ if (!ranked.length) return {topics, answer:'Jeg fant ingen åpen oppgave som matcher temaet direkte. Prøv et fagbegrep som konjunkturer, multiplikator eller Nash-likevekt, eller be om et generelt eksamenseksempel.'};
+ const intro = cycle ? 'Konjunkturer er svingninger i aktiviteten rundt trend eller potensiell produksjon. Et negativt etterspørselssjokk kan senke BNP og øke ledigheten. Et negativt tilbudssjokk kan samtidig senke produksjonen og øke prispresset. På eksamen bør du identifisere hvilket sjokk som dominerer og begrunne virkningene.' : topic ? topic.body : '';
+ const blocks = ranked.map(w=>[
+  '**'+w.title+'**',
+  w.prompt,
+  ...(w.parts||[]).map((p,i)=>String.fromCharCode(97+i)+') '+p),
+  '**Løsningsforslag**',
+  ...w.solution.map((s,i)=>(i+1)+'. '+s)
+ ].join('\n'));
+ return {topics,answer:[intro,'Her er eksamensøving fra MBA NORD med løsningsforslag.',...blocks].filter(Boolean).join('\n\n')};
+}
+
 function studyAssistantPage() {
  if (!studyChats.length) studyChats.push({title:'Ny samtale',turns:[]});
  app.innerHTML = head('ECO 5026','Studieassistent','Få et fagoppslag med én gang. Når KI er klar, kan den utdype svaret.')+
@@ -163,12 +193,12 @@ function studyAssistantPage() {
   const chat=studyChats[activeStudyChat];
   if(!question||pendingStudyChats.has(chat))return;
   const history=chat.turns.slice();
-  let topics=findStudyTopics(question,subject.value);
-  if(!topics.length) topics=(history.at(-1)?.topicIds||[]).map(id=>data.topics.find(t=>t.id===id)).filter(t=>t&&(subject.value==='alle'||t.category===subject.value));
-  const reviewed=reviewedStudyAnswer(question);
+  const plan=planStudyReply(question,subject.value,history);
+  const topics=plan.topics;
+  const reviewed=plan.answer || reviewedStudyAnswer(question);
   const first=topics[0];
   const reply=reviewed|| (first ? [first.body,first.formula,first.example].filter(Boolean).join('\n\n') : 'Jeg fant ingen fagforklaring. Prøv et konkret begrep som Nash-likevekt, multiplikator eller realrente.');
-  const turn={question,answer:reply,label:reviewed?'Fagforklaring':'Fagoppslag',topicIds:topics.map(t=>t.id)};
+  const turn={question,answer:reply,label:plan.answer?'Eksamenshjelp':reviewed?'Fagforklaring':'Fagoppslag',topicIds:topics.map(t=>t.id)};
   if(!history.length)chat.title=question.length>30?question.slice(0,29)+'…':question;
   chat.turns.push(turn);
   if(chat.turns.length>20)chat.turns.shift();
@@ -180,7 +210,7 @@ function studyAssistantPage() {
   refreshStudyAssistant();
   try {
    const answer=await askStudyModel(question,topics,history);
-   if(answer){turn.answer=answer;turn.label='KI-svar';saveStudyChats();}
+   if(answer && !/(?:forstår ikke|kan ikke hjelpe|ingen konkrete eksempler)/i.test(answer)){turn.answer=answer;turn.label='KI-svar';saveStudyChats();}
   } catch {} finally {
    pendingStudyChats.delete(chat);
    refreshStudyAssistant();
