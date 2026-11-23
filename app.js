@@ -16,11 +16,27 @@ const shuffle=items=>{const a=[...items];for(let i=a.length-1;i>0;i--){const j=M
 function chart(a=100){const p=(a-10)/3,q=10+p,x=v=>45+v*2.6,y=v=>235-v*2;return `<svg viewBox="0 0 380 280" role="img" aria-label="Tilbud og etterspørsel: likevektspris ${p.toFixed(1)}, mengde ${q.toFixed(1)}"><path d="M45 20V235H365" fill="none" stroke="currentColor" opacity=".4"/><path d="M${x(10)} ${y(0)}L${x(100)} ${y(90)}" stroke="#b7ce82" stroke-width="3" fill="none"/><path d="M${x(Math.max(0,a-200))} ${y(Math.min(100,a/2))}L${x(a)} ${y(0)}" stroke="#87afaa" stroke-width="3" fill="none"/><path d="M45 ${y(p)}H${x(q)}V235" stroke="currentColor" opacity=".4" stroke-dasharray="4 5" fill="none"/><circle cx="${x(q)}" cy="${y(p)}" r="6" fill="#d4ec95" stroke="#194e40"/><text x="15" y="20" fill="currentColor">Pris</text><text x="300" y="263" fill="currentColor">Mengde</text><text x="255" y="55" fill="#a2be73">Tilbud</text><text x="260" y="210" fill="currentColor">Etterspørsel</text><text x="${x(q)+12}" y="${y(p)-12}" fill="currentColor">Likevekt</text></svg>`}
 let examOnly=false;
 let studyArea='';
-function go(p){
+
+function rememberStudyLocation(topic='') {
+ const state={mba:true,page,studyArea,topic};
+ const old=history.state;
+ if(old?.mba&&old.page===page&&old.studyArea===studyArea&&old.topic===topic)return;
+ history.pushState(state,'');
+}
+history.replaceState({mba:true,page:'oversikt',studyArea:'',topic:''},'');
+window.addEventListener('popstate', event=>{
+ const state=event.state;
+ if(!state?.mba)return;
+ studyArea=state.studyArea;
+ go(state.page,false);
+ if(state.topic)openTopic(state.topic,false);
+});
+
+function go(p,remember=true){
  if(p!=='oppgaver')examOnly=false;
  if(['mikro','makro','oversikt'].includes(p))studyArea=p==='oversikt'?'':p;
  if(studyArea){cardArea=studyArea;deck=0;flipped=false}else if(p==='oversikt'){cardArea='alle';deck=0;flipped=false}
- page=p;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===(p==='assistent'?p:studyArea||p)));render();if(studyArea&&!['mikro','makro'].includes(p))app.insertAdjacentHTML('afterbegin',`<button class="text-button" data-go="${studyArea}">← Til ${category(studyArea).toLowerCase()}</button>`);window.scrollTo(0,0)}
+ page=p;if(remember)rememberStudyLocation();document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===(p==='assistent'?p:studyArea||p)));render();if(studyArea&&!['mikro','makro'].includes(p))app.insertAdjacentHTML('afterbegin',`<button class="text-button" data-go="${studyArea}">← Til ${category(studyArea).toLowerCase()}</button>`);window.scrollTo(0,0)}
 function render(){if(!data)return;switch(page){case 'assistent':studyAssistantPage();break;case 'mikro':subjectPage('mikro');break;case 'makro':subjectPage('makro');break;case 'oversikt':overview();break;case 'forelesning':lecturePage();break;case 'fagstoff':library();break;case 'quiz':quizSetup();break;case 'kort':showCard();break;case 'spill':matrixPage();break;case 'oppgaver':writtenPage();break;case 'modell':modelPage();break}}
 
 const studyWords = value => value.toLocaleLowerCase('nb').match(/[\p{L}\p{N}]+/gu) || [];
@@ -212,6 +228,34 @@ function studyExamOverview(area) {
  return {topics:(macro?['macro-rate','macro-uip','11']:['g3','g10','n2']).map(id=>data.topics.find(t=>t.id===id)).filter(Boolean),answer:(macro?'**Makroøkonomi · prioritert øving**':'**Mikroøkonomi · prioritert øving**')+'\n\n'+text+'\n\nPrioriteringen bygger på øvings- og eksamensmaterialet i appen. Oppgavene kan variere fra år til år.'};
 }
 
+
+function lectureStudyReply(question, subject, history) {
+ if(subject==='makro'||/\bmakroøkonomi/iu.test(question))return null;
+ const games=[
+  {pattern:/chicken|hauk[\s-]*due/iu,id:'notes-chicken',topics:['n4','n8']},
+  {pattern:/matching[\s-]*pennies|myntspillet/iu,id:'notes-mp',topics:['n5','n9']},
+  {pattern:/battle of the sexes/iu,id:'notes-bos',topics:['n3','n7']},
+  {pattern:/fangens dilemma/iu,id:'notes-pd',topics:['n2']}
+ ];
+ const follow=/\b(?:blandet|sekvensiell|baklengs|trekker|trekkrekkefølge|oppgav\p{L}*|eksamen\p{L}*|fasit|løsningsforslag|regn)\b/iu.test(question);
+ const selected=games.find(game=>game.pattern.test(question)) || (follow && games.find(game=>game.topics.includes(history.at(-1)?.topicIds?.[0])));
+ if(!selected){
+  if(!/^(?:hva er |forklar )?spillteori[?!.\s]*$/iu.test(question.trim()))return null;
+  return {topics:['n1','n6','n4','n5'].map(topicBy).filter(Boolean),answer:'Spillteori analyserer valg der resultatet avhenger av flere spilleres handlinger. Start med å identifisere spillerne, strategiene og gevinstene. Finn beste respons ved å holde motpartens valg fast. Der begge velger en beste respons, har du en ren Nash-likevekt. I Chicken finnes to slike utfall i forelesningens eksempel. I Matching Pennies-eksemplet finnes ingen ren likevekt, så du må undersøke blandede strategier.'};
+ }
+ const sequential=/baklengs|sekvensiell|trekker|trekkrekkefølge|først|spilltre|delspill/iu.test(question);
+ const topics=selected.topics.map(topicBy).filter(Boolean);
+ if(sequential && topics.length>1)topics.reverse();
+ const topic=topics[0];
+ const game=data.games.find(item=>item.id===selected.id);
+ const matrix=game.rows.flatMap((row,i)=>game.cols.map((col,j)=>'('+row+', '+col+') gir ('+game.payoffs[i][j].join(', ')+')')).join('. ')+'.';
+ const practice=/eksamen|oppgav|fasit|løsningsforslag/iu.test(question)
+  ? data.written.find(item=>item.game===selected.id && item.exam) || data.written.find(item=>item.game===selected.id && item.id.startsWith('notes-w'))
+  : null;
+ const summary=[topic.body,topic.formula,topic.example].filter(Boolean);
+ return {topics,answer:['**Eksemplet fra forelesningsnotatene**','Gevinstparene oppgis som (spiller 1, spiller 2). '+matrix,...summary,...(practice?['**'+practice.title+'**',practice.prompt,...(practice.parts||[]).map((part,i)=>String.fromCharCode(97+i)+') '+part),'**Løsningsforslag**',...practice.solution.map((step,i)=>(i+1)+'. '+step)]:[])].join('\n\n')};
+}
+
 function planStudyReply(question, subject, history) {
  const exam = /\b(?:eksamen\p{L}*|løsningsforslag\p{L}*|fasit\p{L}*|øvingsoppgav\p{L}*)/iu.test(question);
  const namedArea = /\bmakro(?:økonomi\p{L}*)?\b/iu.test(question)?'makro':/\bmikro(?:økonomi\p{L}*)?\b/iu.test(question)?'mikro':null;
@@ -339,7 +383,8 @@ function studyAssistantPage() {
   const chat=studyChats[activeStudyChat];
   if(!question||pendingStudyChats.has(chat))return;
   const history=chat.turns.slice();
-  const plan=planStudyReply(question,subject.value,history);
+  const lecture=lectureStudyReply(question,subject.value,history);
+  const plan=lecture || planStudyReply(question,subject.value,history);
   const topics=plan.topics;
   const reviewed=plan.answer || reviewedStudyAnswer(question);
   const first=topics[0];
@@ -347,7 +392,7 @@ function studyAssistantPage() {
   const localStrong=Boolean(first && studyWords(question).some(word=>word.length>=4&&!studyStopWords.has(word)&&studyWords(first.title).some(title=>title.startsWith(word))));
   const needsWeb=!reviewed&&!localStrong&&!sources.length;
   const reply=reviewed||(localStrong?'':sources[0]?.body)|| (first ? [first.body,first.formula,first.example].filter(Boolean).join('\n\n') : 'Jeg fant ingen fagforklaring. Prøv et konkret begrep som Nash-likevekt, multiplikator eller realrente.');
-  const turn={question,answer:reply,label:plan.answer?'Eksamenshjelp':reviewed?'Fagforklaring':'Fagoppslag',topicIds:topics.map(t=>t.id),sources};
+  const turn={question,answer:reply,label:lecture?'Forelesningsnotater':plan.answer?'Eksamenshjelp':reviewed?'Fagforklaring':'Fagoppslag',topicIds:topics.map(t=>t.id),sources};
   if(!history.length)chat.title=question.length>30?question.slice(0,29)+'…':question;
   chat.turns.push(turn);
   if(chat.turns.length>20)chat.turns.shift();
@@ -418,7 +463,7 @@ function setTopicDone(id, done) {
  persist();
 }
 function listTopics(){const term=document.querySelector('#search').value.toLocaleLowerCase('nb'),area=document.querySelector('#filter').value;const items=data.topics.filter(t=>matches(t,area)&&JSON.stringify(t).toLocaleLowerCase('nb').includes(term));document.querySelector('#topic-count').textContent=`${items.length} av ${data.topics.length} temaer`;document.querySelector('#topics').innerHTML=items.length?items.map(t=>`<section class="card">${badge(t)}<h3 class="${saved.read.includes(t.id)?'topic-done':''}">${esc(t.title)}</h3><p>${esc(t.subtitle)}</p><label class="topic-check"><input type="checkbox" data-topic-check="${esc(t.id)}" ${saved.read.includes(t.id)?'checked':''}> Gjennomgått</label><div class="card-foot"><span>${saved.read.includes(t.id)?'✓ Gjennomgått':'Teori og eksempel'} · ${data.questions.filter(q=>q.topic===t.id).length} spørsmål</span><button class="text-button" data-topic="${t.id}">Les tema →</button></div></section>`).join(''):'<p class="empty">Ingen temaer passer søket. Prøv et annet begrep.</p>'}
-function openTopic(id){const t=topicBy(id);if(!t)return;app.innerHTML=`<button class="text-button" data-go="fagstoff">← Til kunnskapsbasen</button><article class="article">${head(category(t.area),esc(t.title),esc(t.subtitle))}${t.lecture?'<p class="source-note">Renskrevet fra brukerens forelesningsnotater. Tallene er rekonstruert fra regneuttrykk og gevinstpar. Sammenlign med originallysbildene ved avvik.</p>':''}<h2>Hovedideen</h2><p>${esc(t.body)}</p><div class="formula">${esc(t.formula)}</div>${(t.sections||[]).map(s=>`<h2>${esc(s.title)}</h2><p>${esc(s.text)}</p>`).join('')}<h2>Et konkret eksempel</h2><p>${esc(t.example)}</p><div class="callout"><h3>Kobling til strategi og ledelse</h3><p>${esc(t.strategy)}</p></div><p>Refleksjon: Hvilke forutsetninger bygger modellen på, og når kan de være lite realistiske?</p><div class="actions"><button class="primary" data-read="${t.id}" aria-pressed="${saved.read.includes(t.id)}">${saved.read.includes(t.id)?'✓ Gjennomgått · angre':'Marker som gjennomgått'}</button><button class="secondary" data-quiz-topic="${t.id}">Øv på dette temaet</button>${t.area==='spill'?'<button class="secondary" data-go="spill">Spillverksted</button>':''}</div></article>`;window.scrollTo(0,0)}
+function openTopic(id,remember=true){const t=topicBy(id);if(!t)return;if(remember)rememberStudyLocation(id);app.innerHTML=`<button class="text-button" data-go="fagstoff">← Til kunnskapsbasen</button><article class="article">${head(category(t.area),esc(t.title),esc(t.subtitle))}${t.lecture?'<p class="source-note">Renskrevet fra brukerens forelesningsnotater. Tallene er rekonstruert fra regneuttrykk og gevinstpar. Sammenlign med originallysbildene ved avvik.</p>':''}<h2>Hovedideen</h2><p>${esc(t.body)}</p><div class="formula">${esc(t.formula)}</div>${(t.sections||[]).map(s=>`<h2>${esc(s.title)}</h2><p>${esc(s.text)}</p>`).join('')}<h2>Et konkret eksempel</h2><p>${esc(t.example)}</p><div class="callout"><h3>Kobling til strategi og ledelse</h3><p>${esc(t.strategy)}</p></div><p>Refleksjon: Hvilke forutsetninger bygger modellen på, og når kan de være lite realistiske?</p><div class="actions"><button class="primary" data-read="${t.id}" aria-pressed="${saved.read.includes(t.id)}">${saved.read.includes(t.id)?'✓ Gjennomgått · angre':'Marker som gjennomgått'}</button><button class="secondary" data-quiz-topic="${t.id}">Øv på dette temaet</button>${t.area==='spill'?'<button class="secondary" data-go="spill">Spillverksted</button>':''}</div></article>`;window.scrollTo(0,0)}
 function quizSetup(){app.innerHTML=head('AKTIV GJENHENTING','Velg din øvingsøkt',`${data.questions.length} quizoppgaver med forklaring. Spillmatrisene vises sammen med spørsmålene.`)+`<section class="card"><div class="setup-grid"><label>Fag<select id="quiz-area">${areaOptions()}</select></label><label>Nivå<select id="quiz-level"><option value="alle">Alle nivåer</option><option value="grunnleggende">Grunnleggende</option><option value="middels">Middels</option><option value="fordypning">Fordypning</option></select></label><label>Antall<select id="quiz-length"><option value="10">10 spørsmål</option><option value="20">20 spørsmål</option><option value="alle">Alle som passer</option></select></label><label>Utvalg<select id="quiz-mode"><option value="alle">Alle oppgaver</option><option value="nye">Ikke besvart riktig ennå</option><option value="feil">Siste svar var feil</option></select></label></div><p id="quiz-count" class="hint"></p><button class="primary" id="start-quiz" data-start>Start økten →</button><p class="hint">Spørsmålene kommer i tilfeldig rekkefølge. Fremdrift lagres i denne nettleseren.</p></section>`;quizCount()}
 function quizCandidates(){const area=document.querySelector('#quiz-area').value,level=document.querySelector('#quiz-level').value,mode=document.querySelector('#quiz-mode').value;return data.questions.filter(q=>matches(topicBy(q.topic),area)&&(level==='alle'||q.level===level)&&(mode==='alle'||mode==='nye'&&!saved.correct.includes(q.id)||mode==='feil'&&saved.wrong.includes(q.id)))}
 function quizCount(){const n=quizCandidates().length;document.querySelector('#quiz-count').textContent=n?`${n} oppgaver passer valgene dine.`:'Ingen oppgaver passer. Endre fag, nivå eller utvalg.';document.querySelector('#start-quiz').disabled=!n}
@@ -466,6 +511,7 @@ function listWritten(){const area=document.querySelector('#written-area').value,
 function modelPage(){app.innerHTML=head('UTFORSK SAMMENHENGENE','Økonomilab','Se hvordan økt etterspørsel flytter markedets likevekt.')+`<div class="grid"><section class="card"><h2>Tilbud møter etterspørsel</h2><p>En enkel modell med lineære kurver og fri prisdannelse. Alle tall er illustrasjoner.</p><div class="formula">Qd = a − 2P<br>Qs = 10 + P</div><div class="control"><label for="demand">Etterspørselens konstant a <b id="avalue">100</b></label><input id="demand" type="range" min="60" max="120" step="1" value="100"></div><p>Tilbudet holdes uendret. Modellen forutsetter likevekt og ingen andre samtidige endringer.</p><div id="equilibrium" class="feedback"></div></section><section class="card" id="model-chart"></section></div>`;updateModel(100)}
 function updateModel(a){document.querySelector('#avalue').textContent=a;const p=(a-10)/3,q=10+p;document.querySelector('#equilibrium').textContent=`Likevektspris: ${p.toLocaleString('nb-NO',{maximumFractionDigits:2})} · Likevektsmengde: ${q.toLocaleString('nb-NO',{maximumFractionDigits:2})}`;document.querySelector('#model-chart').innerHTML=chart(a)}
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.history){history.go(Number(b.dataset.history));return;}
  if(b.hasAttribute('data-lecture-quiz')){go('quiz');document.querySelector('#quiz-area').value='forelesning';quizCount()}
  if(b.hasAttribute('data-lecture-written')){go('oppgaver');document.querySelector('#written-area').value='forelesning';listWritten()}
  if(b.hasAttribute('data-sequence-reveal')){sequenceRevealed=true;drawSequence()}
