@@ -143,7 +143,7 @@ try {
  if (Array.isArray(savedChats)) studyChats = savedChats.filter(chat =>
   typeof chat.title === 'string' && Array.isArray(chat.turns));
 } catch {}
-const pendingStudyChats = new Set();
+const pendingStudyChats = new Map();
 let studyModel = null;
 let loadingStudyModel = false;
 let studyModelStatus = '';
@@ -201,7 +201,8 @@ function refreshStudyAssistant() {
  const chat = studyChats[activeStudyChat];
  tabs.innerHTML = studyChats.map((item,index)=>`<span class="study-tab"><button type="button" data-study-tab="${index}" aria-pressed="${index===activeStudyChat}" class="secondary">${esc(item.title)}</button><button type="button" class="study-close" data-study-close="${index}" aria-label="Lukk samtale ${esc(item.title)}">×</button></span>`).join('');
  const log = document.querySelector('#study-conversation');
- const messages = chat.turns.map(turn=>`<article class="study-exchange"><p class="study-question">${esc(turn.question)}</p><div class="study-result"><strong>${esc(turn.label)}</strong>${formatStudyAnswer(turn.answer)}${turn.topicIds.map(id=>data.topics.find(t=>t.id===id)).filter(Boolean).map(t=>`<button class="text-button" data-topic="${esc(t.id)}">${esc(t.title)} →</button>`).join('')}${studySourceLinks(turn.sources)}</div></article>`).join('');
+ const pendingQuestion = pendingStudyChats.get(chat);
+ const messages = chat.turns.map(turn=>`<article class="study-exchange"><p class="study-question">${esc(turn.question)}</p><div class="study-result"><strong>${esc(turn.label)}</strong>${formatStudyAnswer(turn.answer)}${turn.topicIds.map(id=>data.topics.find(t=>t.id===id)).filter(Boolean).map(t=>`<button class="text-button" data-topic="${esc(t.id)}">${esc(t.title)} →</button>`).join('')}${studySourceLinks(turn.sources)}</div></article>`).join('') + (pendingQuestion ? `<article class="study-exchange"><p class="study-question">${esc(pendingQuestion)}</p><div class="study-result study-wait"><span class="study-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>Jobber med svaret</span></div></article>` : '');
  if (renderedStudyChat !== chat || log.innerHTML !== messages) {
   const changed = log.dataset.renderedMessages !== messages;
   if (changed) {
@@ -213,7 +214,7 @@ function refreshStudyAssistant() {
  renderedStudyChat = chat;
  document.querySelector('#study-undo').hidden = !closedStudyChat;
  const pending = pendingStudyChats.has(chat);
- document.querySelector('#study-status').textContent = pending ? 'KI utdyper fagoppslaget …' : studyModelStatus;
+ document.querySelector('#study-status').textContent = pending ? '' : studyModelStatus;
  document.querySelector('#study-form button[type=submit]').disabled = pending;
  document.querySelector('#study-enable').disabled = loadingStudyModel || Boolean(studyModel);
  document.querySelector('#study-enable').hidden = !globalThis.LanguageModel || Boolean(studyModel);
@@ -394,33 +395,40 @@ function studyAssistantPage() {
   const reply=reviewed||(localStrong?'':sources[0]?.body)|| (first ? [first.body,first.formula,first.example].filter(Boolean).join('\n\n') : 'Jeg fant ingen fagforklaring. Prøv et konkret begrep som Nash-likevekt, multiplikator eller realrente.');
   const turn={question,answer:reply,label:lecture?'Forelesningsnotater':plan.answer?'Eksamenshjelp':reviewed?'Fagforklaring':'Fagoppslag',topicIds:topics.map(t=>t.id),sources};
   if(!history.length)chat.title=question.length>30?question.slice(0,29)+'…':question;
-  chat.turns.push(turn);
-  if(chat.turns.length>20)chat.turns.shift();
   input.value='';
-  saveStudyChats();
-  refreshStudyAssistant();
-  if(reviewed||(!studyModel&&!needsWeb))return;
-  pendingStudyChats.add(chat);
+  const finish = () => {
+   if(!studyChats.includes(chat))return;
+   chat.turns.push(turn);
+   if(chat.turns.length>20)chat.turns.shift();
+   saveStudyChats();
+  };
+  if(reviewed||(!studyModel&&!needsWeb)){
+   finish();
+   refreshStudyAssistant();
+   return;
+  }
+  pendingStudyChats.set(chat,question);
   refreshStudyAssistant();
   try {
    if(needsWeb){
     try {
      const hits=await lookupStudyWeb(question);
-     if(!studyChats.includes(chat))return;
      if(hits.length){
       turn.sources=hits;
       turn.answer=hits.map(s=>'**'+s.title+'**\n'+s.body).join('\n\n');
       turn.label='Nettoppslag';
-      saveStudyChats();
-      refreshStudyAssistant();
      }
     } catch {}
    }
    if(!studyChats.includes(chat))return;
    const answer=studyModel ? await askStudyModel(question,topics,history,turn.sources) : '';
-   if(studyChats.includes(chat) && answer && !/(?:forstår ikke|kan ikke hjelpe|ingen konkrete eksempler)/i.test(answer)){turn.answer=answer;turn.label='KI-svar';saveStudyChats();}
+   if(answer && !/(?:forstår ikke|kan ikke hjelpe|ingen konkrete eksempler)/i.test(answer)){
+    turn.answer=answer;
+    turn.label='KI-svar';
+   }
   } catch {} finally {
    pendingStudyChats.delete(chat);
+   finish();
    refreshStudyAssistant();
   }
  });
