@@ -166,12 +166,36 @@ async function askStudyModel(question, topics, history, sources=[]) {
   }), {signal:AbortSignal.timeout(18000)})).trim();
  } finally { session.destroy(); }
 }
+let closedStudyChat;
+let renderedStudyChat;
+function closeStudyChat(index) {
+ const chat = studyChats[index];
+ if (!chat) return;
+ closedStudyChat = {chat,index};
+ studyChats.splice(index,1);
+ if (!studyChats.length) studyChats.push({title:'Ny samtale',turns:[]});
+ if (index < activeStudyChat) activeStudyChat--;
+ activeStudyChat = Math.min(activeStudyChat,studyChats.length-1);
+ saveStudyChats();
+ refreshStudyAssistant();
+}
 function refreshStudyAssistant() {
  const tabs = document.querySelector('#study-tabs');
  if (!tabs) return;
  const chat = studyChats[activeStudyChat];
- tabs.innerHTML = studyChats.map((item,index)=>`<button type="button" data-study-tab="${index}" aria-pressed="${index===activeStudyChat}" class="secondary">${esc(item.title)}</button>`).join('');
- document.querySelector('#study-conversation').innerHTML = chat.turns.map(turn=>`<article class="study-exchange"><p class="study-question">${esc(turn.question)}</p><div class="study-result"><strong>${esc(turn.label)}</strong>${formatStudyAnswer(turn.answer)}${turn.topicIds.map(id=>data.topics.find(t=>t.id===id)).filter(Boolean).map(t=>`<button class="text-button" data-topic="${esc(t.id)}">${esc(t.title)} →</button>`).join('')}${studySourceLinks(turn.sources)}</div></article>`).join('');
+ tabs.innerHTML = studyChats.map((item,index)=>`<span class="study-tab"><button type="button" data-study-tab="${index}" aria-pressed="${index===activeStudyChat}" class="secondary">${esc(item.title)}</button><button type="button" class="study-close" data-study-close="${index}" aria-label="Lukk samtale ${esc(item.title)}">×</button></span>`).join('');
+ const log = document.querySelector('#study-conversation');
+ const messages = chat.turns.map(turn=>`<article class="study-exchange"><p class="study-question">${esc(turn.question)}</p><div class="study-result"><strong>${esc(turn.label)}</strong>${formatStudyAnswer(turn.answer)}${turn.topicIds.map(id=>data.topics.find(t=>t.id===id)).filter(Boolean).map(t=>`<button class="text-button" data-topic="${esc(t.id)}">${esc(t.title)} →</button>`).join('')}${studySourceLinks(turn.sources)}</div></article>`).join('');
+ if (renderedStudyChat !== chat || log.innerHTML !== messages) {
+  const changed = log.dataset.renderedMessages !== messages;
+  if (changed) {
+   log.innerHTML = messages || '<p class="hint">Skriv et spørsmål for å starte samtalen.</p>';
+   log.dataset.renderedMessages = messages;
+  }
+  if (changed || renderedStudyChat !== chat) log.scrollTop = log.scrollHeight;
+ }
+ renderedStudyChat = chat;
+ document.querySelector('#study-undo').hidden = !closedStudyChat;
  const pending = pendingStudyChats.has(chat);
  document.querySelector('#study-status').textContent = pending ? 'KI utdyper fagoppslaget …' : studyModelStatus;
  document.querySelector('#study-form button[type=submit]').disabled = pending;
@@ -260,9 +284,9 @@ async function lookupStudyWeb(question){
 function studyAssistantPage() {
  if (!studyChats.length) studyChats.push({title:'Ny samtale',turns:[]});
  app.innerHTML = head('ECO 5026','Studieassistent','Spør om teori, regnesteg eller eksamensøving.')+
- `<section class="card study-shell"><div class="study-toolbar"><button id="study-new" type="button" class="secondary">+ Ny samtale</button><button id="study-enable" type="button" class="secondary">Klargjør KI</button></div>
+ `<section class="card study-shell"><div class="study-toolbar"><button id="study-new" type="button" class="secondary">+ Ny samtale</button><button id="study-undo" type="button" class="text-button" hidden>Angre lukking</button><button id="study-enable" type="button" class="secondary">Klargjør KI</button></div>
  <div id="study-tabs" class="study-tabs" role="group" aria-label="Samtaler"></div>
- <details class="study-result"><summary>Kildebibliotek · ${studyLibrary.length} fagoppslag</summary>${studyLibrary.map(item=>`<article><h3>${esc(item.title)}</h3><p>${esc(item.body)}</p>${studySourceLinks([item])}</article>`).join('')}</details><div id="study-conversation" role="log" aria-label="Meldinger"></div>
+ <details class="study-library"><summary>Kildebibliotek · ${studyLibrary.length} fagoppslag</summary><div class="study-library-list">${studyLibrary.map(item=>`<article><h3>${esc(item.title)}</h3><p>${esc(item.body)}</p>${studySourceLinks([item])}</article>`).join('')}</div></details><div id="study-conversation" role="log" aria-label="Meldinger"></div>
  <p id="study-status" role="status"></p>
  <form id="study-form"><label for="study-question">Hva vil du ha hjelp med?</label><textarea id="study-question" rows="2" maxlength="500" required placeholder="Spør om et fagbegrep eller en oppgave …"></textarea>
  <div class="actions"><select id="study-subject" aria-label="Velg fag"><option value="alle">Begge fag</option><option value="mikro">Mikroøkonomi</option><option value="makro">Makroøkonomi</option></select><button class="primary" type="submit">Send</button></div><small id="study-keyboard">Enter sender. Skift + Enter gir ny linje. Ved svake treff kan søkeord sendes til Wikipedia.</small></form></section>`;
@@ -284,7 +308,25 @@ function studyAssistantPage() {
   refreshStudyAssistant();
   input.focus();
  });
+ document.querySelector('#study-undo').addEventListener('click',()=>{
+  if(!closedStudyChat)return;
+  const {chat,index}=closedStudyChat;
+  if(studyChats.length===1&&!studyChats[0].turns.length&&studyChats[0].title==='Ny samtale')studyChats.pop();
+  const position=Math.min(index,studyChats.length);
+  studyChats.splice(position,0,chat);
+  activeStudyChat=position;
+  closedStudyChat=null;
+  saveStudyChats();
+  refreshStudyAssistant();
+  input.focus();
+ });
  document.querySelector('#study-tabs').addEventListener('click',event=>{
+  const close=event.target.closest('[data-study-close]');
+  if(close){
+   closeStudyChat(Number(close.dataset.studyClose));
+   document.querySelector('[data-study-tab="'+activeStudyChat+'"]')?.focus();
+   return;
+  }
   const tab=event.target.closest('[data-study-tab]');
   if(!tab)return;
   activeStudyChat=Number(tab.dataset.studyTab);
@@ -319,6 +361,7 @@ function studyAssistantPage() {
    if(needsWeb){
     try {
      const hits=await lookupStudyWeb(question);
+     if(!studyChats.includes(chat))return;
      if(hits.length){
       turn.sources=hits;
       turn.answer=hits.map(s=>'**'+s.title+'**\n'+s.body).join('\n\n');
@@ -328,8 +371,9 @@ function studyAssistantPage() {
      }
     } catch {}
    }
+   if(!studyChats.includes(chat))return;
    const answer=studyModel ? await askStudyModel(question,topics,history,turn.sources) : '';
-   if(answer && !/(?:forstår ikke|kan ikke hjelpe|ingen konkrete eksempler)/i.test(answer)){turn.answer=answer;turn.label='KI-svar';saveStudyChats();}
+   if(studyChats.includes(chat) && answer && !/(?:forstår ikke|kan ikke hjelpe|ingen konkrete eksempler)/i.test(answer)){turn.answer=answer;turn.label='KI-svar';saveStudyChats();}
   } catch {} finally {
    pendingStudyChats.delete(chat);
    refreshStudyAssistant();
