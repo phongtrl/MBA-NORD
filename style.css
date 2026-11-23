@@ -82,3 +82,12 @@ footer { color: #54655f; }
 #study-form select { padding:8px; border:1px solid var(--line); border-radius:8px; background:white; }
 .study-result { margin-top:20px; padding-top:14px; border-top:1px solid var(--line); }
 @media (max-width:420px) { nav { flex-wrap:wrap; } nav button { flex:1 0 45%; } }
+
+.study-shell { background:#fbfcfd; }
+.study-toolbar,.study-tabs { display:flex; gap:.65rem; flex-wrap:wrap; }
+.study-tabs { margin-top:14px; padding:10px 0; border-bottom:1px solid var(--line); }
+.study-tabs button[aria-pressed="true"] { background:#174f50; color:white; }
+.study-exchange { margin:18px 0; }
+.study-question { margin-left:auto; width:fit-content; max-width:85%; background:#e0eee9; padding:10px 16px; border-radius:16px 16px 4px 16px; overflow-wrap:anywhere; }
+.study-exchange .study-result { background:white; border:1px solid var(--line); padding:16px; border-radius:4px 16px 16px; overflow-wrap:anywhere; }
+#study-conversation { max-height:60vh; overflow:auto; }
