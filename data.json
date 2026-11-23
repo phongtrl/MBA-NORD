@@ -1153,6 +1153,102 @@
       "area": "spill",
       "category": "mikro",
       "lecture": true
+    },
+    {
+      "id": "macro-keynes",
+      "title": "Likevekt i varemarkedet",
+      "subtitle": "Multiplikatormodell, kursnotat og regneregler",
+      "body": "Sett planlagt etterspørsel lik produksjonen. I en lukket økonomi er AE=C+I+G. Med faste priser og ledig kapasitet tilpasser bedriftene produksjonen til etterspørselen. Den planlagte etterspørselen kan avvike fra Y utenfor likevekt, selv om nasjonalregnskapet balanserer når uplanlagte lagerendringer regnes med.",
+      "formula": "C=c₀+c₁(Y−T); Y=(c₀+I+G−c₁T)/(1−c₁)",
+      "example": "Med c₀=20, c₁=0,6, T=50, I=30 og G=60 blir telleren 80. Y=200. Konsumet blir 110, og 110+30+60=200.",
+      "strategy": "Oppgi forutsetninger og fortegn. Skill mellom resultatet i modellen og en bredere vurdering av norsk økonomi.",
+      "category": "makro",
+      "area": "makro",
+      "macroCourse": true
+    },
+    {
+      "id": "macro-fiscal",
+      "title": "Offentlige kjøp, skatt og balansert budsjett",
+      "subtitle": "Multiplikatornotatet og tidligere eksamener",
+      "body": "Et offentlig kjøp går direkte inn i etterspørselen. En endring i fast skatt påvirker først disponibel inntekt, og bare konsumandelen slår ut i første runde. Overføringer behandles gjennom disponibel inntekt, avhengig av modellens definisjon av netto skatt.",
+      "formula": "ΔY=(ΔG−c₁ΔT)/(1−c₁)",
+      "example": "Ved c₁=0,75 og både ΔG=20 og ΔT=20 øker Y med 20. Multiplikatoren ved balansert budsjett er 1 i denne lukkede modellen med fast skatt.",
+      "strategy": "Oppgi forutsetninger og fortegn. Skill mellom resultatet i modellen og en bredere vurdering av norsk økonomi.",
+      "category": "makro",
+      "area": "makro",
+      "macroCourse": true
+    },
+    {
+      "id": "macro-tax",
+      "title": "Proporsjonal skatt og investeringer som følger BNP",
+      "subtitle": "Eksamen høst 2024 og høst 2025",
+      "body": "Sett T=tY og I=e+vY−hr. Etterspørselens helning er c₁(1−t)+v. Skatt demper inntektsrundene, mens investeringer som øker med produksjonen forsterker dem. I de vanlige oppgavene er helningen mindre enn 1.",
+      "formula": "D=1−c₁(1−t)−v; ΔY=(ΔG−hΔr)/D",
+      "example": "Med c₁=0,8, t=0,25 og v=0,2 er D=0,2. Ved økning i G på 10 stiger Y med 50.",
+      "strategy": "Oppgi forutsetninger og fortegn. Skill mellom resultatet i modellen og en bredere vurdering av norsk økonomi.",
+      "category": "makro",
+      "area": "makro",
+      "macroCourse": true
+    },
+    {
+      "id": "macro-open",
+      "title": "Åpen økonomi og importlekkasje",
+      "subtitle": "Eksamen høst 2025 og vår 2026",
+      "body": "I en åpen økonomi legger vi til nettoeksport, NX=X−M. Import som øker med innenlandsk inntekt reduserer andelen av etterspørselsøkningen som treffer hjemlig produksjon. En modell kan i tillegg spesifisere at nettoeksporten faller når renten stiger. Bruk sammenhengene som faktisk er gitt i oppgaven.",
+      "formula": "NX=x₀−mY−kr; D=1−c₁(1−t)−v+m; ΔY=(ΔG−(h+k)Δr)/D",
+      "example": "Med c₁=0,8, t=0,25, v=0,1 og m=0,2 får vi D=0,5. Ekstra offentlig etterspørsel på 20 gir ΔY=40.",
+      "strategy": "Oppgi forutsetninger og fortegn. Skill mellom resultatet i modellen og en bredere vurdering av norsk økonomi.",
+      "category": "makro",
+      "area": "makro",
+      "macroCourse": true
+    },
+    {
+      "id": "macro-rate",
+      "title": "Rentesjokk og direkte og indirekte virkninger",
+      "subtitle": "Makro-øvingsoppgaver og eksamen høst 2025",
+      "body": "I en enkel modell reduserer høyere realrente investeringene. Hvis konsum også er rentefølsomt, legger du til et direkte konsumfall. Første runde ligger i telleren. Multiplikatoren fanger opp hvordan endret produksjon deretter virker tilbake på konsum, investering og import. Sysselsettingen går i samme retning som produksjonen dersom modellen antar det.",
+      "formula": "Med C=c₀+c₁(Y−T)−nr: ΔY=−(h+n)Δr/D, eventuelt med +k i parentesen ved rentefølsom NX.",
+      "example": "Med D=0,5, h=4 og n=2 gir Δr=1 et direkte etterspørselsfall på 6 og samlet produksjonsfall på 12. Bruk samme renteenhet som parameterne er gitt i.",
+      "strategy": "Oppgi forutsetninger og fortegn. Skill mellom resultatet i modellen og en bredere vurdering av norsk økonomi.",
+      "category": "makro",
+      "area": "makro",
+      "macroCourse": true
+    },
+    {
+      "id": "macro-fx",
+      "title": "Kronekurs og konkurranseevne",
+      "subtitle": "Valutakursnotatet og eksamen høst 2024",
+      "body": "La E være NOK per euro. Når E stiger, blir euro dyrere og kronen depresierer. Realvalutakursen kan defineres som EP*/P. Økning i dette målet gjør utenlandske varer dyrere relativt til norske. Priser, importerte innsatsvarer og kontrakter avgjør hvor raskt og sterkt handelsvolumet reagerer.",
+      "formula": "E=NOK/EUR; realvalutakurs Q=EP*/P",
+      "example": "En vare til 80 euro koster 800 kroner når E=10 og 880 ved E=11. Alt annet likt styrkes norsk priskonkurranseevne, mens kjøpekraften overfor euro svekkes.",
+      "strategy": "Oppgi forutsetninger og fortegn. Skill mellom resultatet i modellen og en bredere vurdering av norsk økonomi.",
+      "category": "makro",
+      "area": "makro",
+      "macroCourse": true
+    },
+    {
+      "id": "macro-uip",
+      "title": "Udekket renteparitet og forventet kurs",
+      "subtitle": "Valutakursnotatet og løsningsforslag vår 2026",
+      "body": "Med E i NOK per enhet utenlandsk valuta, uendret forventet fremtidig kurs og uten risikopremie, gir høyere innenlandsk rente lavere E i dag. Kronen appresierer i dag, og forventes deretter å svekke seg nok til å utligne rentefordelen. Faktisk kurs påvirkes også av nyheter om fremtidig rente, risiko og kursforventninger.",
+      "formula": "1+i=(1+i*)Eᵉ/E; tilnærmet i−i*≈(Eᵉ−E)/E",
+      "example": "Med i=5 %, i*=3 % og Eᵉ=11 får vi E=11·1,03/1,05≈10,79. Bruk nominelle renter når kursen og avkastningen er nominelle.",
+      "strategy": "Oppgi forutsetninger og fortegn. Skill mellom resultatet i modellen og en bredere vurdering av norsk økonomi.",
+      "category": "makro",
+      "area": "makro",
+      "macroCourse": true
+    },
+    {
+      "id": "macro-trans",
+      "title": "Transmisjonsmekanismen og inflasjon",
+      "subtitle": "Transmisjonsnotatet og eksamen høst 2025",
+      "body": "Styringsrenten påvirker markedsrenter og forventninger. Etterspørselskanalen omfatter blant annet substitusjon, formue og kontantstrøm. Lavere etterspørsel kan redusere press i arbeidsmarkedet og dempe lønns- og prisvekst med etterslep. En sterkere krone kan redusere importprisene og svekke nettoeksporten. Forventningskanalen virker gjennom forventninger om renter og inflasjon og kan påvirke dagens priser og lønnsoppgjør.",
+      "formula": "Styringsrente → finansielle vilkår, valutakurs og forventninger → etterspørsel og priser",
+      "example": "Ved en renteheving kan høyere lånekostnader dempe konsum og investeringer. Samtidig kan appresiering redusere importert prispress. Ved et negativt tilbudssjokk kan aktiviteten falle samtidig som inflasjonen stiger, noe som gir en avveiing.",
+      "strategy": "Oppgi forutsetninger og fortegn. Skill mellom resultatet i modellen og en bredere vurdering av norsk økonomi.",
+      "category": "makro",
+      "area": "makro",
+      "macroCourse": true
     }
   ],
   "questions": [
@@ -3542,6 +3638,344 @@
       "answer": 0,
       "explanation": "Spiller 1 får 5 ved å velge først mot 4 som svarer. Spiller 2 får 4 som svarer mot 2 som førstetrekker. De er enige om rekkefølgen.",
       "level": "middels"
+    },
+    {
+      "id": "eco-0-0",
+      "topic": "macro-keynes",
+      "question": "I øker med 30. Gitt c₁=0,60, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "75",
+        "85",
+        "60"
+      ],
+      "answer": 0,
+      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,40. Del den direkte endringen på D og få ΔY≈75.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-0-1",
+      "topic": "macro-fiscal",
+      "question": "Fast skatt øker med 30. Gitt c₁=0,60, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "-60",
+        "-45",
+        "-35"
+      ],
+      "answer": 1,
+      "explanation": "Den direkte endringen er -18. Helningen bestemmer nevneren D=0,40. Del den direkte endringen på D og få ΔY≈-45.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-0-2",
+      "topic": "macro-tax",
+      "question": "G øker med 30 i en lukket økonomi. Gitt c₁=0,60, t=0,25, v=0,10, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "76,67",
+        "51,67",
+        "66,67"
+      ],
+      "answer": 2,
+      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,45. Del den direkte endringen på D og få ΔY≈66,67.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-0-3",
+      "topic": "macro-open",
+      "question": "G øker med 30 i en åpen økonomi. Gitt c₁=0,60, t=0,25, v=0,10, m=0,05, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "60",
+        "70",
+        "45"
+      ],
+      "answer": 0,
+      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,50. Del den direkte endringen på D og få ΔY≈60.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-0-4",
+      "topic": "macro-rate",
+      "question": "Realrenten øker med 2 enheter, h=5 og k=3. Gitt c₁=0,60, t=0,25, v=0,10, m=0,05, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "-47",
+        "-32",
+        "-22"
+      ],
+      "answer": 1,
+      "explanation": "Den direkte endringen er -16. Helningen bestemmer nevneren D=0,50. Del den direkte endringen på D og få ΔY≈-32.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-1-0",
+      "topic": "macro-keynes",
+      "question": "I øker med 30. Gitt c₁=0,80, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "135",
+        "150",
+        "160"
+      ],
+      "answer": 1,
+      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,20. Del den direkte endringen på D og få ΔY≈150.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-1-1",
+      "topic": "macro-fiscal",
+      "question": "Fast skatt øker med 30. Gitt c₁=0,80, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "-110",
+        "-135",
+        "-120"
+      ],
+      "answer": 2,
+      "explanation": "Den direkte endringen er -24. Helningen bestemmer nevneren D=0,20. Del den direkte endringen på D og få ΔY≈-120.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-1-2",
+      "topic": "macro-tax",
+      "question": "G øker med 30 i en lukket økonomi. Gitt c₁=0,80, t=0,25, v=0,10, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "100",
+        "110",
+        "85"
+      ],
+      "answer": 0,
+      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,30. Del den direkte endringen på D og få ΔY≈100.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-1-3",
+      "topic": "macro-open",
+      "question": "G øker med 30 i en åpen økonomi. Gitt c₁=0,80, t=0,25, v=0,10, m=0,20, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "45",
+        "60",
+        "70"
+      ],
+      "answer": 1,
+      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,50. Del den direkte endringen på D og få ΔY≈60.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-1-4",
+      "topic": "macro-rate",
+      "question": "Realrenten øker med 2 enheter, h=5 og k=3. Gitt c₁=0,80, t=0,25, v=0,10, m=0,20, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "-22",
+        "-47",
+        "-32"
+      ],
+      "answer": 2,
+      "explanation": "Den direkte endringen er -16. Helningen bestemmer nevneren D=0,50. Del den direkte endringen på D og få ΔY≈-32.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-2-0",
+      "topic": "macro-keynes",
+      "question": "I øker med 30. Gitt c₁=0,75, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "130",
+        "105",
+        "120"
+      ],
+      "answer": 2,
+      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,25. Del den direkte endringen på D og få ΔY≈120.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-2-1",
+      "topic": "macro-fiscal",
+      "question": "Fast skatt øker med 30. Gitt c₁=0,75, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "-90",
+        "-80",
+        "-105"
+      ],
+      "answer": 0,
+      "explanation": "Den direkte endringen er -22,50. Helningen bestemmer nevneren D=0,25. Del den direkte endringen på D og få ΔY≈-90.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-2-2",
+      "topic": "macro-tax",
+      "question": "G øker med 30 i en lukket økonomi. Gitt c₁=0,75, t=0,20, v=0,20, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "135",
+        "150",
+        "160"
+      ],
+      "answer": 1,
+      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,20. Del den direkte endringen på D og få ΔY≈150.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-2-3",
+      "topic": "macro-open",
+      "question": "G øker med 30 i en åpen økonomi. Gitt c₁=0,75, t=0,20, v=0,20, m=0,10, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "110",
+        "85",
+        "100"
+      ],
+      "answer": 2,
+      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,30. Del den direkte endringen på D og få ΔY≈100.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-2-4",
+      "topic": "macro-rate",
+      "question": "Realrenten øker med 2 enheter, h=5 og k=3. Gitt c₁=0,75, t=0,20, v=0,20, m=0,10, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "-53,33",
+        "-43,33",
+        "-68,33"
+      ],
+      "answer": 0,
+      "explanation": "Den direkte endringen er -16. Helningen bestemmer nevneren D=0,30. Del den direkte endringen på D og få ΔY≈-53,33.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-3-0",
+      "topic": "macro-keynes",
+      "question": "I øker med 30. Gitt c₁=0,50, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "60",
+        "70",
+        "45"
+      ],
+      "answer": 0,
+      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,50. Del den direkte endringen på D og få ΔY≈60.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-3-1",
+      "topic": "macro-fiscal",
+      "question": "Fast skatt øker med 30. Gitt c₁=0,50, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "-45",
+        "-30",
+        "-20"
+      ],
+      "answer": 1,
+      "explanation": "Den direkte endringen er -15. Helningen bestemmer nevneren D=0,50. Del den direkte endringen på D og få ΔY≈-30.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-3-2",
+      "topic": "macro-tax",
+      "question": "G øker med 30 i en lukket økonomi. Gitt c₁=0,50, t=0,20, v=0,10, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "70",
+        "45",
+        "60"
+      ],
+      "answer": 2,
+      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,50. Del den direkte endringen på D og få ΔY≈60.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-3-3",
+      "topic": "macro-open",
+      "question": "G øker med 30 i en åpen økonomi. Gitt c₁=0,50, t=0,20, v=0,10, m=0,10, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "50",
+        "60",
+        "35"
+      ],
+      "answer": 0,
+      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,60. Del den direkte endringen på D og få ΔY≈50.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-3-4",
+      "topic": "macro-rate",
+      "question": "Realrenten øker med 2 enheter, h=5 og k=3. Gitt c₁=0,50, t=0,20, v=0,10, m=0,10, hva blir ΔY (avrundet ved behov)?",
+      "options": [
+        "-41,67",
+        "-26,67",
+        "-16,67"
+      ],
+      "answer": 1,
+      "explanation": "Den direkte endringen er -16. Helningen bestemmer nevneren D=0,60. Del den direkte endringen på D og få ΔY≈-26,67.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-e",
+      "topic": "macro-fx",
+      "question": "E øker fra 10 til 11 NOK/EUR. Hva skjer med kronen?",
+      "options": [
+        "Den depresierer",
+        "Den appresierer",
+        "Den står stille"
+      ],
+      "answer": 0,
+      "explanation": "Én euro koster flere kroner. Kronen svekker seg mot euro.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-real",
+      "topic": "macro-fx",
+      "question": "E stiger 10 % mens P og P* står stille. Hva skjer med EP*/P?",
+      "options": [
+        "Øker 10 %",
+        "Faller 10 %",
+        "Står stille"
+      ],
+      "answer": 0,
+      "explanation": "Når prisnivåene er faste, endres realvalutakursen proporsjonalt med E.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-par",
+      "topic": "macro-uip",
+      "question": "Innenlandsk rente stiger. Hva skjer med dagens E ved uendret Eᵉ og uten risikopremie?",
+      "options": [
+        "E faller",
+        "E stiger",
+        "E står stille"
+      ],
+      "answer": 0,
+      "explanation": "E=(1+i*)Eᵉ/(1+i). Høyere i gir lavere NOK per euro.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-expect",
+      "topic": "macro-uip",
+      "question": "Hvilket forhold kan endre renteparitetsresultatet i praksis?",
+      "options": [
+        "Endret forventet fremtidig kurs",
+        "Kun antall desimaler",
+        "Bokstavvalget for valutakursen"
+      ],
+      "answer": 0,
+      "explanation": "Forventet fremtidig kurs og risikopremie kan begge endres samtidig med renten.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-channels",
+      "topic": "macro-trans",
+      "question": "Hvilken kanal virker direkte gjennom billigere import etter en appresiering?",
+      "options": [
+        "Valutakurskanalen",
+        "Skattemultiplikatoren",
+        "Kontantstrømkanalen"
+      ],
+      "answer": 0,
+      "explanation": "En sterkere krone gjør valuta billigere og kan redusere importpriser i kroner.",
+      "level": "middels"
+    },
+    {
+      "id": "eco-fixed",
+      "topic": "macro-trans",
+      "question": "Kan modellen med fast prisnivå alene tallfeste inflasjonsvirkningen av en renteøkning?",
+      "options": [
+        "Nei",
+        "Ja, alltid én til én",
+        "Ja, hvis c₁=0,5"
+      ],
+      "answer": 0,
+      "explanation": "Modellen bestemmer produksjon under gitte priser. Inflasjonsanalysen krever mekanismer for blant annet priser, lønn og forventninger.",
+      "level": "middels"
     }
   ],
   "games": [
@@ -4956,7 +5390,7 @@
       ]
     }
   ],
-  "version": 3,
+  "version": 4,
   "written": [
     {
       "id": "w1",
@@ -5230,6 +5664,78 @@
         "Spiller 1 ønsker å være først: 5>4. Spiller 2 ønsker å være sist: 4>2. Begge foretrekker rekkefølgen 1 først og 2 sist. Det er harmoni om rekkefølgen, ikke nødvendigvis om alle andre aspekter ved spillet."
       ],
       "level": "fordypning"
+    },
+    {
+      "id": "eco-w-keynes",
+      "title": "Løs varemarkedet på redusert form",
+      "topic": "macro-keynes",
+      "level": "fordypning",
+      "prompt": "Bruk C=30+0,75(Y−40), I=40 og G=70. Finn Y og C. Øk deretter I med 12.",
+      "solution": [
+        "Sett inn: Y=30+0,75Y−30+40+70=110+0,75Y.",
+        "Da er Y=440 og C=330. Kontroll: 330+40+70=440.",
+        "Endringsform: ΔY=12/(1−0,75)=48. Ny Y er 488."
+      ]
+    },
+    {
+      "id": "eco-w-fiscal",
+      "title": "Sammenlign to finanspolitiske tiltak",
+      "topic": "macro-fiscal",
+      "level": "fordypning",
+      "prompt": "La c₁=0,8 og T være fast. Sammenlign ΔG=10 med et skattekutt på 10.",
+      "solution": [
+        "Utgiftsøkningen gir 10 direkte. Multiplisert med 5 gir det ΔY=50.",
+        "Skattekuttet øker disponibel inntekt med 10 og konsumet med 8 i første runde. ΔY=40.",
+        "Forklar hvorfor økt offentlig kjøp har større virkning i denne modellen."
+      ]
+    },
+    {
+      "id": "eco-w-open",
+      "title": "Regn med skatt, investering og import",
+      "topic": "macro-open",
+      "level": "fordypning",
+      "prompt": "Bruk c₁=0,75, t=0,2, v=0,15 og m=0,25. Finn effekten av ΔG=20 i lukket og åpen økonomi.",
+      "solution": [
+        "Lukket: D=1−0,75·0,8−0,15=0,25. ΔY=80.",
+        "Åpen: import legger 0,25 til nevneren, som blir 0,5. ΔY=40.",
+        "Import er lekkasje fra etterspørselen etter produksjon hjemme."
+      ]
+    },
+    {
+      "id": "eco-w-rate",
+      "title": "Skill første runde fra multiplikatorvirkningen",
+      "topic": "macro-rate",
+      "level": "fordypning",
+      "prompt": "I en åpen økonomi er D=0,4, h=4, n=2 og k=2. Renten øker én modell-enhet. Finn direkte, indirekte og samlet effekt.",
+      "solution": [
+        "Direkte fall er 4+2+2=8, altså −8.",
+        "Samlet ΔY=−8/0,4=−20. Indirekte bidrag er −20−(−8)=−12.",
+        "Gitt at sysselsettingen øker med produksjonen, faller også sysselsettingen i modellen."
+      ]
+    },
+    {
+      "id": "eco-w-uip",
+      "title": "Regn renteparitet og tolk kronen",
+      "topic": "macro-uip",
+      "level": "fordypning",
+      "prompt": "Eᵉ=12, i*=2 %. Regn ut E når norsk rente først er 2 %, deretter 5 %.",
+      "solution": [
+        "Ved lik rente er E=12.",
+        "Etter renteøkningen er E=12·1,02/1,05≈11,66. Kronen appresierer med en gang ifølge modellen.",
+        "Det forventede fremtidige nivået på 12 innebærer deretter en forventet kronesvekkelse, gitt forutsetningene."
+      ]
+    },
+    {
+      "id": "eco-w-trans",
+      "title": "Drøft en renteøkning etter et energisjokk",
+      "topic": "macro-trans",
+      "level": "fordypning",
+      "prompt": "Energiprisene øker og inflasjonen stiger mens produksjonen svekkes. Drøft renteøkning gjennom de tre kanalene og virkningen på aktivitet.",
+      "solution": [
+        "Beskriv energisjokket som et kostnadssjokk som kan gi lavere produksjon og høyere priser.",
+        "Drøft svakere etterspørsel, eventuell appresiering og lavere importprisvekst, samt hvordan forventninger kan påvirke lønns- og prisvekst.",
+        "Forklar avveiingen mellom inflasjon og realaktivitet og hvorfor virkningene kommer med etterslep."
+      ]
     }
   ],
   "lectureBaseGames": [

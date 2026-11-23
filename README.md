@@ -17,10 +17,10 @@ Nye endringer på main publiseres automatisk når dette oppsettet er aktivert.
 
 ## Innhold
 
-- **49 teoritemaer**, inkludert 30 innen spillteori med hovedideer, forutsetninger, gjennomarbeidede eksempler og strategiske anvendelser.
-- **178 quizoppgaver**, hvorav 143 innen spillteori. Velg fag, nivå og 10, 20 eller alle spørsmål. Øv på siste feil eller oppgaver du ennå ikke har besvart riktig.
+- **57 teoritemaer**, inkludert 30 innen spillteori med hovedideer, forutsetninger, gjennomarbeidede eksempler og strategiske anvendelser.
+- **204 quizoppgaver**, hvorav 143 innen spillteori. Velg fag, nivå og 10, 20 eller alle spørsmål. Øv på siste feil eller oppgaver du ennå ikke har besvart riktig.
 - **27 interaktive spillmatriser**: marker alle rene Nash-likevekter, håndter like gevinster og spill uten ren likevekt, og vis trinnvise beste-respons-forklaringer.
-- **20 åpne regne- og drøftingsoppgaver** med egne svarfelt og trinnvise løsningsforslag. Egenvurdering, ingen automatisk sensur av fritekst.
+- **26 åpne regne- og drøftingsoppgaver** med egne svarfelt og trinnvise løsningsforslag. Egenvurdering, ingen automatisk sensur av fritekst.
 - Flashkort med fagfilter, søkbart fagstoff og interaktiv tilbuds- og etterspørselsmodell.
 
 Spillteori omfatter beste respons, rene og blandede Nash-likevekter, dominant/dominert strategi, fangens dilemma, koordinering, Chicken, Pareto, nullsumspill, sekvensielle spill, delspillperfeksjon, troverdige trusler, gjentatte spill, grim trigger, Cournot, Bertrand, Stackelberg og Bayesiansk Nash.
@@ -66,3 +66,7 @@ Kontrollene bruker Node.js uten tilleggspakker og simulerer DOM for å teste log
 ## Alternativ: lokal filåpning
 
 Last ned ZIP, pakk ut hele mappen og dobbeltklikk index.html. Ingen lokal server kreves. Nettleseren kan begrense lokal lagring ved filåpning. Nettskriftene krever nett, med lokale reservefonter.
+
+## Makroøkonomi i ECO 5026
+
+Velg Makroøkonomi i menyen for å finne åtte kurstemaer, 26 quizoppgaver og seks åpne oppgaver med løsningsforslag. Oppgavene bygger på multiplikatornotatet, makroøvingene, notatene om valuta og transmisjon og tidligere eksamener.
