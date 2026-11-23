@@ -273,23 +273,26 @@ function planStudyReply(question, subject, history) {
   .replace(/\b(?:koble|opp|mot|fag|faget|her|har|eksempel|eksempler|gi|vis|løsning|løsningen)\b/giu,'');
  const prior = (history.at(-1)?.topicIds || []).map(id=>data.topics.find(topic=>topic.id===id))
   .filter(topic=>topic && (subject==='alle' || topic.category===subject));
- const direct = findStudyTopics(cleaned,subject);
+ const query=cleaned.replace(/\b(?:nord universitet|eco\s*5026|pensum|forklar|øvingsoppgav\p{L}*)\b/giu,' ');
+ const direct=findStudyTopics(query,subject);
+ const ids=/multiplikator|keyneskryss|varemarked/iu.test(query)?['macro-keynes','macro-rate','macro-open']:/renteparitet/iu.test(query)?['macro-uip']:[]; 
+ if(subject!=='mikro') for(const id of ids.reverse()){const topic=topicBy(id);if(topic){const i=direct.indexOf(topic);if(i>=0)direct.splice(i,1);direct.unshift(topic);}}
  const topic = direct[0] || prior[0];
  const area = topic?.category || subject;
  const topics = direct.length ? direct.filter(t=>t.category===area) : prior;
  if (!exam) return {topics};
  const cycle = topic?.id==='11' || /\bkonjunktur/iu.test(cleaned);
- const aliases = {'e5':['w11','exam-policy'],'macro-uip':['exam-policy'],'e8':['w10'],'g3':['exam-dilemma','exam-chicken'],'g10':['w2','exam-chicken']};
+ const aliases = {'e5':['w11','exam-policy'],'macro-uip':['exam-policy'],'e8':['w10'],'g3':['exam-dilemma','exam-chicken'],'g10':['w2'],'macro-keynes':['exam-mult','eco-w-keynes'],'macro-rate':['exam-mult','eco-w-rate'],'macro-open':['eco-w-open','exam-mult'],'macro-trans':['exam-policy','eco-w-trans']};
  const preferred = cycle ? ['w11','exam-mult','exam-policy'] : aliases[topic?.id] || [];
  const exercises = data.written.filter(w=>area==='alle'||data.topics.some(t=>t.id===w.topic&&t.category===area));
  const ranked = exercises.map(w=>({w,score:preferred.includes(w.id)?100-preferred.indexOf(w.id):w.topic===topic?.id?50:!topic&&w.exam?20:0}))
   .filter(item=>item.score>0).sort((a,b)=>b.score-a.score).slice(0,2).map(item=>item.w);
  if (!ranked.length && topic) {
-  const related=exercises.find(w=>w.exam);
+
   return {topics,answer:[
    '**'+topic.title+' på eksamen**',topic.body,topic.formula,topic.example,
    'I en besvarelse kan du definere begrepet, bruke det på situasjonen i oppgaven og begrunne konklusjonen.',
-   related ? 'En bredere øving i samme fag er «'+related.title+'» under Eksamensoppgaver med løsninger.' : ''
+   'Bruk teorien til å begrunne virkningen under forutsetningene i oppgaven.'
   ].filter(Boolean).join('\n\n')};
  }
  if (!ranked.length) return studyExamOverview(area==='mikro'?'mikro':'makro');
@@ -301,7 +304,7 @@ function planStudyReply(question, subject, history) {
   '**Løsningsforslag**',
   ...w.solution.map((s,i)=>(i+1)+'. '+s)
  ].join('\n'));
- return {topics,answer:[intro,'Her er eksamensøving fra MBA NORD med løsningsforslag.',...blocks].filter(Boolean).join('\n\n')};
+ return {topics,answer:[intro,'Her er bearbeidet eksamensøving med løsningsforslag fra MBA NORD, basert på ECO 5026.',...blocks].filter(Boolean).join('\n\n')};
 }
 
 const studyLibrary = [{"area":"mikro","title":"Markedslikevekt","body":"I likevekt er tilbudt mengde lik etterspurt mengde. Endret egen pris gir bevegelse langs kurven. Endrede kostnader eller inntekt kan forskyve den.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"},{"area":"mikro","title":"Elastisitet","body":"Priselastisitet er prosentvis mengdeendring delt på prosentvis prisendring. Ved elastisk etterspørsel reduserer en liten prisøkning normalt omsetningen.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"},{"area":"mikro","title":"Alternativkostnad og komparativt fortrinn","body":"Alternativkostnad er verdien av det beste alternativet du gir avkall på. Komparativt fortrinn bygger på lavere alternativkostnad.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"},{"area":"mikro","title":"Skatteinsidens og avgifter","body":"En avgift skaper et gap mellom kjøperpris og selgerpris. Siden som reagerer minst på prisendringer bærer vanligvis mest av byrden.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"},{"area":"mikro","title":"Konsumentoverskudd og dødvektstap","body":"Konsumentoverskudd er betalingsvillighet minus utgift. Dødvektstap måler overskudd fra handler som går tapt.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"},{"area":"mikro","title":"Monopol og grenseinntekt","body":"I en indre optimumsløsning setter monopolisten grenseinntekt lik grensekostnad og finner prisen fra etterspørselen.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"},{"area":"mikro","title":"Fullkommen konkurranse","body":"En pristaker setter pris lik grensekostnad i en indre løsning. På kort sikt må inntekten også dekke variable kostnader for at produksjonen skal fortsette.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"},{"area":"mikro","title":"Oligopol og Nash-likevekt","body":"Et oligopol har få tilbydere, slik at hver bedrifts valg påvirker de andre. En Nash-likevekt består av gjensidige beste responser.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"},{"area":"mikro","title":"Fangens dilemma","body":"Begge kan ha en dominant strategi og samtidig ende dårligere enn ved gjensidig samarbeid.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"},{"area":"mikro","title":"Eksternaliteter og kollektive goder","body":"Eksternaliteter rammer andre uten at hele virkningen inngår i prisen. Rene kollektive goder er ikke-rivaliserende og ikke-ekskluderbare.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"},{"area":"mikro","title":"Asymmetrisk informasjon","body":"Ugunstig utvalg gjelder skjulte egenskaper før avtale. Moralsk hasard gjelder skjult atferd etter avtale.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"},{"area":"makro","title":"Keyneskryss og multiplikator","body":"Likevekt betyr at planlagt etterspørsel er lik produksjonen. I enkel lukket økonomi uten inntektsavhengig skatt er utgiftsmultiplikatoren 1/(1−c). Skatt og import kan dempe virkningen.","url":"https://openstax.org/books/principles-economics-3e/pages/d-the-expenditure-output-model","source":"OpenStax"},{"area":"makro","title":"BNP og realvekst","body":"BNP måler verdien av produksjonen. Reelt BNP korrigerer for prisendringer. Utgiftsmetoden summerer konsum, investering, offentlige kjøp og nettoeksport.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"},{"area":"makro","title":"Produksjonsgap og konjunkturer","body":"Produksjonsgapet sammenligner faktisk og anslått potensiell produksjon. Fastlands-BNP brukes for å vurdere norsk konjunkturaktivitet.","url":"https://www.norges-bank.no/aktuelt/publikasjoner/Norges-Bank-Memo-/2024/nb-memo-3-2024-pengepolitisk-handbok/nettrapport-nb-memo-3-2024-pengepolitisk-handbok/","source":"Norges Bank"},{"area":"makro","title":"Arbeidsledighet og arbeidsstyrke","body":"Ledighetsraten er arbeidsledige som andel av arbeidsstyrken. Arbeidsstyrken omfatter sysselsatte og arbeidsledige.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"},{"area":"makro","title":"KPI, inflasjon og deflasjon","body":"KPI måler prisutviklingen på varer og tjenester norske husholdninger kjøper. Lavere positiv inflasjon betyr langsommere prisvekst. Deflasjon betyr fallende samlet prisnivå.","url":"https://www.ssb.no/priser-og-prisindekser/konsumpriser/statistikk/konsumprisindeksen","source":"SSB"},{"area":"makro","title":"Styringsrente og transmisjonsmekanismen","body":"Renten virker gjennom etterspørsel, valutakurs og forventninger. Virkningene kommer med etterslep og kan variere med sjokket.","url":"https://www.norges-bank.no/aktuelt/publikasjoner/Norges-Bank-Memo-/2024/nb-memo-3-2024-pengepolitisk-handbok/nettrapport-nb-memo-3-2024-pengepolitisk-handbok/","source":"Norges Bank"},{"area":"makro","title":"Nominell rente og realrente","body":"Forventet realrente er omtrent nominell rente minus forventet inflasjon. Falne inflasjonsforventninger kan stramme til økonomien ved uendret nominell rente.","url":"https://www.norges-bank.no/aktuelt/publikasjoner/Norges-Bank-Memo-/2024/nb-memo-3-2024-pengepolitisk-handbok/nettrapport-nb-memo-3-2024-pengepolitisk-handbok/","source":"Norges Bank"},{"area":"makro","title":"Valutakurs, appresiering og depresiering","body":"Når NOK per euro øker, har kronen svekket seg. Import kan bli dyrere i kroner, og norsk eksport kan bli mer konkurransedyktig.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"},{"area":"makro","title":"Finanspolitikk og stabilisatorer","body":"Offentlige kjøp, skatter og overføringer påvirker etterspørselen. Skatteinntekter faller gjerne automatisk i nedgang, mens enkelte overføringer øker.","url":"https://www.imf.org/en/publications/fandd/issues/series/back-to-basics/fiscal-policy","source":"IMF"},{"area":"makro","title":"Handlingsregelen og oljefondet","body":"Bruken av fondsmidler skal over tid følge forventet realavkastning. Bruken kan tilpasses konjunkturene fra år til år.","url":"https://www.regjeringen.no/no/tema/okonomi-og-budsjett/statsbudsjett/ord-og-begreper-i-statsbudsjettet/handlingsregelen/id2860044/","source":"Regjeringen"},{"area":"makro","title":"Etterspørsels- og tilbudssjokk","body":"Et negativt etterspørselssjokk demper normalt aktivitet og prispress. Et negativt tilbudssjokk kan dempe aktiviteten samtidig som prispresset øker.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"},{"area":"makro","title":"Finanskrisen og kreditt","body":"Tap knyttet til amerikanske boliglån svekket finansinstitusjoner. Strammere kreditt og økt usikkerhet dempet konsum og investeringer.","url":"https://www.federalreservehistory.org/essays/great-recession-and-its-aftermath","source":"Federal Reserve History"},{"area":"makro","title":"Økonomisk vekst og produktivitet","body":"Kapital, kompetanse og teknologi kan øke produksjon per innbygger. Skill høyere produksjonsnivå fra varig høyere vekstrate.","url":"https://openstax.org/books/principles-economics-3e/pages/index","source":"OpenStax"}];
@@ -402,7 +405,8 @@ function studyAssistantPage() {
    if(chat.turns.length>20)chat.turns.shift();
    saveStudyChats();
   };
-  if(reviewed||(!studyModel&&!needsWeb)){
+  const followUp=history.length>0 && /^(?:og |men |hva med |hvorfor\b|kan du utdype\b)/iu.test(question);
+  if(reviewed||(!needsWeb&&(!studyModel||!followUp))){
    finish();
    refreshStudyAssistant();
    return;
@@ -416,13 +420,16 @@ function studyAssistantPage() {
      if(hits.length){
       turn.sources=hits;
       turn.answer=hits.map(s=>'**'+s.title+'**\n'+s.body).join('\n\n');
-      turn.label='Nettoppslag';
+      turn.label='Nettkilde · supplement til ECO 5026';
      }
     } catch {}
    }
    if(!studyChats.includes(chat))return;
    const answer=studyModel ? await askStudyModel(question,topics,history,turn.sources) : '';
-   if(answer && !/(?:forstår ikke|kan ikke hjelpe|ingen konkrete eksempler)/i.test(answer)){
+   const words=studyWords(answer);
+   const bokmal=words.filter(w=>/^(og|er|det|som|ikke|av|til|fra|på|ved|med|når|hvis|blir|å|en|et)$/.test(w)).length;
+   const other=words.filter(w=>/^(the|and|is|are|that|with|from|this|which|not|of|ikkje|berre|kva|korleis|kvifor)$/.test(w)).length;
+   if(answer && bokmal>0 && bokmal>=other*2 && !/(?:forstår ikke|kan ikke hjelpe|ingen konkrete eksempler)/i.test(answer)){
     turn.answer=answer;
     turn.label='KI-svar';
    }
