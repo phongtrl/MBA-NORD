@@ -178,8 +178,27 @@ function refreshStudyAssistant() {
  document.querySelector('#study-enable').hidden = !globalThis.LanguageModel || Boolean(studyModel);
 }
 
+
+function studyExamOverview(area) {
+ const macro = area==='makro';
+ const text = macro
+  ? '**Start med multiplikatormodellen.** Øv på å sette konsum, investering og nettoeksport inn i likevektsbetingelsen. Løs for Y, og bruk endringsformen til å skille direkte effekt fra multiplikatorvirkningen. Forklar hvordan skatt og import demper virkningen.\n\n**Gå videre til rente og valutakurs.** Regn på renteparitet med kurs i NOK per euro. Forklar hvordan en renteøkning kan påvirke etterspørsel, kronekurs og inflasjonsforventninger.\n\n**Øv på konjunkturdrøfting.** Skill mellom etterspørsels- og tilbudssjokk. Begrunn retningen på BNP, sysselsetting og prispress fra forutsetningene i oppgaven.\n\n**Prøv selv:** Hvis G øker med 20 og multiplikatoren er 2, øker Y med 40 i modellen. Forklar deretter hvorfor større importlekkasje gir mindre økning i Y, alt annet likt.'
+  : '**Start med beste respons og Nash-likevekt.** Hold den andres handling fast, sammenlign egne gevinster og finn cellene der begge svarer optimalt.\n\n**Øv deretter på blandet likevekt og spilltrær.** Sett forventet gevinst fra egne alternativer lik for å finne motpartens sannsynlighet. I sekvensielle spill løser du siste trekk først og angir en full plan for begge spillere.\n\n**Avslutt med gjentatte spill.** Sammenlign gevinsten av å samarbeide med gevinsten av å avvike nå og møte straff senere.';
+ return {topics:(macro?['macro-rate','macro-uip','11']:['g3','g10','n2']).map(id=>data.topics.find(t=>t.id===id)).filter(Boolean),answer:(macro?'**Makroøkonomi · prioritert øving**':'**Mikroøkonomi · prioritert øving**')+'\n\n'+text+'\n\nPrioriteringen bygger på øvings- og eksamensmaterialet i appen. Oppgavene kan variere fra år til år.'};
+}
+
 function planStudyReply(question, subject, history) {
  const exam = /\b(?:eksamen\p{L}*|løsningsforslag\p{L}*|fasit\p{L}*|øvingsoppgav\p{L}*)/iu.test(question);
+ const namedArea = /\bmakro(?:økonomi\p{L}*)?\b/iu.test(question)?'makro':/\bmikro(?:økonomi\p{L}*)?\b/iu.test(question)?'mikro':null;
+ subject=namedArea||subject;
+ const overview=exam && /viktig|prioriter|pugge|leseplan|forbered|må\s+(?:jeg\s+)?kunne/iu.test(question);
+ if(overview && subject!=='alle')return studyExamOverview(subject);
+ if(overview){
+  const previous=data.topics.find(t=>t.id===history.at(-1)?.topicIds?.[0]);
+  if(previous)return studyExamOverview(previous.category);
+  const micro=studyExamOverview('mikro'),macro=studyExamOverview('makro');
+  return {topics:[...micro.topics,...macro.topics],answer:micro.answer+'\n\n'+macro.answer};
+ }
  const cleaned = question.replace(/\b(?:eksamen|løsningsforslag|eksamensløsning|fasit|oppgav|øvingsoppgav)\p{L}*/giu,'')
   .replace(/\b(?:koble|opp|mot|fag|faget|her|har|eksempel|eksempler|gi|vis|løsning|løsningen)\b/giu,'');
  const prior = (history.at(-1)?.topicIds || []).map(id=>data.topics.find(topic=>topic.id===id))
@@ -195,7 +214,15 @@ function planStudyReply(question, subject, history) {
  const exercises = data.written.filter(w=>area==='alle'||data.topics.some(t=>t.id===w.topic&&t.category===area));
  const ranked = exercises.map(w=>({w,score:preferred.includes(w.id)?100-preferred.indexOf(w.id):w.topic===topic?.id?50:!topic&&w.exam?20:0}))
   .filter(item=>item.score>0).sort((a,b)=>b.score-a.score).slice(0,2).map(item=>item.w);
- if (!ranked.length) return {topics, answer:'Jeg fant ingen åpen oppgave som matcher temaet direkte. Prøv et fagbegrep som konjunkturer, multiplikator eller Nash-likevekt, eller be om et generelt eksamenseksempel.'};
+ if (!ranked.length && topic) {
+  const related=exercises.find(w=>w.exam);
+  return {topics,answer:[
+   '**'+topic.title+' på eksamen**',topic.body,topic.formula,topic.example,
+   'I en besvarelse kan du definere begrepet, bruke det på situasjonen i oppgaven og begrunne konklusjonen.',
+   related ? 'En bredere øving i samme fag er «'+related.title+'» under Eksamensoppgaver med løsninger.' : ''
+  ].filter(Boolean).join('\n\n')};
+ }
+ if (!ranked.length) return studyExamOverview(area==='mikro'?'mikro':'makro');
  const intro = cycle ? 'Konjunkturer er svingninger i aktiviteten rundt trend eller potensiell produksjon. Et negativt etterspørselssjokk kan senke BNP og øke ledigheten. Et negativt tilbudssjokk kan samtidig senke produksjonen og øke prispresset. På eksamen bør du identifisere hvilket sjokk som dominerer og begrunne virkningene.' : topic ? topic.body : '';
  const blocks = ranked.map(w=>[
   '**'+w.title+'**',
