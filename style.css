@@ -91,3 +91,23 @@ footer { color: #54655f; }
 .study-question { margin-left:auto; width:fit-content; max-width:85%; background:#e0eee9; padding:10px 16px; border-radius:16px 16px 4px 16px; overflow-wrap:anywhere; }
 .study-exchange .study-result { background:white; border:1px solid var(--line); padding:16px; border-radius:4px 16px 16px; overflow-wrap:anywhere; }
 #study-conversation { max-height:60vh; overflow:auto; }
+
+/* Japandi: matte flater, varme nøytraler og dempet oliven. */
+:root { --paper:#f4f1e9; --ink:#302e27; --muted:#635f54; --line:#d8d0c2; --green:#4b5140; --lime:#e3e6d6; }
+body,.study-shell { background:var(--paper); }
+aside { background:#e8e1d3; color:var(--ink); border-right:1px solid var(--line); }
+.brand,.brand span,.brand small,.aside-bottom small,.nav-label,nav button { color:var(--ink); }
+nav button:hover { background:#ded5c4; }
+nav button.active { background:#d7dcc9; color:#2d392c; }
+.card,.flash,.stat { background:#fcfaf5; box-shadow:none; border-radius:10px; }
+.grid > .card:has(button[data-go="mikro"]),.grid > .card:has(button[data-go="makro"]) { color:var(--ink); background:#e2e6d8; border:1px solid var(--line); }
+.grid > .card:has(button[data-go="makro"]) { background:#e9dfcf; }
+.grid > .card:has(button[data-go="mikro"]) p,.grid > .card:has(button[data-go="makro"]) p { color:var(--muted); }
+.primary,.study-tabs button[aria-pressed="true"] { background:#4b5140; color:#fffdf7; }
+.study-question { background:#e5e8da; border-radius:8px; }
+.study-exchange .study-result { background:#fcfaf5; border-radius:8px; }
+.study-tabs button { border-radius:6px; }
+#study-keyboard { color:var(--muted); }
+.topic-check { display:flex; gap:8px; align-items:center; color:var(--muted); width:fit-content; cursor:pointer; }
+.topic-check input { accent-color:#4b5140; width:18px; height:18px; }
+.topic-done { text-decoration:line-through; text-decoration-thickness:1px; color:var(--muted); }
