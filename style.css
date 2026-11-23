@@ -71,3 +71,9 @@ footer { color: #54655f; }
  .article h1 { font-size:34px; }
  .toolbar select,.toolbar input { max-width:100%; }
 }
+
+.solution-visual { margin: 14px 0 20px; padding: 14px; border: 1px solid var(--line); background: white; border-radius: 10px; overflow-x: auto; }
+.solution-visual figcaption { color: var(--muted); font-size: .88rem; }
+.solution-visual meter { display:block; width: 100%; height: 18px; }
+.solution-visual p { margin-bottom: 4px; }
+.solution-flow { background: #edf2e9; border-radius: 8px; padding: 12px; line-height: 1.8; margin-bottom: 10px; }
