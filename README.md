@@ -2,6 +2,14 @@
 
 Norsk kunnskapsbase for mikro- og makroøkonomi. Selvstendig øvingsverktøy, ikke offisielt materiale eller kontrollert pensum fra Nord universitet.
 
+## Studieløypen i spillteori
+
+Fire moduler fra beste respons og ren Nash-likevekt til blandede strategier, spilltrær og gjentatte spill. Hver modul kobler teori til en oppgave i ECO 5026. Begrepene vises også på engelsk.
+
+I **Nash-verkstedet** markerer du beste respons for spiller 1, deretter for spiller 2, og finner til slutt de rene likevektene. Bruk Chicken, Matching Pennies-varianten eller matrisen med like gevinster.
+
+Studieløypen er inspirert av fagrekkefølgen i [MIT 14.12](https://ocw.mit.edu/courses/14-12-economic-applications-of-game-theory-fall-2025/resources/lecture-notes/) og [Yale ECON 159](https://oyc.yale.edu/economics/econ-159). Øvingsinnholdet bygger på ECO 5026-materialet.
+
 ## Åpne via GitHub Pages
 
 Ingen lokal HTTP-/HTTPS-server, Python eller installasjon er nødvendig for å bruke appen.
