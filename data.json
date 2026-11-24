@@ -3984,6 +3984,174 @@
       "answer": 0,
       "explanation": "Modellen bestemmer produksjon under gitte priser. Inflasjonsanalysen krever mekanismer for blant annet priser, lønn og forventninger.",
       "level": "middels"
+    },
+    {
+      "id": "course-spill-dominans",
+      "topic": "g4",
+      "question": "I plattformmatrisen: hvilken handling kan spiller 1 fjerne ved streng dominans?",
+      "options": [
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": 2,
+      "explanation": "B gir høyere gevinst enn C mot samtlige valg fra spiller 2.",
+      "level": "fordypning",
+      "game": "course-platform"
+    },
+    {
+      "id": "course-spill-iterasjon",
+      "topic": "g4",
+      "question": "C er fjernet fra plattformmatrisen. Hvilken handling er nå strengt dominert av Y?",
+      "options": [
+        "Z",
+        "X",
+        "Ingen"
+      ],
+      "answer": 0,
+      "explanation": "Spiller 2 får 2 i stedet for 1 ved A og 4 i stedet for 2 ved B. Dette er alle gjenværende rader.",
+      "level": "fordypning",
+      "game": "course-platform"
+    },
+    {
+      "id": "course-spill-pareto",
+      "topic": "g8",
+      "question": "Hvilket likevektsutfall i plattformmatrisen Pareto-dominerer det andre?",
+      "options": [
+        "(B, Y)",
+        "(A, X)",
+        "Ingen av dem"
+      ],
+      "answer": 1,
+      "explanation": "(A,X) gir (6,6) mot (4,4) ved (B,Y), så begge får det bedre ved den koordinerte overgangen.",
+      "level": "fordypning",
+      "game": "course-platform"
+    },
+    {
+      "id": "course-spill-blanding-p",
+      "topic": "g10",
+      "question": "I Kontroll og tilpasning: hvilken p = Pr(H) gjør spiller 2 indifferent?",
+      "options": [
+        "2/7",
+        "3/8",
+        "5/8"
+      ],
+      "answer": 2,
+      "explanation": "Spiller 2 får 5−4p ved h og 4p ved l. Likhet gir 8p=5.",
+      "level": "fordypning",
+      "game": "course-monitor"
+    },
+    {
+      "id": "course-spill-blanding-q",
+      "topic": "g10",
+      "question": "I Kontroll og tilpasning: hvilken q = Pr(h) gjør spiller 1 indifferent?",
+      "options": [
+        "2/7",
+        "5/8",
+        "5/7"
+      ],
+      "answer": 0,
+      "explanation": "Spiller 1 får 1+4q ved H og 3−3q ved L. Likhet gir 7q=2.",
+      "level": "fordypning",
+      "game": "course-monitor"
+    },
+    {
+      "id": "course-spill-utfall",
+      "topic": "g9",
+      "question": "Bruk p=5/8 og q=2/7. Hvilket av de fire utfallene er mest sannsynlig når spillerne blander uavhengig?",
+      "options": [
+        "(H,h)",
+        "(H,l)",
+        "(L,h)",
+        "(L,l)"
+      ],
+      "answer": 1,
+      "explanation": "Vektene er 10/56, 25/56, 6/56 og 15/56. Den største er p(1−q)=25/56, som tilhører (H,l).",
+      "level": "fordypning",
+      "game": "course-monitor"
+    },
+    {
+      "id": "course-spill-plan",
+      "topic": "g12",
+      "question": "Spiller 1 velger H eller L først. Hva betyr responsplanen hl for spiller 2?",
+      "options": [
+        "l etter H og h etter L",
+        "Spill alltid l",
+        "h etter H og l etter L"
+      ],
+      "answer": 2,
+      "explanation": "En responsplan sier hva spiller 2 gjør etter hver mulig handling fra spiller 1. Her står h først for H-grenen og l sist for L-grenen.",
+      "level": "fordypning",
+      "game": "course-coordinate"
+    },
+    {
+      "id": "course-spill-delspill",
+      "topic": "g13",
+      "question": "Når spiller 1 velger først i koordineringsspillet, hvilken profil er delspillperfekt?",
+      "options": [
+        "(H, hl)",
+        "(H, hh)",
+        "(L, ll)"
+      ],
+      "answer": 0,
+      "explanation": "Spiller 2 velger h etter H og l etter L. Spiller 1 velger H fordi 6>3. hh og ll er ikke optimale etter begge førstetrekk.",
+      "level": "fordypning",
+      "game": "course-coordinate-first1"
+    },
+    {
+      "id": "course-spill-timing",
+      "topic": "g13",
+      "question": "I Kontroll og tilpasning får spillerne (1,4) når spiller 1 går først, og (5,1) når spiller 2 går først. Hvem foretrekker å velge sist?",
+      "options": [
+        "Bare spiller 2",
+        "Begge spillerne",
+        "Bare spiller 1"
+      ],
+      "answer": 1,
+      "explanation": "Spiller 1 får 5 når hun går sist mot 1 når hun går først. Spiller 2 får 4 når hun går sist mot 1 når hun går først.",
+      "level": "fordypning"
+    },
+    {
+      "id": "course-spill-fem",
+      "topic": "g15",
+      "question": "Samarbeidsspillet gjentas nøyaktig fem ganger. Hva spilles i runde 1 i en delspillperfekt likevekt når sluttdatoen er kjent?",
+      "options": [
+        "Samarbeid for begge",
+        "En spiller samarbeider og én avviker",
+        "Avvik for begge"
+      ],
+      "answer": 2,
+      "explanation": "I siste runde spiller begge avvik uansett historikk. Baklengs induksjon gir avvik også i de foregående rundene.",
+      "level": "fordypning",
+      "game": "course-repeat"
+    },
+    {
+      "id": "course-spill-trigger",
+      "topic": "g16",
+      "question": "Bruk gevinstene i Samarbeid mellom to avdelinger. Hva er laveste δ som kan støtte samarbeid med grim trigger ved uendelig gjentakelse?",
+      "options": [
+        "3/7",
+        "1/3",
+        "2/3"
+      ],
+      "answer": 0,
+      "explanation": "Med T=9, R=6 og P=2 blir kravet δ ≥ (T−R)/(T−P)=3/7.",
+      "level": "fordypning",
+      "game": "course-repeat"
+    },
+    {
+      "id": "course-spill-straff",
+      "topic": "g16",
+      "question": "Hvorfor er straffen etter et avvik troverdig i grim trigger i denne matrisen?",
+      "options": [
+        "Fordi avvik alltid gir lik gevinst som samarbeid",
+        "Fordi gjensidig avvik er Nash-likevekt i engangsspillet",
+        "Fordi den som avviker, mister retten til å velge"
+      ],
+      "answer": 1,
+      "explanation": "Etter et avvik velger begge avvik i alle senere runder. Ingen vil ensidig velge samarbeid når den andre velger avvik.",
+      "level": "fordypning",
+      "game": "course-repeat"
     }
   ],
   "games": [
@@ -5396,6 +5564,245 @@
         4,
         2
       ]
+    },
+    {
+      "id": "course-platform",
+      "title": "Plattformvalg med tre alternativer",
+      "topic": "g4",
+      "rows": [
+        "A",
+        "B",
+        "C"
+      ],
+      "cols": [
+        "X",
+        "Y",
+        "Z"
+      ],
+      "payoffs": [
+        [
+          [
+            6,
+            6
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        [
+          [
+            2,
+            1
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            3,
+            2
+          ]
+        ],
+        [
+          [
+            0,
+            2
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "equilibria": [
+        "0-0",
+        "1-1"
+      ],
+      "note": "B dominerer C strengt. Etter at C er fjernet, dominerer Y også Z strengt. Ved Z er A og B like gode i den opprinnelige matrisen."
+    },
+    {
+      "id": "course-monitor",
+      "title": "Kontroll og tilpasning",
+      "topic": "g11",
+      "rows": [
+        "H",
+        "L"
+      ],
+      "cols": [
+        "h",
+        "l"
+      ],
+      "payoffs": [
+        [
+          [
+            5,
+            1
+          ],
+          [
+            1,
+            4
+          ]
+        ],
+        [
+          [
+            0,
+            5
+          ],
+          [
+            3,
+            0
+          ]
+        ]
+      ],
+      "equilibria": [],
+      "note": "Ingen ren Nash-likevekt. I den indre blandede likevekten er p=5/8 og q=2/7. Gevinstsummen varierer mellom cellene, så spillet er ikke nullsum."
+    },
+    {
+      "id": "course-coordinate",
+      "title": "Koordinering med ulike prioriteringer",
+      "topic": "g13",
+      "rows": [
+        "H",
+        "L"
+      ],
+      "cols": [
+        "h",
+        "l"
+      ],
+      "payoffs": [
+        [
+          [
+            6,
+            3
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            6
+          ]
+        ]
+      ],
+      "equilibria": [
+        "0-0",
+        "1-1"
+      ],
+      "note": "Hver spiller ønsker å koordinere. Spiller 1 foretrekker (H,h), mens spiller 2 foretrekker (L,l)."
+    },
+    {
+      "id": "course-coordinate-first1",
+      "title": "Normalform når spiller 1 velger først",
+      "topic": "g13",
+      "rows": [
+        "H",
+        "L"
+      ],
+      "cols": [
+        "hh",
+        "hl",
+        "lh",
+        "ll"
+      ],
+      "payoffs": [
+        [
+          [
+            6,
+            3
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            6
+          ]
+        ]
+      ],
+      "equilibria": [
+        "0-0",
+        "0-1",
+        "1-3"
+      ],
+      "note": "Tre rene Nash-likevekter, men bare (H,hl) er delspillperfekt. Responsplanen hl er optimal etter begge førstetrekk."
+    },
+    {
+      "id": "course-repeat",
+      "title": "Samarbeid mellom to avdelinger",
+      "topic": "g16",
+      "rows": [
+        "S",
+        "A"
+      ],
+      "cols": [
+        "s",
+        "a"
+      ],
+      "payoffs": [
+        [
+          [
+            6,
+            6
+          ],
+          [
+            1,
+            9
+          ]
+        ],
+        [
+          [
+            9,
+            1
+          ],
+          [
+            2,
+            2
+          ]
+        ]
+      ],
+      "equilibria": [
+        "1-1"
+      ],
+      "note": "Avvik er strengt dominant for begge i engangsspillet. Ved uendelig gjentakelse med perfekt observasjon kan grim trigger støtte samarbeid dersom δ ≥ 3/7."
     }
   ],
   "version": 4,
@@ -5843,6 +6250,90 @@
         "Reell BNP-vekst er (990−980)/980 · 100 ≈ 1,02 %. Produksjonsgapet er (990−1 020)/1 020 · 100 ≈ −2,94 %. Økonomien vokser fra forrige periode, men aktivitetsnivået ligger fortsatt under potensialet. Vekst er en endring over tid, mens gapet er en forskjell i nivå.",
         "Stigende ledighet og svakere lønnsvekst er forenlig med ledige ressurser og mindre lønnspress. Undersøk for eksempel investeringer for å se om bedriftene utsetter kapasitetsutvidelser. Ledighet og lønn kan også påvirkes av tilbudsforhold eller institusjoner. Potensiell produksjon kan ikke observeres direkte, og nye data eller endrede anslag på produktivitet kan flytte gapet.",
         "Nødvendig økning i Y er 1 020−990=30. Multiplikatoren er 1/(1−0,75)=4, slik at ΔG=30/4=7,5 i modellens enheter. Regnestykket holder prisnivå, skatt, investeringer og potensiell produksjon fast. I norsk økonomi kan import, kapasitetsgrenser og en rente- eller prisreaksjon endre effekten. Vurder også usikkerheten i anslått gap."
+      ]
+    },
+    {
+      "id": "exam-platform",
+      "title": "Oppgave 6 · Dominans, beste respons og Pareto",
+      "topic": "g4",
+      "game": "course-platform",
+      "level": "fordypning",
+      "exam": true,
+      "basis": "Egen øvingsoppgave etter mønster fra ECO 5026, Øvinger oppgave 2 (3 × 3) og eksamen vår 2026 (rene likevekter).",
+      "prompt": "To avdelinger velger hver sin teknologiplattform uten å observere den andres valg. Første tall er gevinsten til spiller 1, andre tall er gevinsten til spiller 2.",
+      "parts": [
+        "Undersøk om noen handlinger kan fjernes ved iterert eliminering av strengt dominerte strategier. Vis gevinstsammenligningene i hvert trinn.",
+        "Finn alle beste responser og alle Nash-likevekter i rene strategier i den opprinnelige matrisen. Vis hvordan du håndterer lik gevinst.",
+        "Undersøk om én av de rene likevektene Pareto-dominerer den andre. Forklar hvorfor den andre likevekten likevel kan være stabil."
+      ],
+      "solution": [
+        "Spiller 1 kan fjerne C: B gir 2 > 0 mot X, 4 > 2 mot Y og 3 > 1 mot Z. Før dette er Z ikke strengt dominert av Y, fordi spiller 2 får 1 mot 0 ved C. Når C er fjernet, gir Y 2 > 1 mot A og 4 > 2 mot B. Da kan også Z fjernes. Ingen av de gjenværende handlingene er strengt dominert i 2 × 2-matrisen.",
+        "Spiller 1 svarer A mot X, B mot Y og både A og B mot Z, fordi begge gir 3. Spiller 2 svarer X mot A, Y mot B og X mot C. Bare (A,X) og (B,Y) består av gjensidige beste responser. Selv om spiller 1 har to beste responser mot Z, er Z aldri beste respons for spiller 2.",
+        "(A,X) gir (6,6) og Pareto-dominerer (B,Y), som gir (4,4). Ved (B,Y) faller spiller 1s gevinst fra 4 til 1 hvis hun bytter til A, og spiller 2s gevinst faller til 1 ved X eller 2 ved Z. En koordinert overgang kan bedre utfallet for begge selv om ingen vil bytte alene."
+      ]
+    },
+    {
+      "id": "exam-monitor",
+      "title": "Oppgave 7 · Blanding, utfall og andretrekksfordel",
+      "topic": "g11",
+      "game": "course-monitor",
+      "level": "fordypning",
+      "exam": true,
+      "basis": "Egen variant av Matching Pennies fra forelesningene. Oppgaveformen følger ECO 5026, Øvinger oppgave 3 og eksamen høst 2024.",
+      "prompt": "To spillere velger H eller L og h eller l. De treffer først valgene samtidig. Sett p = Pr(H) for spiller 1 og q = Pr(h) for spiller 2.",
+      "parts": [
+        "Bruk beste responser til å vise at spillet ikke har Nash-likevekt i rene strategier.",
+        "Utled den indre blandede likevekten. Beregn også forventet gevinst for begge spillere.",
+        "Beregn sannsynligheten for de fire utfallene når spillerne blander uavhengig. Hvilket utfall er mest sannsynlig?",
+        "Anta at den som velger sist, observerer førstetrekket. Bruk baklengs induksjon for begge trekkrekkefølger og sammenlign hvem som foretrekker å gå sist."
+      ],
+      "solution": [
+        "Spiller 1 svarer H mot h (5 > 0) og L mot l (3 > 1). Spiller 2 svarer l mot H (4 > 1) og h mot L (5 > 0). I hver celle har minst én spiller et lønnsomt ensidig avvik.",
+        "Spiller 1 er indifferent når 5q+1(1−q)=0q+3(1−q). Det gir 1+4q=3−3q, så q=2/7. Spiller 2 er indifferent når 1p+5(1−p)=4p+0(1−p). Det gir 5−4p=4p, så p=5/8. Setter vi inn sannsynlighetene, får spiller 1 forventet gevinst 15/7 og spiller 2 gevinst 5/2.",
+        "Pr(H,h)=pq=10/56. Pr(H,l)=p(1−q)=25/56. Pr(L,h)=(1−p)q=6/56. Pr(L,l)=(1−p)(1−q)=15/56. Summen er 56/56. (H,l) er mest sannsynlig med 25/56.",
+        "Hvis spiller 1 går først, svarer spiller 2 l etter H og h etter L. Spiller 1 velger H fordi 1 > 0. Profilen er (H,lh), og utfallet gir (1,4). Hvis spiller 2 går først, svarer spiller 1 H etter h og L etter l. Spiller 2 velger h fordi 1 > 0. Profilen er (HL,h), og utfallet gir (5,1). Spiller 1 foretrekker å gå sist fordi 5 > 1. Spiller 2 foretrekker også å gå sist fordi 4 > 1."
+      ]
+    },
+    {
+      "id": "exam-coordinate",
+      "title": "Oppgave 8 · Normalform, spilltre og troverdige valg",
+      "topic": "g13",
+      "game": "course-coordinate",
+      "level": "fordypning",
+      "exam": true,
+      "basis": "Egen koordinasjonsoppgave etter mønster fra forelesningene om Battle of the Sexes, ECO 5026 Øvinger oppgave 1 og 4 og eksamen høst 2025.",
+      "prompt": "To avdelinger må koordinere valg av løsning, men foretrekker hver sin løsning. Gevinstmatrisen viser utfallene for hvert handlingspar. Ved sekvensielle valg observerer den som velger sist, den andres valg.",
+      "parts": [
+        "Finn alle Nash-likevekter i rene strategier når spillerne velger samtidig.",
+        "La spiller 1 velge først. Skriv spiller 2s fire fullstendige planer, sett opp normalformen og finn alle rene Nash-likevekter.",
+        "Tegn spillet som et spilltre. Bruk baklengs induksjon og forklar hvorfor de andre rene Nash-likevektene ikke er delspillperfekte.",
+        "Bytt trekkrekkefølge. Finn delspillperfekt profil og utfall, og vurder om begge har fordel av å velge først i dette spillet."
+      ],
+      "solution": [
+        "Spiller 1 svarer H mot h og L mot l. Spiller 2 svarer h mot H og l mot L. De rene Nash-likevektene er (H,h) med (6,3) og (L,l) med (3,6).",
+        "Spiller 2 planlegger valg etter både H og L. Planene er hh, hl, lh og ll, med valget etter H først. I H-raden gir de (6,3), (6,3), (1,0), (1,0). I L-raden gir de (0,1), (3,6), (0,1), (3,6). Rene Nash-likevekter er (H,hh), (H,hl) og (L,ll).",
+        "I spilltreet svarer spiller 2 h etter H (3 > 0) og l etter L (6 > 1), så planen er hl. Spiller 1 velger H fordi 6 > 3. Delspillperfekt profil er (H,hl), med (6,3). Planen hh gir et dårlig svar etter L, mens ll gir et dårlig svar etter H. Derfor er de to andre rene Nash-likevektene ikke optimale i alle delspill.",
+        "Spiller 1 svarer H etter h (6 > 0) og L etter l (3 > 1). Spiller 2 velger l fordi 6 > 3. Delspillperfekt profil er (HL,l) i spillerrekkefølge, med utfall (3,6). Begge foretrekker å velge først i dette spillet, fordi det gir dem 6 i stedet for 3."
+      ]
+    },
+    {
+      "id": "exam-repeat",
+      "title": "Oppgave 9 · Endelig og uendelig gjentakelse",
+      "topic": "g16",
+      "game": "course-repeat",
+      "level": "fordypning",
+      "exam": true,
+      "basis": "Egen øvingsoppgave etter mønster fra forelesningene om fangens dilemma og ECO 5026-eksamenene høst 2020 og vår 2026.",
+      "prompt": "To avdelinger velger å samarbeide (S for spiller 1, s for spiller 2) eller avvike (A og a). Dersom spillet gjentas, observerer begge tidligere valg og diskonterer framtidige gevinster med δ, der 0 ≤ δ < 1.",
+      "parts": [
+        "Finn Nash-likevekten i engangsspillet og sammenlign den med gjensidig samarbeid.",
+        "Anta nøyaktig fem runder med kjent sluttdato. Forklar hva som spilles i hver periode i en delspillperfekt likevekt.",
+        "Anta uendelig gjentakelse. Utled når grim trigger kan støtte samarbeid. Kontroller vilkåret ved δ = 0,4 og δ = 0,6."
+      ],
+      "solution": [
+        "Avvik er strengt dominant for begge: 9 > 6 mot samarbeid, og 2 > 1 mot avvik. Eneste Nash-likevekt i engangsspillet er (A,a) med (2,2). Gjensidig samarbeid gir (6,6), som gjør begge bedre stilt.",
+        "Start i runde fem. Her er (A,a) eneste Nash-likevekt for enhver historikk. Runde fire kan derfor ikke endre hva som skjer i runde fem, så (A,a) spilles også der. Gjenta bakover til runde én. Begge avviker i alle rundene i en delspillperfekt likevekt.",
+        "Samarbeid gir 6/(1−δ). Ett avvik gir 9 nå og 2 i hver senere runde, altså 9+2δ/(1−δ). Kravet 6/(1−δ) ≥ 9+2δ/(1−δ) gir 7δ ≥ 3, altså δ ≥ 3/7. Ved 0,4 er avvik mer lønnsomt (ca. 10,33 mot 10). Ved 0,6 er samarbeid bedre (15 mot 12). Etter et avvik er straffen troverdig fordi (A,a) er Nash i engangsspillet."
       ]
     }
   ],

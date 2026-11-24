@@ -18,14 +18,16 @@ Nye endringer på main publiseres automatisk når dette oppsettet er aktivert.
 ## Innhold
 
 - **57 teoritemaer**, inkludert 30 innen spillteori med hovedideer, forutsetninger, gjennomarbeidede eksempler og strategiske anvendelser.
-- **204 quizoppgaver**, hvorav 143 innen spillteori. Velg fag, nivå og 10, 20 eller alle spørsmål. Øv på siste feil eller oppgaver du ennå ikke har besvart riktig.
-- **27 interaktive spillmatriser**: marker alle rene Nash-likevekter, håndter like gevinster og spill uten ren likevekt, og vis trinnvise beste-respons-forklaringer.
-- **31 åpne regne- og drøftingsoppgaver** med egne svarfelt og trinnvise løsningsforslag. Fem av oppgavene har delspørsmål med hint og sjekklister for egenvurdering i Eksamensøving.
+- **216 quizoppgaver**, hvorav 155 innen spillteori. Velg fag, nivå og 10, 20 eller alle spørsmål. Øv på siste feil eller oppgaver du ennå ikke har besvart riktig.
+- **32 interaktive spillmatriser**: marker alle rene Nash-likevekter, håndter like gevinster og spill uten ren likevekt, og vis trinnvise beste-respons-forklaringer.
+- **35 åpne regne- og drøftingsoppgaver** med egne svarfelt og trinnvise løsningsforslag. Ni av oppgavene har delspørsmål med hint og sjekklister for egenvurdering i Eksamensøving.
 - Flashkort med fagfilter, søkbart fagstoff og interaktiv tilbuds- og etterspørselsmodell.
 
 Spillteori omfatter beste respons, rene og blandede Nash-likevekter, dominant/dominert strategi, fangens dilemma, koordinering, Chicken, Pareto, nullsumspill, sekvensielle spill, delspillperfeksjon, troverdige trusler, gjentatte spill, grim trigger, Cournot, Bertrand, Stackelberg og Bayesiansk Nash.
 
 Anbefalt rekkefølge: byggesteiner → beste respons → ren Nash → spillverksted → blandede strategier → sekvensielle spill → gjentatte spill og oligopol.
+
+Eksamensøvingen i spillteori følger oppgaveformene i ECO 5026-øvingene og tidligere eksamener. Fire egne oppgaver med nye tall dekker dominans i en 3 × 3-matrise, blanding med utfallsvekter, normalform og spilltre, samt endelig og uendelig gjentakelse. Velg **Mikroøkonomi** i Eksamensøving, eller **Quiz om spillteori** under Mikroøkonomi.
 
 ## Forelesningsløype fra brukerens notater
 

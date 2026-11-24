@@ -14,11 +14,43 @@ function matrixAnswers(game){
  const pure=rows.flatMap((row,i)=>cols.filter((col,j)=>rowBest(j).includes(row)&&colBest(i).includes(col)).map(col=>'('+row+', '+col+')'));
  return {rowBest,colBest,pure};
 }
+// Derive the new game-theory answer keys from payoff matrices and timing.
+const platform=gameById.get('course-platform'),monitor=gameById.get('course-monitor');
+const coordinate=gameById.get('course-coordinate'),repeat=gameById.get('course-repeat');
+const first1=gameById.get('course-coordinate-first1');
+const [hh,hl,lh,ll]=monitor.payoffs.flat();
+const p=(lh[1]-ll[1])/(hl[1]-hh[1]+lh[1]-ll[1]);
+const q=(ll[0]-hl[0])/(hh[0]-lh[0]+ll[0]-hl[0]);
+assert.equal(p,5/8);
+assert.equal(q,2/7);
+assert.equal(hh[0]*q+hl[0]*(1-q),lh[0]*q+ll[0]*(1-q));
+assert.equal(hh[1]*p+lh[1]*(1-p),hl[1]*p+ll[1]*(1-p));
+const outcomeWeights=[p*q,p*(1-q),(1-p)*q,(1-p)*(1-q)];
+assert(Math.abs(outcomeWeights.reduce((sum,value)=>sum+value,0)-1)<1e-12);
+const mostLikely=['(H,h)','(H,l)','(L,h)','(L,l)'][outcomeWeights.indexOf(Math.max(...outcomeWeights))];
+assert.equal(mostLikely,'(H,l)');
+assert(platform.payoffs[1].every((cell,j)=>cell[0]>platform.payoffs[2][j][0]));
+assert(platform.payoffs.slice(0,2).every(row=>row[1][1]>row[2][1]));
+assert(platform.payoffs[0][0].every((v,i)=>v>platform.payoffs[1][1][i]));
+assert.deepEqual(matrixAnswers(first1).pure,['(H, hh)','(H, hl)','(L, ll)']);
+for(const [j,plan] of first1.cols.entries())for(const i of [0,1]){
+ const col=coordinate.cols.indexOf(plan[i]);
+ assert.deepEqual(first1.payoffs[i][j],coordinate.payoffs[i][col]);
+}
+const temptation=repeat.payoffs[1][0][0],reward=repeat.payoffs[0][0][0],punishment=repeat.payoffs[1][1][0];
+assert.deepEqual(matrixAnswers(repeat).pure,['(A, a)']);
+assert.equal((temptation-reward)/(temptation-punishment),3/7);
+const courseKeys={
+ dominans:'C',iterasjon:'Z',pareto:'(A, X)','blanding-p':'5/8','blanding-q':'2/7',utfall:mostLikely,
+ plan:'h etter H og l etter L',delspill:'(H, hl)',timing:'Begge spillerne',fem:'Avvik for begge',
+ trigger:'3/7',straff:'Fordi gjensidig avvik er Nash-likevekt i engangsspillet'
+};
 for(const q of db.questions){
  assert(topicIds.has(q.topic),q.id);
  assert(Number.isInteger(q.answer)&&q.answer>=0&&q.answer<q.options.length,q.id);
  assert.equal(new Set(q.options.map(foldedOption)).size,q.options.length,q.id);
- if(q.game){
+ if(q.id.startsWith('course-spill-')) assert.equal(q.options[q.answer],courseKeys[q.id.slice(13)],q.id);
+ else if(q.game){
   const game=gameById.get(q.game);
   assert(game,q.id);
   const {rowBest,colBest,pure}=matrixAnswers(game);
@@ -145,5 +177,18 @@ async function create(protocol='file:',offline=false,legacy=null){
  assert.match(a.node('#app').innerHTML,/Andre del/);
  assert.equal(a.getStored().drafts['exam-chicken:del-0'],'Første del');
 
+ // Both move orders, independently expected from the new payoff tables.
+ for(const [id,first,profile,payoff] of [
+  ['course-monitor',1,['H','lh'],[1,4]],['course-monitor',2,['HL','h'],[5,1]],
+  ['course-coordinate',1,['H','hl'],[6,3]],['course-coordinate',2,['HL','l'],[3,6]]
+ ]){
+  const result=JSON.parse(a.run(`JSON.stringify(solveSequence(data.games.find(g=>g.id==='${id}'),${first}))`));
+  assert.deepEqual(result.profile,profile);
+  assert.deepEqual(result.payoff,payoff);
+ }
+ a.run("studyArea='mikro';go('eksamen');selectExamExercise('exam-monitor')");
+ assert.match(a.node('#app').innerHTML,/Kontroll og tilpasning/);
+ a.run("setExamPosition(data.written.find(w=>w.id==='exam-monitor'),2)");
+ assert.match(a.node('#app').innerHTML,/25\/56/);
  console.log('PASS: legacy progress migration; topic/search filters; per-level quiz; all quiz answers; no double scoring; wrong/new selections; all Nash solutions; ties/no-pure/multiple validation; flashcards; draft saving/escaping; model; HTTP/file/offline loading; lecture filters; ten sequential fixtures; normal-form plans; lecture mixed probabilities and expected payoffs; exam navigation, review and independent drafts.');
 })().catch(e=>{console.error(e);process.exitCode=1});
