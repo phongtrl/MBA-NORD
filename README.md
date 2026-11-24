@@ -20,7 +20,7 @@ Nye endringer på main publiseres automatisk når dette oppsettet er aktivert.
 - **57 teoritemaer**, inkludert 30 innen spillteori med hovedideer, forutsetninger, gjennomarbeidede eksempler og strategiske anvendelser.
 - **204 quizoppgaver**, hvorav 143 innen spillteori. Velg fag, nivå og 10, 20 eller alle spørsmål. Øv på siste feil eller oppgaver du ennå ikke har besvart riktig.
 - **27 interaktive spillmatriser**: marker alle rene Nash-likevekter, håndter like gevinster og spill uten ren likevekt, og vis trinnvise beste-respons-forklaringer.
-- **26 åpne regne- og drøftingsoppgaver** med egne svarfelt og trinnvise løsningsforslag. Egenvurdering, ingen automatisk sensur av fritekst.
+- **31 åpne regne- og drøftingsoppgaver** med egne svarfelt og trinnvise løsningsforslag. Fem av oppgavene har delspørsmål med hint og sjekklister for egenvurdering i Eksamensøving.
 - Flashkort med fagfilter, søkbart fagstoff og interaktiv tilbuds- og etterspørselsmodell.
 
 Spillteori omfatter beste respons, rene og blandede Nash-likevekter, dominant/dominert strategi, fangens dilemma, koordinering, Chicken, Pareto, nullsumspill, sekvensielle spill, delspillperfeksjon, troverdige trusler, gjentatte spill, grim trigger, Cournot, Bertrand, Stackelberg og Bayesiansk Nash.
@@ -35,7 +35,7 @@ I forelesningsløypen kan du bytte førstetrekker for fem spill og se spilltre, 
 
 Notatenes tabeller mistet delvis formatering. Matrisene er rekonstruert fra uttrykk og sluttgevinster. Appen viser en rettelsesoversikt for blant annet fortegn, utfallsvekter, begrepet ren Nash og en feil spilleridentitet i det innlimte sammendraget om Battle of the Sexes. Sammenlign med originallysbildene ved avvik. Dette er en renskriving, ikke en kvalitetssikring fra foreleser.
 
-Originalnotatene er ikke publisert. Notatene sier at makro kommer, og at eksamen har mikro- og makrodel. Pensumliste, Canvas-oppgaver og makroforelesninger fulgte ikke med; appens generelle makrostoff er derfor ikke merket som tilpasset disse forelesningene.
+Forelesningsløypen bygger på mikroforelesningsnotatene. Makroøkonomi har egne kursnotater og et kompendium. I Eksamensøving står grunnlaget for hver bearbeidet oppgave ved løsningen.
 
 ## Fremdrift og egne svar
 
@@ -69,4 +69,4 @@ Last ned ZIP, pakk ut hele mappen og dobbeltklikk index.html. Ingen lokal server
 
 ## Makroøkonomi i ECO 5026
 
-Velg Makroøkonomi i menyen for å finne åtte kurstemaer, 26 quizoppgaver og seks åpne oppgaver med løsningsforslag. Oppgavene bygger på multiplikatornotatet, makroøvingene, notatene om valuta og transmisjon og tidligere eksamener.
+Velg Makroøkonomi i menyen for å finne åtte kurstemaer, 26 quizoppgaver og seks åpne oppgaver med løsningsforslag. Oppgavene bygger på multiplikatornotatet, makroøvingene, notatene om valuta og transmisjon og tidligere eksamener. Eksamensøvingen om konjunkturer og produksjonsgap bygger på Kompendium, Makroøkonomi 2026.

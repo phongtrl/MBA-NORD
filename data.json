@@ -228,6 +228,14 @@
         {
           "title": "Produksjonsgap",
           "text": "Et negativt produksjonsgap indikerer aktivitet under anslått potensial. Potensialet er ikke direkte observerbart, så gapet er et usikkert modellanslag."
+        },
+        {
+          "title": "Produksjonsgap og BNP-vekst",
+          "text": "Kompendiet i makroøkonomi (2026) skiller mellom faktisk og potensiell produksjon. Et negativt gap betyr at aktiviteten ligger under potensialet, selv om BNP vokser. Potensiell produksjon er et anslag på bærekraftig aktivitet ved normal kapasitetsutnytting. Anslaget kan endre seg når nye data kommer."
+        },
+        {
+          "title": "Se flere indikatorer sammen",
+          "text": "Bruk BNP og ledighet sammen med lønns- og prisvekst. Investeringer, boligpriser og kredittvekst kan gi mer informasjon om kapasitetsutnyttingen. Én indikator kan peke i en annen retning enn resten."
         }
       ]
     },
@@ -923,8 +931,8 @@
     {
       "id": "n1",
       "title": "Forelesningsguide: begreper og presisjon",
-      "subtitle": "Start her: slik er notatene renskrevet og brukt.",
-      "body": "Notatene handler foreløpig om spillteori og mikroøkonomisk atferd. De oppgir at eksamen har både mikro- og makrodel, men inneholder ikke den kommende makroteorien, pensumliste eller Canvas-oppgavene. Forelesningsløypen tar derfor utgangspunkt i de konkrete spillene, regnemetodene og trekkrekkefølgene som faktisk er omtalt.",
+      "subtitle": "Slik bruker du mikroforelesningsnotatene sammen med resten av kursmaterialet.",
+      "body": "De opprinnelige mikroforelesningsnotatene handler om spillteori og mikroøkonomisk atferd. Forelesningsløypen følger spillene, regnemetodene og trekkrekkefølgene som er omtalt der. Makroøkonomien dekkes av egne kursnotater og makrokompendiet.",
       "formula": "Gevinstpar skrives alltid (spiller 1, spiller 2), også når spiller 2 velger først.",
       "example": "H og L er spiller 1s handlinger; h og l er spiller 2s. Notatenes tabeller har mistet noe formatering. Tallene her er rekonstruert fra forventningsuttrykk og oppgitte sluttgevinster, og er gjort eksplisitte slik at de kan sammenlignes med originallysbildene.",
       "strategy": "Bruk de oppgitte gevinstene og oppgi hvem som velger først. Skill mellom en handling, en fullstendig strategi, et utfall og en likevekt.",
@@ -1371,14 +1379,14 @@
     },
     {
       "topic": "10",
-      "question": "Hva er multiplikatoren i den enkle modellen når c = 0,8?",
+      "question": "Hva er utgiftsmultiplikatoren når c = 0,8 i en lukket økonomi med faste priser, fast skatt og eksogene investeringer?",
       "options": [
         "0,2",
         "5",
         "1,8"
       ],
       "answer": 1,
-      "explanation": "k = 1/(1 − 0,8) = 5 under modellens strenge forutsetninger.",
+      "explanation": "Med Y=C+I+G og C=c₀+c(Y−T) får vi (1−c)ΔY=ΔG når I og T holdes fast. Utgiftsmultiplikatoren er 1/(1−0,8)=5.",
       "id": "q10",
       "level": "grunnleggende"
     },
@@ -1554,7 +1562,7 @@
     {
       "id": "q24",
       "topic": "g5",
-      "question": "Med T=5, R=3, P=1 og S=0, hva er avviksgevinsten når motparten samarbeider?",
+      "question": "Med T=5, R=3, P=1 og S=0, hvor mye mer tjener en spiller på å avvike fremfor å samarbeide i inneværende periode når motparten samarbeider?",
       "options": [
         "5",
         "2",
@@ -1840,7 +1848,7 @@
     {
       "id": "q46",
       "topic": "g15",
-      "question": "Hva innebærer høyere δ i den standard gjentatte modellen?",
+      "question": "Hva betyr en høyere δ i et gjentatt spill?",
       "options": [
         "Fremtidige gevinster veier mer",
         "Fremtidige gevinster veier mindre",
@@ -2022,14 +2030,14 @@
     {
       "id": "q60",
       "topic": "g15",
-      "question": "I et endelig gjentatt spill med kjent slutt og unik Nash i stadiespillet, hva gir standard baklengs induksjon?",
+      "question": "I et endelig gjentatt spill med kjent slutt, observerte handlinger og en unik Nash-likevekt i stadiespillet, hva spilles i hver periode i en delspillperfekt likevekt?",
       "options": [
         "Samarbeid bare i siste periode",
         "Stadielikevekten i hver periode",
         "Samarbeid i alle perioder"
       ],
       "answer": 1,
-      "explanation": "Siste periode gir stadielikevekten. Med en unik videreføring gir samme resonnement dette i nest siste periode og bakover, under standardforutsetningene.",
+      "explanation": "Start i siste periode, der stadielikevekten er eneste optimale videreføring. Når den videreføringen er gitt uansett historikk, gjelder samme resonnement i nest siste periode, og så videre.",
       "level": "middels"
     },
     {
@@ -2915,7 +2923,7 @@
     {
       "id": "q125",
       "topic": "10",
-      "question": "c=0,8, t=0,25 og m=0,1. Hva er multiplikatoren i den enkle åpne modellen?",
+      "question": "I en åpen økonomi med faste priser er c=0,8, skattesatsen t=0,25 og marginal importtilbøyelighet m=0,1. Investeringene er eksogene. Hva er utgiftsmultiplikatoren?",
       "options": [
         "5",
         "2,5",
@@ -3026,7 +3034,7 @@
         "(H, l)"
       ],
       "answer": 0,
-      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (L, l). Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "explanation": "Sammenlign spiller 1s gevinster nedover hver kolonne og spiller 2s gevinster bortover hver rad. Begge har en strengt dominant strategi. L er best for spiller 1, og l er best for spiller 2. Samarbeidsutfallet (H,h) gir likevel begge høyere gevinst.",
       "level": "middels",
       "game": "notes-pd"
     },
@@ -3096,7 +3104,7 @@
         "(H, h)"
       ],
       "answer": 1,
-      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (H, h), (L, l). Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "explanation": "Sammenlign spiller 1s gevinster nedover hver kolonne og spiller 2s gevinster bortover hver rad. De rene likevektene er (H,h) og (L,l). I den indre blandede likevekten er p=3/4 og q=1/4.",
       "level": "middels",
       "game": "notes-bos"
     },
@@ -3166,7 +3174,7 @@
         "(H, l), (L, h)"
       ],
       "answer": 2,
-      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: (H, l), (L, h). Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "explanation": "Sammenlign spiller 1s gevinster nedover hver kolonne og spiller 2s gevinster bortover hver rad. To rene likevekter, (H,l) og (L,h). I den indre blandede likevekten er p=1/2 og q=4/5.",
       "level": "middels",
       "game": "notes-chicken"
     },
@@ -3236,7 +3244,7 @@
         "(H, l)"
       ],
       "answer": 0,
-      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: Ingen rene Nash-likevekter. Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "explanation": "Sammenlign spiller 1s gevinster nedover hver kolonne og spiller 2s gevinster bortover hver rad. Det finnes ingen ren Nash-likevekt. I den blandede likevekten er p=1/3 og q=1/2. Gevinstsummen varierer mellom cellene.",
       "level": "middels",
       "game": "notes-mp"
     },
@@ -3306,7 +3314,7 @@
         "(H, h)"
       ],
       "answer": 1,
-      "explanation": "Marker rads største første tall i hver kolonne og kolonnes største andre tall i hver rad. Rene Nash: Ingen rene Nash-likevekter. Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "explanation": "Sammenlign spiller 1s gevinster nedover hver kolonne og spiller 2s gevinster bortover hver rad. Gevinsten ved (L,h) er endret fra (3,4) til (5,4). Det finnes fortsatt ingen ren Nash-likevekt.",
       "level": "middels",
       "game": "notes-variant"
     },
@@ -3369,14 +3377,14 @@
     {
       "id": "q158",
       "topic": "n1",
-      "question": "Hvilket utsagn om eksamensdekning støttes av disse notatene?",
+      "question": "Hva dekker de opprinnelige mikroforelesningsnotatene som brukes i forelesningsløypen?",
       "options": [
-        "Notatene dekker hele makropensumet",
-        "Canvas-oppgavene er allerede inkludert",
-        "Både mikro og makro omtales som eksamensdeler, men makrostoffet er ikke med her"
+        "Renteparitet og valutakurs",
+        "Multiplikatormodellen og transmisjonsmekanismen",
+        "Spillteori og mikroøkonomisk atferd"
       ],
       "answer": 2,
-      "explanation": "Notatene sier at makro kommer, og viser til Canvas. Verken emneplan, pensumliste eller selve Canvas-oppgavene fulgte med.",
+      "explanation": "Forelesningsløypen gjengir mikroeksemplene. Makrostoffet ligger i egne kursnotater og i makrokompendiet.",
       "level": "middels"
     },
     {
@@ -3554,7 +3562,7 @@
       "question": "Spiller 1 velger først. Hva betyr spiller 2s strategi lh?",
       "options": [
         "l etter H og h etter L",
-        "l etter h og h etter l",
+        "h etter H og l etter L",
         "At begge handlingene utføres samtidig"
       ],
       "answer": 0,
@@ -3642,261 +3650,261 @@
     {
       "id": "eco-0-0",
       "topic": "macro-keynes",
-      "question": "I øker med 30. Gitt c₁=0,60, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk en lukket økonomi med faste priser, fast skatt og eksogene investeringer. I øker med 30. Gitt c₁=0,60, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "75",
         "85",
         "60"
       ],
       "answer": 0,
-      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,40. Del den direkte endringen på D og få ΔY≈75.",
+      "explanation": "Den direkte endringen er 30. Innsetting i likevektsbetingelsen gir D=1−c₁=0,40. Del den direkte endringen på D og få ΔY≈75.",
       "level": "middels"
     },
     {
       "id": "eco-0-1",
       "topic": "macro-fiscal",
-      "question": "Fast skatt øker med 30. Gitt c₁=0,60, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk en lukket økonomi med faste priser og eksogene investeringer. T er en fast skatt. Fast skatt øker med 30. Gitt c₁=0,60, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "-60",
         "-45",
         "-35"
       ],
       "answer": 1,
-      "explanation": "Den direkte endringen er -18. Helningen bestemmer nevneren D=0,40. Del den direkte endringen på D og få ΔY≈-45.",
+      "explanation": "Den direkte endringen er -18. Innsetting i likevektsbetingelsen gir D=1−c₁=0,40. Del den direkte endringen på D og få ΔY≈-45.",
       "level": "middels"
     },
     {
       "id": "eco-0-2",
       "topic": "macro-tax",
-      "question": "G øker med 30 i en lukket økonomi. Gitt c₁=0,60, t=0,25, v=0,10, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk faste priser, C=c₀+c₁(Y−tY) og I=e+vY. v er investeringens følsomhet for Y. G øker med 30 i en lukket økonomi. Gitt c₁=0,60, t=0,25, v=0,10, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "76,67",
         "51,67",
         "66,67"
       ],
       "answer": 2,
-      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,45. Del den direkte endringen på D og få ΔY≈66,67.",
+      "explanation": "Den direkte endringen er 30. Innsetting i likevektsbetingelsen gir D=1−c₁(1−t)−v=0,45. Del den direkte endringen på D og få ΔY≈66,67.",
       "level": "middels"
     },
     {
       "id": "eco-0-3",
       "topic": "macro-open",
-      "question": "G øker med 30 i en åpen økonomi. Gitt c₁=0,60, t=0,25, v=0,10, m=0,05, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk faste priser, C=c₀+c₁(Y−tY), I=e+vY og NX=x₀−mY. m er marginal importtilbøyelighet. G øker med 30 i en åpen økonomi. Gitt c₁=0,60, t=0,25, v=0,10, m=0,05, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "60",
         "70",
         "45"
       ],
       "answer": 0,
-      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,50. Del den direkte endringen på D og få ΔY≈60.",
+      "explanation": "Den direkte endringen er 30. Innsetting i likevektsbetingelsen gir D=1−c₁(1−t)−v+m=0,50. Del den direkte endringen på D og få ΔY≈60.",
       "level": "middels"
     },
     {
       "id": "eco-0-4",
       "topic": "macro-rate",
-      "question": "Realrenten øker med 2 enheter, h=5 og k=3. Gitt c₁=0,60, t=0,25, v=0,10, m=0,05, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk faste priser, C=c₀+c₁(Y−tY), I=e+vY−hr og NX=x₀−mY−kr. Konsumet har ingen direkte rentefølsomhet. Realrenten øker med 2 prosentpoeng (r måles i prosentpoeng), h=5 og k=3. Gitt c₁=0,60, t=0,25, v=0,10, m=0,05, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "-47",
         "-32",
         "-22"
       ],
       "answer": 1,
-      "explanation": "Den direkte endringen er -16. Helningen bestemmer nevneren D=0,50. Del den direkte endringen på D og få ΔY≈-32.",
+      "explanation": "Den direkte endringen er -16. Innsetting i likevektsbetingelsen gir D=1−c₁(1−t)−v+m=0,50. Del den direkte endringen på D og få ΔY≈-32.",
       "level": "middels"
     },
     {
       "id": "eco-1-0",
       "topic": "macro-keynes",
-      "question": "I øker med 30. Gitt c₁=0,80, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk en lukket økonomi med faste priser, fast skatt og eksogene investeringer. I øker med 30. Gitt c₁=0,80, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "135",
         "150",
         "160"
       ],
       "answer": 1,
-      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,20. Del den direkte endringen på D og få ΔY≈150.",
+      "explanation": "Den direkte endringen er 30. Innsetting i likevektsbetingelsen gir D=1−c₁=0,20. Del den direkte endringen på D og få ΔY≈150.",
       "level": "middels"
     },
     {
       "id": "eco-1-1",
       "topic": "macro-fiscal",
-      "question": "Fast skatt øker med 30. Gitt c₁=0,80, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk en lukket økonomi med faste priser og eksogene investeringer. T er en fast skatt. Fast skatt øker med 30. Gitt c₁=0,80, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "-110",
         "-135",
         "-120"
       ],
       "answer": 2,
-      "explanation": "Den direkte endringen er -24. Helningen bestemmer nevneren D=0,20. Del den direkte endringen på D og få ΔY≈-120.",
+      "explanation": "Den direkte endringen er -24. Innsetting i likevektsbetingelsen gir D=1−c₁=0,20. Del den direkte endringen på D og få ΔY≈-120.",
       "level": "middels"
     },
     {
       "id": "eco-1-2",
       "topic": "macro-tax",
-      "question": "G øker med 30 i en lukket økonomi. Gitt c₁=0,80, t=0,25, v=0,10, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk faste priser, C=c₀+c₁(Y−tY) og I=e+vY. v er investeringens følsomhet for Y. G øker med 30 i en lukket økonomi. Gitt c₁=0,80, t=0,25, v=0,10, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "100",
         "110",
         "85"
       ],
       "answer": 0,
-      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,30. Del den direkte endringen på D og få ΔY≈100.",
+      "explanation": "Den direkte endringen er 30. Innsetting i likevektsbetingelsen gir D=1−c₁(1−t)−v=0,30. Del den direkte endringen på D og få ΔY≈100.",
       "level": "middels"
     },
     {
       "id": "eco-1-3",
       "topic": "macro-open",
-      "question": "G øker med 30 i en åpen økonomi. Gitt c₁=0,80, t=0,25, v=0,10, m=0,20, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk faste priser, C=c₀+c₁(Y−tY), I=e+vY og NX=x₀−mY. m er marginal importtilbøyelighet. G øker med 30 i en åpen økonomi. Gitt c₁=0,80, t=0,25, v=0,10, m=0,20, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "45",
         "60",
         "70"
       ],
       "answer": 1,
-      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,50. Del den direkte endringen på D og få ΔY≈60.",
+      "explanation": "Den direkte endringen er 30. Innsetting i likevektsbetingelsen gir D=1−c₁(1−t)−v+m=0,50. Del den direkte endringen på D og få ΔY≈60.",
       "level": "middels"
     },
     {
       "id": "eco-1-4",
       "topic": "macro-rate",
-      "question": "Realrenten øker med 2 enheter, h=5 og k=3. Gitt c₁=0,80, t=0,25, v=0,10, m=0,20, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk faste priser, C=c₀+c₁(Y−tY), I=e+vY−hr og NX=x₀−mY−kr. Konsumet har ingen direkte rentefølsomhet. Realrenten øker med 2 prosentpoeng (r måles i prosentpoeng), h=5 og k=3. Gitt c₁=0,80, t=0,25, v=0,10, m=0,20, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "-22",
         "-47",
         "-32"
       ],
       "answer": 2,
-      "explanation": "Den direkte endringen er -16. Helningen bestemmer nevneren D=0,50. Del den direkte endringen på D og få ΔY≈-32.",
+      "explanation": "Den direkte endringen er -16. Innsetting i likevektsbetingelsen gir D=1−c₁(1−t)−v+m=0,50. Del den direkte endringen på D og få ΔY≈-32.",
       "level": "middels"
     },
     {
       "id": "eco-2-0",
       "topic": "macro-keynes",
-      "question": "I øker med 30. Gitt c₁=0,75, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk en lukket økonomi med faste priser, fast skatt og eksogene investeringer. I øker med 30. Gitt c₁=0,75, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "130",
         "105",
         "120"
       ],
       "answer": 2,
-      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,25. Del den direkte endringen på D og få ΔY≈120.",
+      "explanation": "Den direkte endringen er 30. Innsetting i likevektsbetingelsen gir D=1−c₁=0,25. Del den direkte endringen på D og få ΔY≈120.",
       "level": "middels"
     },
     {
       "id": "eco-2-1",
       "topic": "macro-fiscal",
-      "question": "Fast skatt øker med 30. Gitt c₁=0,75, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk en lukket økonomi med faste priser og eksogene investeringer. T er en fast skatt. Fast skatt øker med 30. Gitt c₁=0,75, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "-90",
         "-80",
         "-105"
       ],
       "answer": 0,
-      "explanation": "Den direkte endringen er -22,50. Helningen bestemmer nevneren D=0,25. Del den direkte endringen på D og få ΔY≈-90.",
+      "explanation": "Den direkte endringen er -22,50. Innsetting i likevektsbetingelsen gir D=1−c₁=0,25. Del den direkte endringen på D og få ΔY≈-90.",
       "level": "middels"
     },
     {
       "id": "eco-2-2",
       "topic": "macro-tax",
-      "question": "G øker med 30 i en lukket økonomi. Gitt c₁=0,75, t=0,20, v=0,20, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk faste priser, C=c₀+c₁(Y−tY) og I=e+vY. v er investeringens følsomhet for Y. G øker med 30 i en lukket økonomi. Gitt c₁=0,75, t=0,20, v=0,20, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "135",
         "150",
         "160"
       ],
       "answer": 1,
-      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,20. Del den direkte endringen på D og få ΔY≈150.",
+      "explanation": "Den direkte endringen er 30. Innsetting i likevektsbetingelsen gir D=1−c₁(1−t)−v=0,20. Del den direkte endringen på D og få ΔY≈150.",
       "level": "middels"
     },
     {
       "id": "eco-2-3",
       "topic": "macro-open",
-      "question": "G øker med 30 i en åpen økonomi. Gitt c₁=0,75, t=0,20, v=0,20, m=0,10, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk faste priser, C=c₀+c₁(Y−tY), I=e+vY og NX=x₀−mY. m er marginal importtilbøyelighet. G øker med 30 i en åpen økonomi. Gitt c₁=0,75, t=0,20, v=0,20, m=0,10, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "110",
         "85",
         "100"
       ],
       "answer": 2,
-      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,30. Del den direkte endringen på D og få ΔY≈100.",
+      "explanation": "Den direkte endringen er 30. Innsetting i likevektsbetingelsen gir D=1−c₁(1−t)−v+m=0,30. Del den direkte endringen på D og få ΔY≈100.",
       "level": "middels"
     },
     {
       "id": "eco-2-4",
       "topic": "macro-rate",
-      "question": "Realrenten øker med 2 enheter, h=5 og k=3. Gitt c₁=0,75, t=0,20, v=0,20, m=0,10, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk faste priser, C=c₀+c₁(Y−tY), I=e+vY−hr og NX=x₀−mY−kr. Konsumet har ingen direkte rentefølsomhet. Realrenten øker med 2 prosentpoeng (r måles i prosentpoeng), h=5 og k=3. Gitt c₁=0,75, t=0,20, v=0,20, m=0,10, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "-53,33",
         "-43,33",
         "-68,33"
       ],
       "answer": 0,
-      "explanation": "Den direkte endringen er -16. Helningen bestemmer nevneren D=0,30. Del den direkte endringen på D og få ΔY≈-53,33.",
+      "explanation": "Den direkte endringen er -16. Innsetting i likevektsbetingelsen gir D=1−c₁(1−t)−v+m=0,30. Del den direkte endringen på D og få ΔY≈-53,33.",
       "level": "middels"
     },
     {
       "id": "eco-3-0",
       "topic": "macro-keynes",
-      "question": "I øker med 30. Gitt c₁=0,50, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk en lukket økonomi med faste priser, fast skatt og eksogene investeringer. I øker med 30. Gitt c₁=0,50, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "60",
         "70",
         "45"
       ],
       "answer": 0,
-      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,50. Del den direkte endringen på D og få ΔY≈60.",
+      "explanation": "Den direkte endringen er 30. Innsetting i likevektsbetingelsen gir D=1−c₁=0,50. Del den direkte endringen på D og få ΔY≈60.",
       "level": "middels"
     },
     {
       "id": "eco-3-1",
       "topic": "macro-fiscal",
-      "question": "Fast skatt øker med 30. Gitt c₁=0,50, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk en lukket økonomi med faste priser og eksogene investeringer. T er en fast skatt. Fast skatt øker med 30. Gitt c₁=0,50, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "-45",
         "-30",
         "-20"
       ],
       "answer": 1,
-      "explanation": "Den direkte endringen er -15. Helningen bestemmer nevneren D=0,50. Del den direkte endringen på D og få ΔY≈-30.",
+      "explanation": "Den direkte endringen er -15. Innsetting i likevektsbetingelsen gir D=1−c₁=0,50. Del den direkte endringen på D og få ΔY≈-30.",
       "level": "middels"
     },
     {
       "id": "eco-3-2",
       "topic": "macro-tax",
-      "question": "G øker med 30 i en lukket økonomi. Gitt c₁=0,50, t=0,20, v=0,10, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk faste priser, C=c₀+c₁(Y−tY) og I=e+vY. v er investeringens følsomhet for Y. G øker med 30 i en lukket økonomi. Gitt c₁=0,50, t=0,20, v=0,10, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "70",
         "45",
         "60"
       ],
       "answer": 2,
-      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,50. Del den direkte endringen på D og få ΔY≈60.",
+      "explanation": "Den direkte endringen er 30. Innsetting i likevektsbetingelsen gir D=1−c₁(1−t)−v=0,50. Del den direkte endringen på D og få ΔY≈60.",
       "level": "middels"
     },
     {
       "id": "eco-3-3",
       "topic": "macro-open",
-      "question": "G øker med 30 i en åpen økonomi. Gitt c₁=0,50, t=0,20, v=0,10, m=0,10, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk faste priser, C=c₀+c₁(Y−tY), I=e+vY og NX=x₀−mY. m er marginal importtilbøyelighet. G øker med 30 i en åpen økonomi. Gitt c₁=0,50, t=0,20, v=0,10, m=0,10, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "50",
         "60",
         "35"
       ],
       "answer": 0,
-      "explanation": "Den direkte endringen er 30. Helningen bestemmer nevneren D=0,60. Del den direkte endringen på D og få ΔY≈50.",
+      "explanation": "Den direkte endringen er 30. Innsetting i likevektsbetingelsen gir D=1−c₁(1−t)−v+m=0,60. Del den direkte endringen på D og få ΔY≈50.",
       "level": "middels"
     },
     {
       "id": "eco-3-4",
       "topic": "macro-rate",
-      "question": "Realrenten øker med 2 enheter, h=5 og k=3. Gitt c₁=0,50, t=0,20, v=0,10, m=0,10, hva blir ΔY (avrundet ved behov)?",
+      "question": "Bruk faste priser, C=c₀+c₁(Y−tY), I=e+vY−hr og NX=x₀−mY−kr. Konsumet har ingen direkte rentefølsomhet. Realrenten øker med 2 prosentpoeng (r måles i prosentpoeng), h=5 og k=3. Gitt c₁=0,50, t=0,20, v=0,10, m=0,10, hva blir ΔY (avrundet ved behov)?",
       "options": [
         "-41,67",
         "-26,67",
         "-16,67"
       ],
       "answer": 1,
-      "explanation": "Den direkte endringen er -16. Helningen bestemmer nevneren D=0,60. Del den direkte endringen på D og få ΔY≈-26,67.",
+      "explanation": "Den direkte endringen er -16. Innsetting i likevektsbetingelsen gir D=1−c₁(1−t)−v+m=0,60. Del den direkte endringen på D og få ΔY≈-26,67.",
       "level": "middels"
     },
     {
@@ -3915,7 +3923,7 @@
     {
       "id": "eco-real",
       "topic": "macro-fx",
-      "question": "E stiger 10 % mens P og P* står stille. Hva skjer med EP*/P?",
+      "question": "La E være NOK per euro, P norsk prisnivå og P* utenlandsk prisnivå. Hva skjer med realvalutakursen EP*/P når E stiger 10 % og P og P* er uendret?",
       "options": [
         "Øker 10 %",
         "Faller 10 %",
@@ -3928,7 +3936,7 @@
     {
       "id": "eco-par",
       "topic": "macro-uip",
-      "question": "Innenlandsk rente stiger. Hva skjer med dagens E ved uendret Eᵉ og uten risikopremie?",
+      "question": "Norsk nominell rente stiger. Hva skjer med dagens kurs E målt i NOK per euro ved udekket renteparitet, gitt uendret utenlandsk rente, uendret forventet framtidig kurs og ingen risikopremie?",
       "options": [
         "E faller",
         "E stiger",
@@ -3941,14 +3949,14 @@
     {
       "id": "eco-expect",
       "topic": "macro-uip",
-      "question": "Hvilket forhold kan endre renteparitetsresultatet i praksis?",
+      "question": "Norsk rente øker mens utenlandsk rente er uendret. Hvilken samtidig endring kan dempe eller snu den umiddelbare kronestyrkingen i modellen for udekket renteparitet?",
       "options": [
-        "Endret forventet fremtidig kurs",
-        "Kun antall desimaler",
-        "Bokstavvalget for valutakursen"
+        "Markedet venter en svakere krone framover",
+        "Markedet venter en sterkere krone framover",
+        "Forventet framtidig kurs og risikopremien er begge uendret"
       ],
       "answer": 0,
-      "explanation": "Forventet fremtidig kurs og risikopremie kan begge endres samtidig med renten.",
+      "explanation": "Med E i NOK per euro er E=(1+i*)Eᵉ/(1+i) når risikopremien er null. Høyere forventet Eᵉ (svakere krone) trekker E opp og motvirker at dagens E faller når norsk rente øker.",
       "level": "middels"
     },
     {
@@ -3961,7 +3969,7 @@
         "Kontantstrømkanalen"
       ],
       "answer": 0,
-      "explanation": "En sterkere krone gjør valuta billigere og kan redusere importpriser i kroner.",
+      "explanation": "En sterkere krone betyr at en enhet utenlandsk valuta koster færre kroner. Det kan redusere prisene på import målt i kroner.",
       "level": "middels"
     },
     {
@@ -4507,7 +4515,7 @@
         ]
       ],
       "topic": "n2",
-      "note": "Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "note": "Begge har en strengt dominant strategi. L er best for spiller 1, og l er best for spiller 2. Samarbeidsutfallet (H,h) gir likevel begge høyere gevinst.",
       "equilibria": [
         "1-1"
       ],
@@ -4689,7 +4697,7 @@
         ]
       ],
       "topic": "n3",
-      "note": "Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "note": "De rene likevektene er (H,h) og (L,l). I den indre blandede likevekten er p=3/4 og q=1/4.",
       "equilibria": [
         "0-0",
         "1-1"
@@ -4876,7 +4884,7 @@
         ]
       ],
       "topic": "n4",
-      "note": "Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "note": "To rene likevekter, (H,l) og (L,h). I den indre blandede likevekten er p=1/2 og q=4/5.",
       "equilibria": [
         "0-1",
         "1-0"
@@ -5063,7 +5071,7 @@
         ]
       ],
       "topic": "n5",
-      "note": "Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "note": "Det finnes ingen ren Nash-likevekt. I den blandede likevekten er p=1/3 og q=1/2. Gevinstsummen varierer mellom cellene.",
       "equilibria": [],
       "lecture": true
     },
@@ -5243,7 +5251,7 @@
         ]
       ],
       "topic": "n9",
-      "note": "Finn beste responser med disse forelesningsgevinstene. Ikke bruk standardgevinster fra andre eksempler. Ingen ren likevekt betyr ikke at blandet likevekt mangler.",
+      "note": "Gevinsten ved (L,h) er endret fra (3,4) til (5,4). Det finnes fortsatt ingen ren Nash-likevekt.",
       "equilibria": [],
       "lecture": true
     },
@@ -5539,7 +5547,8 @@
         "Dyrere energi kan være et negativt tilbudssjokk: høyere marginalkostnader, lavere produksjon og høyere prisnivå i standard kortsiktig modell med uendret AD.",
         "Svakere krone øker importkostnader målt i kroner og kan støtte eksportetterspørsel. Nettoeffekten avhenger av valuta i inntekter, kostnader, gjeld og eventuell sikring.",
         "Lavere ordreinngang kan også reflektere et negativt etterspørselssjokk. Flere sjokk samtidig kan trekke produksjon i samme retning, men prispress i ulike retninger.",
-        "Drøft usikkerhet, tidshorisont, kapasitetsutnyttelse og pengepolitisk reaksjon. Det finnes ikke ett bestemt tallfasitsvar uten flere data."
+        "Drøft usikkerhet, tidshorisont, kapasitetsutnyttelse og pengepolitisk reaksjon. Det finnes ikke ett bestemt tallfasitsvar uten flere data.",
+        "Bruk flere indikatorer før du kaller situasjonen en lavkonjunktur. Vurder produksjonsgapet sammen med ledighet og lønns- og prisvekst. Svak ordreinngang i ett foretak alene sier lite om kapasitetsutnyttingen i hele økonomien."
       ]
     },
     {
@@ -5602,10 +5611,10 @@
       "title": "Bygg 2×4-normalform fra et spilltre",
       "topic": "n6",
       "game": "notes-bos-first1",
-      "prompt": "Forklar kolonnene hh, hl, lh og ll i dette spillet. Finn alle Nash og bare de delspillperfekte. Forklar hvorfor én realisert handling ikke er en full strategi.",
+      "prompt": "Forklar kolonnene hh, hl, lh og ll i dette spillet. Finn alle rene Nash-likevekter og vis hvilke av dem som er delspillperfekte. Forklar hvorfor én realisert handling ikke er en full strategi.",
       "solution": [
         "hh betyr h etter både H og L; hl betyr h etter H, l etter L; lh betyr l etter H, h etter L; ll betyr l etter begge.",
-        "Normalformen gir Nash (H,hh), (H,hl) og (L,ll). Disse finnes ved å holde den andre aktørens fullstendige plan fast.",
+        "Normalformen gir de rene Nash-likevektene (H,hh), (H,hl) og (L,ll). Disse finnes ved å holde den andre aktørens fullstendige plan fast.",
         "Etter H vil spiller 2 velge h fordi 2>1. Etter L vil spiller 2 velge l fordi 3>0. Bare hl er optimal i alle delspill.",
         "Spiller 1 velger H fordi 3>2. Delspillperfekt profil (H,hl), utfall (3,2). Det er ikke nok å oppgi bare «spiller 2 valgte h»; planen må også dekke L-grenen."
       ],
@@ -5613,10 +5622,10 @@
     },
     {
       "id": "notes-w5",
-      "title": "Rett sammendraget når spiller 2 velger først",
+      "title": "Battle of the Sexes med spiller 2 først",
       "topic": "n7",
       "game": "notes-bos-first2",
-      "prompt": "Finn delspillperfekt løsning med spiller 2 først i Battle of the Sexes. Behold gevinstrekkefølgen (spiller 1, spiller 2), og forklar feilen i det innlimte Copilot-sammendraget.",
+      "prompt": "Finn delspillperfekt løsning med spiller 2 først i Battle of the Sexes. Hold gevinstrekkefølgen (spiller 1, spiller 2) fast. Forklar hvorfor påstanden «spiller 2 velger h fordi 3 > 2» er feil.",
       "solution": [
         "Spiller 1 svarer H etter h fordi 3>0 og L etter l fordi 2>1. Responsplanen er HL.",
         "Spiller 2 sammenligner sin egen gevinst 2 ved h med 3 ved l. Den velger l.",
@@ -5627,7 +5636,7 @@
     },
     {
       "id": "notes-w6",
-      "title": "Leksen: snu trekkrekkefølgen i Chicken",
+      "title": "Snu trekkrekkefølgen i Chicken",
       "topic": "n8",
       "game": "notes-chicken-first2",
       "prompt": "Spiller 2 velger først og spiller 1 observerer. Tegn de to responsene, finn alle rene Nash i normalformen, og vis hvorfor delspillperfekt utfall er (2,3).",
@@ -5670,7 +5679,7 @@
       "title": "Løs varemarkedet på redusert form",
       "topic": "macro-keynes",
       "level": "fordypning",
-      "prompt": "Bruk C=30+0,75(Y−40), I=40 og G=70. Finn Y og C. Øk deretter I med 12.",
+      "prompt": "I en lukket økonomi med faste priser, bruk Y=C+I+G, C=30+0,75(Y−40), I=40 og G=70. Finn Y og C. Øk deretter I med 12, med øvrige eksogene størrelser uendret.",
       "solution": [
         "Sett inn: Y=30+0,75Y−30+40+70=110+0,75Y.",
         "Da er Y=440 og C=330. Kontroll: 330+40+70=440.",
@@ -5682,11 +5691,11 @@
       "title": "Sammenlign to finanspolitiske tiltak",
       "topic": "macro-fiscal",
       "level": "fordypning",
-      "prompt": "La c₁=0,8 og T være fast. Sammenlign ΔG=10 med et skattekutt på 10.",
+      "prompt": "Anta en lukket økonomi med faste priser og eksogene investeringer. Konsumet er C=c₀+0,8(Y−T), der T er fast skatt. Sammenlign ΔG=10 med et skattekutt på 10, som to separate tiltak.",
       "solution": [
         "Utgiftsøkningen gir 10 direkte. Multiplisert med 5 gir det ΔY=50.",
         "Skattekuttet øker disponibel inntekt med 10 og konsumet med 8 i første runde. ΔY=40.",
-        "Forklar hvorfor økt offentlig kjøp har større virkning i denne modellen."
+        "Et offentlig kjøp på 10 øker etterspørselen med hele beløpet. Skattekuttet øker konsumet med 8, fordi husholdningene i første runde sparer de resterende 2. Begge tiltakene har samme multiplikator etter første runde."
       ]
     },
     {
@@ -5694,7 +5703,7 @@
       "title": "Regn med skatt, investering og import",
       "topic": "macro-open",
       "level": "fordypning",
-      "prompt": "Bruk c₁=0,75, t=0,2, v=0,15 og m=0,25. Finn effekten av ΔG=20 i lukket og åpen økonomi.",
+      "prompt": "Sammenlign to økonomier med faste priser, C=c₀+c₁(Y−tY) og I=e+vY. Legg til NX=x₀−mY i åpen økonomi. Bruk c₁=0,75, t=0,2, v=0,15 og m=0,25. Finn effekten av ΔG=20, alt annet likt.",
       "solution": [
         "Lukket: D=1−0,75·0,8−0,15=0,25. ΔY=80.",
         "Åpen: import legger 0,25 til nevneren, som blir 0,5. ΔY=40.",
@@ -5706,7 +5715,7 @@
       "title": "Skill første runde fra multiplikatorvirkningen",
       "topic": "macro-rate",
       "level": "fordypning",
-      "prompt": "I en åpen økonomi er D=0,4, h=4, n=2 og k=2. Renten øker én modell-enhet. Finn direkte, indirekte og samlet effekt.",
+      "prompt": "I en åpen økonomi med faste priser er D=0,4. Ved gitt Y senker en renteøkning på ett prosentpoeng investering, konsum og nettoeksport med henholdsvis h=4, n=2 og k=2. Finn direkte, indirekte og samlet effekt på Y for en slik renteøkning.",
       "solution": [
         "Direkte fall er 4+2+2=8, altså −8.",
         "Samlet ΔY=−8/0,4=−20. Indirekte bidrag er −20−(−8)=−12.",
@@ -5718,7 +5727,7 @@
       "title": "Regn renteparitet og tolk kronen",
       "topic": "macro-uip",
       "level": "fordypning",
-      "prompt": "Eᵉ=12, i*=2 %. Regn ut E når norsk rente først er 2 %, deretter 5 %.",
+      "prompt": "Anta udekket renteparitet uten risikopremie, med E i NOK per euro og uendret forventet framtidig kurs Eᵉ=12. Utenlandsk nominell rente er 2 %. Finn E når norsk nominell rente først er 2 %, deretter 5 %.",
       "solution": [
         "Ved lik rente er E=12.",
         "Etter renteøkningen er E=12·1,02/1,05≈11,66. Kronen appresierer med en gang ifølge modellen.",
@@ -5732,9 +5741,9 @@
       "level": "fordypning",
       "prompt": "Energiprisene øker og inflasjonen stiger mens produksjonen svekkes. Drøft renteøkning gjennom de tre kanalene og virkningen på aktivitet.",
       "solution": [
-        "Beskriv energisjokket som et kostnadssjokk som kan gi lavere produksjon og høyere priser.",
-        "Drøft svakere etterspørsel, eventuell appresiering og lavere importprisvekst, samt hvordan forventninger kan påvirke lønns- og prisvekst.",
-        "Forklar avveiingen mellom inflasjon og realaktivitet og hvorfor virkningene kommer med etterslep."
+        "Et energisjokk øker produksjonskostnadene. Bedriftene kan øke prisene samtidig som produksjonen går ned. Et slikt tilbudssjokk kan derfor gi høy inflasjon selv ved svakere aktivitet.",
+        "Etterspørselskanalen: Høyere renter kan dempe konsum og investeringer. Valutakanalen: Hvis kronen styrker seg, kan importprisene i kroner falle. Forventningskanalen: Hvis renteøkningen gjør at husholdninger og bedrifter venter lavere inflasjon framover, kan pris- og lønnsveksten dempes.",
+        "Virkningene kommer gradvis, blant annet fordi lån, lønn og priser justeres på ulike tidspunkter. Høyere rente kan samtidig øke produksjonsfallet. Avveiingen avhenger av om energisjokket varer og om inflasjonsforventningene holder seg stabile."
       ]
     },
     {
@@ -5745,7 +5754,7 @@
       "parts": [
         "Finn alle Nash-likevekter i rene strategier. Drøft om utfallet er Pareto-effektivt.",
         "Spiller 1 velger først. Sett opp spillet i ekstensiv form og finn delspillperfekt likevekt.",
-        "Anta uendelig gjentakelse og perfekt observasjon. Utled betingelsen for samarbeid med grim trigger."
+        "Anta uendelig gjentakelse, perfekt observasjon og diskonteringsfaktor δ ∈ [0,1). Utled betingelsen for samarbeid med grim trigger."
       ],
       "solution": [
         "Spiller 1 foretrekker L mot h (4 > 3) og l (1 > 0). Spiller 2 foretrekker l mot H (4 > 3) og L (1 > 0). Eneste Nash-likevekt er (L,l), med (1,1). Begge får 3 ved (H,h), så likevektsutfallet er ikke Pareto-effektivt.",
@@ -5754,7 +5763,8 @@
       ],
       "game": "notes-pd",
       "level": "fordypning",
-      "exam": true
+      "exam": true,
+      "basis": "Bearbeidet øving etter mønster fra ECO 5026, Vår 2026, spillteori."
     },
     {
       "id": "exam-chicken",
@@ -5769,30 +5779,32 @@
       "solution": [
         "Rad svarer L mot h og H mot l. Kolonne svarer l mot H og h mot L. Det gir (H,l) med (4,2) og (L,h) med (2,3).",
         "Rad er indifferent når 4−3q=2q, så q=4/5. Kolonne er indifferent når 3−3p=1+p, så p=1/2. Sett inn i indifferensuttrykkene. Rad får 2q=1,6 og kolonne 1+p=1,5.",
-        "Spiller 1 svarer L etter h og H etter l. Spiller 2 velger h fordi 3 > 2. Profil (LH,h), utfall (2,3). Når spiller 1 velger først, svarer spiller 2 l etter H og h etter L. Spiller 1 velger H fordi 4 > 2. Profil (H,lh), utfall (4,2)."
+        "Spiller 1 svarer L etter h og H etter l. Spiller 2 velger h fordi 3 > 2. Profil (LH,h), utfall (2,3). Når spiller 1 velger først, svarer spiller 2 l etter H og h etter L. Spiller 1 velger H fordi 4 > 2. Profil (H,lh), utfall (4,2). I dette eksemplet foretrekker begge å velge først. Spiller 1 får da 4 framfor 2, og spiller 2 får 3 framfor 2."
       ],
       "game": "notes-chicken",
       "level": "fordypning",
-      "exam": true
+      "exam": true,
+      "basis": "Bearbeidet øving etter mønster fra ECO 5026, Høst 2025, spillteori og trekkrekkefølge."
     },
     {
       "id": "exam-mult",
       "topic": "macro-rate",
       "title": "Oppgave 3 · Multiplikatormodellen i lukket og åpen økonomi",
-      "prompt": "En økonomi har Y=C+I+G, C=40+0,75(Y−T)−2r og I=20+0,15Y−3r. Sett G=60, T=40 og r=2. Renten måles i prosentpoeng. Prisnivået ligger fast, og sysselsettingen øker med produksjonen.",
+      "prompt": "En økonomi har Y=C+I+G, C=40+0,75(Y−T)−2r og I=20+0,15Y−3r. Sett G=60, T=40 og r=2. T er en fast skatt. Renten måles i prosentpoeng. Prisnivået ligger fast, og sysselsettingen øker med produksjonen.",
       "parts": [
         "Angi endogene og eksogene variabler. Vis sammenhengene i et flytdiagram og utled redusert form.",
         "Renten øker ett prosentpoeng. Finn direkte og indirekte virkninger på produksjon og virkningen på sysselsetting.",
         "Åpne økonomien med NX=30−0,20Y−4r. Utled endringsformen og sammenlign rentevirkningene."
       ],
       "solution": [
-        "G, T og r er gitt utenfra. Y, C og I bestemmes sammen. Pilene er T→C, r→C og I, Y→C og I, og C, I og G→Y. Ved innsetting får vi 0,10Y=60+40+20−0,75T−5r. Med oppgitte tall er Y=800.",
+        "G, T og r bestemmes utenfor modellen. Y, C og I bestemmes i modellen. Vis T og r → C, r → I, C, I og G → Y, og Y → C og I. Ved innsetting får vi Y=40+0,75Y−0,75T−2r+20+0,15Y−3r+G. Samle leddene med Y: 0,10Y=60+G−0,75T−5r. Med G=60, T=40 og r=2 er høyresiden 80, så Y=800.",
         "Direkte faller C med 2 og I med 3. Samlet ΔY=−5/0,10=−50. Den indirekte virkningen er −50−(−5)=−45. Sysselsettingen faller under den oppgitte antakelsen.",
-        "Når NX legges til, øker nevneren fra 0,10 til 0,30 på grunn av importlekkasjen. Endringsformen er ΔY=(ΔG−0,75ΔT−9Δr)/0,30. Når Δr=1, er direkte effekt −9 og samlet effekt −30. Her dominerer importlekkasjen den ekstra direkte rentevirkningen, slik at samlet produksjonsfall er mindre enn i lukket økonomi."
+        "Når NX legges til, øker nevneren fra 0,10 til 0,30 på grunn av importlekkasjen. Endringsformen er ΔY=(ΔG−0,75ΔT−9Δr)/0,30. Når Δr=1, er direkte effekt −9 og samlet effekt −30. Her dominerer importlekkasjen den ekstra direkte rentevirkningen, slik at samlet produksjonsfall er mindre enn i lukket økonomi. Sammenlign størrelsen på den standardiserte utgiftsmultiplikatoren og den samlede renteeffekten hver for seg. Importlekkasjen gjør alltid utgiftsmultiplikatoren mindre her, mens sammenligningen av renteeffekten også avhenger av k."
       ],
       "game": null,
       "level": "fordypning",
-      "exam": true
+      "exam": true,
+      "basis": "Bearbeidet øving etter mønster fra ECO 5026, Vår 2026, multiplikatormodellen."
     },
     {
       "id": "exam-policy",
@@ -5811,7 +5823,27 @@
       ],
       "game": null,
       "level": "fordypning",
-      "exam": true
+      "exam": true,
+      "basis": "Bearbeidet øving etter mønster fra ECO 5026, Høst 2025 og vår 2026, transmisjon og renteparitet."
+    },
+    {
+      "id": "exam-gap",
+      "topic": "11",
+      "title": "Oppgave 5 · Konjunkturer og produksjonsgap",
+      "level": "fordypning",
+      "exam": true,
+      "basis": "Eksamensøving basert på Kompendium, Makroøkonomi 2026. Tallene er laget for oppgaven.",
+      "prompt": "Reelt BNP stiger fra 980 til 990. Anslått potensiell produksjon i siste periode er 1 020. Arbeidsledigheten øker, mens lønnsveksten avtar. Prisnivået holdes fast i regnemodellen i del c).",
+      "parts": [
+        "Beregn veksten i reelt BNP og produksjonsgapet i siste periode. Forklar hvordan BNP kan vokse i en lavkonjunktur.",
+        "Vurder hva opplysningene om arbeidsledighet og lønnsvekst sier om kapasitetsutnyttingen. Nevn én indikator til du ville undersøkt, og forklar hvorfor anslaget på produksjonsgapet kan endre seg.",
+        "Bruk en enkel lukket Keynes-modell med c₁=0,75, fast skatt og eksogene investeringer. Beregn økningen i G som i modellen akkurat lukker gapet, gitt uendret potensial. Forklar hvorfor dette regnestykket alene ikke fastsetter riktig finanspolitikk."
+      ],
+      "solution": [
+        "Reell BNP-vekst er (990−980)/980 · 100 ≈ 1,02 %. Produksjonsgapet er (990−1 020)/1 020 · 100 ≈ −2,94 %. Økonomien vokser fra forrige periode, men aktivitetsnivået ligger fortsatt under potensialet. Vekst er en endring over tid, mens gapet er en forskjell i nivå.",
+        "Stigende ledighet og svakere lønnsvekst er forenlig med ledige ressurser og mindre lønnspress. Undersøk for eksempel investeringer for å se om bedriftene utsetter kapasitetsutvidelser. Ledighet og lønn kan også påvirkes av tilbudsforhold eller institusjoner. Potensiell produksjon kan ikke observeres direkte, og nye data eller endrede anslag på produktivitet kan flytte gapet.",
+        "Nødvendig økning i Y er 1 020−990=30. Multiplikatoren er 1/(1−0,75)=4, slik at ΔG=30/4=7,5 i modellens enheter. Regnestykket holder prisnivå, skatt, investeringer og potensiell produksjon fast. I norsk økonomi kan import, kapasitetsgrenser og en rente- eller prisreaksjon endre effekten. Vurder også usikkerheten i anslått gap."
+      ]
     }
   ],
   "lectureBaseGames": [

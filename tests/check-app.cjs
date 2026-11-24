@@ -1,6 +1,55 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert');
 const root=require('path').resolve(__dirname,'..')+'/',js=fs.readFileSync(root+'app.js','utf8'),raw=fs.readFileSync(root+'data.json','utf8'),db=JSON.parse(raw);
 assert.deepStrictEqual(JSON.parse(fs.readFileSync(root+'index.html','utf8').match(/<script id="study-data" type="application\/json">([\s\S]*?)<\/script>/)[1]),db);
+// Cross-check the answer key against the exercise bank, rather than clicking the stored answer.
+const topicIds=new Set(db.topics.map(t=>t.id));
+const gameById=new Map(db.games.map(g=>[g.id,g]));
+const assertUnique=items=>assert.equal(new Set(items.map(item=>item.id)).size,items.length);
+for(const items of [db.topics,db.questions,db.games,db.written])assertUnique(items);
+const foldedOption=text=>text.normalize('NFKC').replace(/\s+/g,' ').trim();
+function matrixAnswers(game){
+ const rows=game.rows,cols=game.cols,m=game.payoffs;
+ const rowBest=j=>rows.filter((_,i)=>m[i][j][0]===Math.max(...m.map(row=>row[j][0])));
+ const colBest=i=>cols.filter((_,j)=>m[i][j][1]===Math.max(...m[i].map(cell=>cell[1])));
+ const pure=rows.flatMap((row,i)=>cols.filter((col,j)=>rowBest(j).includes(row)&&colBest(i).includes(col)).map(col=>'('+row+', '+col+')'));
+ return {rowBest,colBest,pure};
+}
+for(const q of db.questions){
+ assert(topicIds.has(q.topic),q.id);
+ assert(Number.isInteger(q.answer)&&q.answer>=0&&q.answer<q.options.length,q.id);
+ assert.equal(new Set(q.options.map(foldedOption)).size,q.options.length,q.id);
+ if(q.game){
+  const game=gameById.get(q.game);
+  assert(game,q.id);
+  const {rowBest,colBest,pure}=matrixAnswers(game);
+  const actual=q.options[q.answer];
+  let expected;
+  if(/Hvilke er ALLE/.test(q.question)) expected=pure.join(', ')||'Ingen rene Nash-likevekter';
+  if(/rads beste respons/.test(q.question)) expected=rowBest(0).join(', ');
+  if(/kolonnes beste respons/.test(q.question)) expected=colBest(0).join(', ');
+  if(/Er \(.+\) en ren Nash/.test(q.question)) expected=pure.includes('('+game.rows[0]+', '+game.cols[0]+')')?'Ja, begge spiller beste respons':'Nei, minst én har et strengt lønnsomt ensidig avvik';
+  if(/Hvilken profil er delspillperfekt/.test(q.question)) expected='('+game.speProfile.join(', ')+')';
+  assert.equal(actual,expected,q.id);
+ }
+ const type=q.id.match(/^eco-\d-(\d)$/);
+ if(type){
+  const value=key=>{
+   const match=q.question.match(new RegExp(key+'=(\\d+(?:,\\d+)?)'));
+   assert(match,q.id+' '+key);
+   return Number(match[1].replace(',','.'));
+  };
+  const kind=Number(type[1]),c=value('c₁');
+  const d=kind<2?1-c:1-c*(1-value('t'))-value('v')+(kind>=3?value('m'):0);
+  const shock=kind===1?-30*c:kind===4?-2*(value('h')+value('k')):30;
+  assert(Math.abs(Number(q.options[q.answer].replace(',','.'))-shock/d)<=0.005,q.id);
+ }
+}
+for(const w of db.written){
+ assert(topicIds.has(w.topic)&&(!w.game||gameById.has(w.game)),w.id);
+ assert(w.solution.every(s=>typeof s==='string'&&s.trim()),w.id);
+ if(w.exam)assert.equal(w.parts.length,w.solution.length,w.id);
+}
+
 async function create(protocol='file:',offline=false,legacy=null){
  const nodes={},events={};let fetches=0,stored;
  const node=s=>nodes[s]??=( {innerHTML:'',textContent:'',value:'',disabled:false,dataset:{},focus(){},setAttribute(){},insertAdjacentHTML(position,html){this.innerHTML=html+this.innerHTML}} );
@@ -74,7 +123,7 @@ async function create(protocol='file:',offline=false,legacy=null){
  a.events.change({target:{id:'sequence-first',value:'1',dataset:{}}});assert(!a.node('#sequence-content').innerHTML.includes('Delspillperfekt profil'));
  a.run("go('fagstoff')");a.node('#filter').value='forelesning';a.node('#search').value='';a.run('listTopics()');assert(a.node('#topic-count').textContent.startsWith('9 '));
  a.run("go('quiz')");a.node('#quiz-area').value='forelesning';a.node('#quiz-level').value='alle';a.node('#quiz-mode').value='alle';assert.equal(a.run('quizCandidates().length'),46);
- a.run("go('oppgaver')");a.node('#written-area').value='forelesning';a.run('listWritten()');assert(a.node('#written-list').innerHTML.includes('Leksen: snu trekkrekkefølgen'));
+ a.run("go('oppgaver')");a.node('#written-area').value='forelesning';a.run('listWritten()');assert(a.node('#written-list').innerHTML.includes('Snu trekkrekkefølgen'));
 
  // The exam view keeps each part's draft and review status independent.
  a.run("studyArea='mikro';go('eksamen');selectExamExercise('exam-chicken')");
