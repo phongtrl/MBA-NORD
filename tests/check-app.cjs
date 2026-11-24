@@ -3,10 +3,11 @@ const root=require('path').resolve(__dirname,'..')+'/',js=fs.readFileSync(root+'
 assert.deepStrictEqual(JSON.parse(fs.readFileSync(root+'index.html','utf8').match(/<script id="study-data" type="application\/json">([\s\S]*?)<\/script>/)[1]),db);
 async function create(protocol='file:',offline=false,legacy=null){
  const nodes={},events={};let fetches=0,stored;
- const node=s=>nodes[s]??=( {innerHTML:'',textContent:'',value:'',disabled:false,dataset:{}} );
+ const node=s=>nodes[s]??=( {innerHTML:'',textContent:'',value:'',disabled:false,dataset:{},focus(){},setAttribute(){},insertAdjacentHTML(position,html){this.innerHTML=html+this.innerHTML}} );
  node('#study-data').textContent=raw;node('#filter').value='alle';node('#written-area').value='alle';
  for(const [key,value] of Object.entries({'#quiz-area':'alle','#quiz-level':'alle','#quiz-mode':'alle','#quiz-length':'10'}))node(key).value=value;
- const context=vm.createContext({document:{querySelector:node,querySelectorAll:()=>[],addEventListener:(name,fn)=>events[name]=fn},location:{protocol},localStorage:{getItem:()=>legacy?JSON.stringify(legacy):null,setItem:(key,v)=>stored=JSON.parse(v)},window:{scrollTo:()=>{}},fetch:async()=>{fetches++;if(offline)throw Error('offline');return{ok:true,json:async()=>db}}});
+ const history={state:null,replaceState(state){this.state=state},pushState(state){this.state=state}};
+ const context=vm.createContext({document:{querySelector:node,querySelectorAll:()=>[],addEventListener:(name,fn)=>events[name]=fn},location:{protocol},localStorage:{getItem:()=>legacy?JSON.stringify(legacy):null,setItem:(key,v)=>stored=JSON.parse(v)},history,window:{scrollTo:()=>{},addEventListener:(name,fn)=>events[name]=fn},fetch:async()=>{fetches++;if(offline)throw Error('offline');return{ok:true,json:async()=>db}}});
  vm.runInContext(js,context);await new Promise(r=>setImmediate(r));assert(node('#app').innerHTML.includes(String(db.topics.length)));assert(node('#app').innerHTML.includes(String(db.questions.length)));
  return {context,node,nodes,events,getStored:()=>stored,getFetches:()=>fetches,run:code=>vm.runInContext(code,context)};
 }
@@ -70,10 +71,30 @@ async function create(protocol='file:',offline=false,legacy=null){
  a.run("go('forelesning')");assert(a.node('#app').innerHTML.includes('Rettelser og presiseringer'));
  assert(!a.node('#sequence-content').innerHTML.includes('Delspillperfekt profil'));
  a.run("sequenceBase='notes-bos';sequenceFirst=2;sequenceRevealed=true;drawSequence()");assert(a.node('#sequence-content').innerHTML.includes('(HL, l)'));assert(a.node('#sequence-content').innerHTML.includes('(2, 3)'));
- a.events.change({target:{id:'sequence-first',value:'1'}});assert(!a.node('#sequence-content').innerHTML.includes('Delspillperfekt profil'));
+ a.events.change({target:{id:'sequence-first',value:'1',dataset:{}}});assert(!a.node('#sequence-content').innerHTML.includes('Delspillperfekt profil'));
  a.run("go('fagstoff')");a.node('#filter').value='forelesning';a.node('#search').value='';a.run('listTopics()');assert(a.node('#topic-count').textContent.startsWith('9 '));
  a.run("go('quiz')");a.node('#quiz-area').value='forelesning';a.node('#quiz-level').value='alle';a.node('#quiz-mode').value='alle';assert.equal(a.run('quizCandidates().length'),46);
  a.run("go('oppgaver')");a.node('#written-area').value='forelesning';a.run('listWritten()');assert(a.node('#written-list').innerHTML.includes('Leksen: snu trekkrekkefølgen'));
 
- console.log('PASS: legacy progress migration; topic/search filters; per-level quiz; all quiz answers; no double scoring; wrong/new selections; all Nash solutions; ties/no-pure/multiple validation; flashcards; draft saving/escaping; model; HTTP/file/offline loading; lecture filters; ten sequential fixtures; normal-form plans; lecture mixed probabilities and expected payoffs.');
+ // The exam view keeps each part's draft and review status independent.
+ a.run("studyArea='mikro';go('eksamen');selectExamExercise('exam-chicken')");
+ assert.match(a.node('#app').innerHTML,/a\) Rene likevekter/);
+ assert(!a.node('#app').innerHTML.includes('Rad er indifferent'));
+ assert(!a.node('#app').innerHTML.includes('value="exam-policy"'));
+ a.events.input({target:{id:'exam-draft',dataset:{draft:'exam-chicken:del-0'},value:'Første del'}});
+ a.events.change({target:{id:'exam-done',checked:true,dataset:{}}});
+ assert.equal(a.getStored().examDone['exam-chicken:del-0'],true);
+ a.run("setExamPosition(data.written.find(w=>w.id==='exam-chicken'),1)");
+ assert.match(a.node('#app').innerHTML,/b\) Blandet likevekt/);
+ assert(!a.node('#app').innerHTML.includes('Første del'));
+ a.events.input({target:{id:'exam-draft',dataset:{draft:'exam-chicken:del-1'},value:'Andre del'}});
+ const savedExamLocation=a.run('history.state');
+ a.run("go('makro');go('eksamen')");
+ assert.match(a.node('#app').innerHTML,/Multiplikatormodellen i lukket og åpen økonomi/);
+ a.events.popstate({state:savedExamLocation});
+ assert.match(a.node('#app').innerHTML,/b\) Blandet likevekt/);
+ assert.match(a.node('#app').innerHTML,/Andre del/);
+ assert.equal(a.getStored().drafts['exam-chicken:del-0'],'Første del');
+
+ console.log('PASS: legacy progress migration; topic/search filters; per-level quiz; all quiz answers; no double scoring; wrong/new selections; all Nash solutions; ties/no-pure/multiple validation; flashcards; draft saving/escaping; model; HTTP/file/offline loading; lecture filters; ten sequential fixtures; normal-form plans; lecture mixed probabilities and expected payoffs; exam navigation, review and independent drafts.');
 })().catch(e=>{console.error(e);process.exitCode=1});

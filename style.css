@@ -135,3 +135,62 @@ nav button.active { background:#d7dcc9; color:#2d392c; }
 .study-dots i:nth-child(3) { animation-delay:.3s; }
 @keyframes study-pulse { 0%,60%,100% { opacity:.35; transform:translateY(0); } 30% { opacity:1; transform:translateY(-3px); } }
 @media(prefers-reduced-motion:reduce) { .study-dots i { animation:none; } }
+
+.exam-toolbar {
+ display:grid;
+ grid-template-columns:minmax(0,1fr) auto;
+ gap:16px;
+ align-items:end;
+ padding:18px 0;
+}
+.exam-picker { display:grid; gap:6px; }
+.exam-picker label,.exam-label { font-weight:700; }
+.exam-picker select {
+ width:100%;
+ min-height:44px;
+ padding:8px 12px;
+ border:1px solid var(--line);
+ border-radius:8px;
+ background:#fcfaf5;
+ color:var(--ink);
+ font:inherit;
+}
+.exam-progress { display:grid; text-align:right; font-size:.88rem; color:var(--muted); }
+.exam-progress strong { color:var(--green); }
+.exam-context,.exam-part { margin-bottom:16px; }
+.exam-kicker { margin:0 0 8px; font-size:.82rem; font-weight:700; color:var(--muted); }
+.exam-context h2,.exam-part h2 { margin:0 0 12px; }
+.exam-context > p:last-child,.exam-context .matrix-wrap { margin-bottom:0; }
+.exam-part-top,.exam-controls { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.exam-part-top { margin-bottom:14px; }
+.exam-parts { display:flex; gap:6px; }
+.exam-parts button { min-width:44px; padding:6px 10px; }
+.exam-parts [aria-pressed="true"] { background:var(--green); border-color:var(--green); color:#fffdf7; }
+.exam-question { font-size:1.04rem; color:var(--ink); }
+#exam-draft {
+ display:block;
+ width:100%;
+ margin-top:6px;
+ padding:12px;
+ border:1px solid var(--line);
+ border-radius:8px;
+ font:inherit;
+ color:var(--ink);
+ background:#fffdfa;
+ resize:vertical;
+}
+.exam-save-note { margin:5px 0 16px; }
+.exam-disclosure { border-top:1px solid var(--line); padding:11px 0; }
+.exam-disclosure summary,.exam-context summary { cursor:pointer; font-weight:650; }
+.exam-disclosure ul { padding-left:22px; }
+.exam-done { padding:12px 0 14px; }
+.exam-controls { border-top:1px solid var(--line); padding-top:14px; }
+.exam-legacy-draft { white-space:pre-wrap; overflow-wrap:anywhere; }
+.exam-source { margin:0 0 20px; }
+@media(max-width:560px){
+ .exam-toolbar { grid-template-columns:minmax(0,1fr); gap:8px; }
+ .exam-progress { grid-template-columns:1fr auto; text-align:left; gap:8px; }
+ .exam-controls { flex-wrap:wrap; }
+}
+.exam-areas { flex-wrap:wrap; }
+.exam-areas button { padding:6px 12px; }

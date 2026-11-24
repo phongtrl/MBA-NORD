@@ -2,8 +2,9 @@
 const app=document.querySelector('#app');
 let data,page='oversikt',deck=0,flipped=false,cardArea='alle',qi=0,score=0,answered=false,session=[],sessionWrong=[];
 let selectedCells=new Set(),noPure=false,revealMatrix=false,gameId='prison',sequenceBase='notes-bos',sequenceFirst=1,sequenceRevealed=false;
-let saved={version:2,read:[],correct:[],wrong:[],drafts:{}};
+let saved={version:2,read:[],correct:[],wrong:[],drafts:{},examDone:{},examPosition:null};
 try{const old=JSON.parse(localStorage.getItem('sl-progress'));if(old&&Array.isArray(old.read)&&Array.isArray(old.correct)){saved={...saved,...old,version:2};if(old.version!==2)saved.correct=old.correct.map(id=>'q'+id);if(!Array.isArray(saved.wrong))saved.wrong=[];if(!saved.drafts||typeof saved.drafts!=='object')saved.drafts={}}}catch{}
+if(!saved.examDone||typeof saved.examDone!=='object'||Array.isArray(saved.examDone))saved.examDone={};
 const persist=()=>{try{localStorage.setItem('sl-progress',JSON.stringify(saved))}catch{}};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const category=c=>c==='spill'?'Spillteori':c==='mikro'?'Mikroøkonomi':'Makroøkonomi';
@@ -14,7 +15,6 @@ const badge=t=>`<span class="badge ${t.category==='makro'?'macro':''}">${categor
 const areaOptions=()=>studyArea==='mikro'?'<option value="mikro">All mikroøkonomi</option><option value="marked">Markeder og økonomiske valg</option><option value="spill">Spillteori</option><option value="forelesning">Fra forelesningsnotatene</option>':studyArea==='makro'?'<option value="makro">All makroøkonomi</option><option value="makrokurs">Makro fra ECO 5026</option>':'<option value="alle">Alle fag</option><option value="forelesning">Fra forelesningsnotatene</option><option value="spill">Bare spillteori</option><option value="mikro">Mikroøkonomi (inkl. spillteori)</option><option value="makro">Makroøkonomi</option><option value="makrokurs">Makro fra ECO 5026</option>';
 const shuffle=items=>{const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 function chart(a=100){const p=(a-10)/3,q=10+p,x=v=>45+v*2.6,y=v=>235-v*2;return `<svg viewBox="0 0 380 280" role="img" aria-label="Tilbud og etterspørsel: likevektspris ${p.toFixed(1)}, mengde ${q.toFixed(1)}"><path d="M45 20V235H365" fill="none" stroke="currentColor" opacity=".4"/><path d="M${x(10)} ${y(0)}L${x(100)} ${y(90)}" stroke="#b7ce82" stroke-width="3" fill="none"/><path d="M${x(Math.max(0,a-200))} ${y(Math.min(100,a/2))}L${x(a)} ${y(0)}" stroke="#87afaa" stroke-width="3" fill="none"/><path d="M45 ${y(p)}H${x(q)}V235" stroke="currentColor" opacity=".4" stroke-dasharray="4 5" fill="none"/><circle cx="${x(q)}" cy="${y(p)}" r="6" fill="#d4ec95" stroke="#194e40"/><text x="15" y="20" fill="currentColor">Pris</text><text x="300" y="263" fill="currentColor">Mengde</text><text x="255" y="55" fill="#a2be73">Tilbud</text><text x="260" y="210" fill="currentColor">Etterspørsel</text><text x="${x(q)+12}" y="${y(p)-12}" fill="currentColor">Likevekt</text></svg>`}
-let examOnly=false;
 let studyArea='';
 
 function rememberStudyLocation(topic='') {
@@ -28,16 +28,16 @@ window.addEventListener('popstate', event=>{
  const state=event.state;
  if(!state?.mba)return;
  studyArea=state.studyArea;
+ examPosition=state.examPosition||null;
  go(state.page,false);
  if(state.topic)openTopic(state.topic,false);
 });
 
 function go(p,remember=true){
- if(p!=='oppgaver')examOnly=false;
  if(['mikro','makro','oversikt'].includes(p))studyArea=p==='oversikt'?'':p;
  if(studyArea){cardArea=studyArea;deck=0;flipped=false}else if(p==='oversikt'){cardArea='alle';deck=0;flipped=false}
- page=p;if(remember)rememberStudyLocation();document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===(p==='assistent'?p:studyArea||p)));render();if(studyArea&&!['mikro','makro'].includes(p))app.insertAdjacentHTML('afterbegin',`<button class="text-button" data-go="${studyArea}">← Til ${category(studyArea).toLowerCase()}</button>`);window.scrollTo(0,0)}
-function render(){if(!data)return;switch(page){case 'assistent':studyAssistantPage();break;case 'mikro':subjectPage('mikro');break;case 'makro':subjectPage('makro');break;case 'oversikt':overview();break;case 'forelesning':lecturePage();break;case 'fagstoff':library();break;case 'quiz':quizSetup();break;case 'kort':showCard();break;case 'spill':matrixPage();break;case 'oppgaver':writtenPage();break;case 'modell':modelPage();break}}
+ page=p;if(remember)rememberStudyLocation();document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===(['assistent','eksamen'].includes(p)?p:studyArea||p)));render();if(studyArea&&!['mikro','makro','eksamen'].includes(p))app.insertAdjacentHTML('afterbegin',`<button class="text-button" data-go="${studyArea}">← Til ${category(studyArea).toLowerCase()}</button>`);window.scrollTo(0,0)}
+function render(){if(!data)return;switch(page){case 'assistent':studyAssistantPage();break;case 'mikro':subjectPage('mikro');break;case 'makro':subjectPage('makro');break;case 'oversikt':overview();break;case 'forelesning':lecturePage();break;case 'fagstoff':library();break;case 'quiz':quizSetup();break;case 'kort':showCard();break;case 'spill':matrixPage();break;case 'oppgaver':writtenPage();break;case 'eksamen':examPage();break;case 'modell':modelPage();break}}
 
 const studyWords = value => value.toLocaleLowerCase('nb').match(/[\p{L}\p{N}]+/gu) || [];
 const studyStopWords = new Set('hva hvordan hvorfor hvem hvor når kan skal jeg du det dette med som for man til fra ved hvilken hvilke betyr forklar meg om en et er og i på av'.split(' '));
@@ -478,7 +478,7 @@ function setTopicDone(id, done) {
  persist();
 }
 function listTopics(){const term=document.querySelector('#search').value.toLocaleLowerCase('nb'),area=document.querySelector('#filter').value;const items=data.topics.filter(t=>matches(t,area)&&JSON.stringify(t).toLocaleLowerCase('nb').includes(term));document.querySelector('#topic-count').textContent=`${items.length} av ${data.topics.length} temaer`;document.querySelector('#topics').innerHTML=items.length?items.map(t=>`<section class="card">${badge(t)}<h3 class="${saved.read.includes(t.id)?'topic-done':''}">${esc(t.title)}</h3><p>${esc(t.subtitle)}</p><label class="topic-check"><input type="checkbox" data-topic-check="${esc(t.id)}" ${saved.read.includes(t.id)?'checked':''}> Gjennomgått</label><div class="card-foot"><span>${saved.read.includes(t.id)?'✓ Gjennomgått':'Teori og eksempel'} · ${data.questions.filter(q=>q.topic===t.id).length} spørsmål</span><button class="text-button" data-topic="${t.id}">Les tema →</button></div></section>`).join(''):'<p class="empty">Ingen temaer passer søket. Prøv et annet begrep.</p>'}
-function openTopic(id,remember=true){const t=topicBy(id);if(!t)return;if(remember)rememberStudyLocation(id);app.innerHTML=`<button class="text-button" data-go="fagstoff">← Til kunnskapsbasen</button><article class="article">${head(category(t.area),esc(t.title),esc(t.subtitle))}${t.lecture?'<p class="source-note">Renskrevet fra brukerens forelesningsnotater. Tallene er rekonstruert fra regneuttrykk og gevinstpar. Sammenlign med originallysbildene ved avvik.</p>':''}<h2>Hovedideen</h2><p>${esc(t.body)}</p><div class="formula">${esc(t.formula)}</div>${(t.sections||[]).map(s=>`<h2>${esc(s.title)}</h2><p>${esc(s.text)}</p>`).join('')}<h2>Et konkret eksempel</h2><p>${esc(t.example)}</p><div class="callout"><h3>Kobling til strategi og ledelse</h3><p>${esc(t.strategy)}</p></div><p>Refleksjon: Hvilke forutsetninger bygger modellen på, og når kan de være lite realistiske?</p><div class="actions"><button class="primary" data-read="${t.id}" aria-pressed="${saved.read.includes(t.id)}">${saved.read.includes(t.id)?'✓ Gjennomgått · angre':'Marker som gjennomgått'}</button><button class="secondary" data-quiz-topic="${t.id}">Øv på dette temaet</button>${t.area==='spill'?'<button class="secondary" data-go="spill">Spillverksted</button>':''}</div></article>`;window.scrollTo(0,0)}
+function openTopic(id,remember=true){const t=topicBy(id);if(!t)return;if(remember)rememberStudyLocation(id);app.innerHTML=`<button class="text-button" data-go="${page==='eksamen'?'eksamen':'fagstoff'}">← ${page==='eksamen'?'Til eksamensøvingen':'Til kunnskapsbasen'}</button><article class="article">${head(category(t.area),esc(t.title),esc(t.subtitle))}${t.lecture?'<p class="source-note">Renskrevet fra brukerens forelesningsnotater. Tallene er rekonstruert fra regneuttrykk og gevinstpar. Sammenlign med originallysbildene ved avvik.</p>':''}<h2>Hovedideen</h2><p>${esc(t.body)}</p><div class="formula">${esc(t.formula)}</div>${(t.sections||[]).map(s=>`<h2>${esc(s.title)}</h2><p>${esc(s.text)}</p>`).join('')}<h2>Et konkret eksempel</h2><p>${esc(t.example)}</p><div class="callout"><h3>Kobling til strategi og ledelse</h3><p>${esc(t.strategy)}</p></div><p>Refleksjon: Hvilke forutsetninger bygger modellen på, og når kan de være lite realistiske?</p><div class="actions"><button class="primary" data-read="${t.id}" aria-pressed="${saved.read.includes(t.id)}">${saved.read.includes(t.id)?'✓ Gjennomgått · angre':'Marker som gjennomgått'}</button><button class="secondary" data-quiz-topic="${t.id}">Øv på dette temaet</button>${t.area==='spill'?'<button class="secondary" data-go="spill">Spillverksted</button>':''}</div></article>`;window.scrollTo(0,0)}
 function quizSetup(){app.innerHTML=head('AKTIV GJENHENTING','Velg din øvingsøkt',`${data.questions.length} quizoppgaver med forklaring. Spillmatrisene vises sammen med spørsmålene.`)+`<section class="card"><div class="setup-grid"><label>Fag<select id="quiz-area">${areaOptions()}</select></label><label>Nivå<select id="quiz-level"><option value="alle">Alle nivåer</option><option value="grunnleggende">Grunnleggende</option><option value="middels">Middels</option><option value="fordypning">Fordypning</option></select></label><label>Antall<select id="quiz-length"><option value="10">10 spørsmål</option><option value="20">20 spørsmål</option><option value="alle">Alle som passer</option></select></label><label>Utvalg<select id="quiz-mode"><option value="alle">Alle oppgaver</option><option value="nye">Ikke besvart riktig ennå</option><option value="feil">Siste svar var feil</option></select></label></div><p id="quiz-count" class="hint"></p><button class="primary" id="start-quiz" data-start>Start økten →</button><p class="hint">Spørsmålene kommer i tilfeldig rekkefølge. Fremdrift lagres i denne nettleseren.</p></section>`;quizCount()}
 function quizCandidates(){const area=document.querySelector('#quiz-area').value,level=document.querySelector('#quiz-level').value,mode=document.querySelector('#quiz-mode').value;return data.questions.filter(q=>matches(topicBy(q.topic),area)&&(level==='alle'||q.level===level)&&(mode==='alle'||mode==='nye'&&!saved.correct.includes(q.id)||mode==='feil'&&saved.wrong.includes(q.id)))}
 function quizCount(){const n=quizCandidates().length;document.querySelector('#quiz-count').textContent=n?`${n} oppgaver passer valgene dine.`:'Ingen oppgaver passer. Endre fag, nivå eller utvalg.';document.querySelector('#start-quiz').disabled=!n}
@@ -496,7 +496,130 @@ function matrixPage(){app.innerHTML=head('SPILLVERKSTEDET','Finn Nash-likevekten
 function drawMatrix(){const g=data.games.find(g=>g.id===gameId);document.querySelector('#matrix-content').innerHTML=matrixTable(g,true,revealMatrix)+`<p class="hint">Klikk på alle rene Nash-likevekter. Ved like gevinster teller alle beste responser. ${selectedCells.size} celle(r) valgt.</p><button class="secondary ${noPure?'selected':''}" data-no-pure aria-pressed="${noPure}">Ingen rene likevekter</button><div class="actions"><button class="primary" data-check-matrix>Sjekk svaret</button><button class="secondary" data-reveal>Vis beste responser og løsning</button><button class="text-button" data-reset-matrix>Nullstill</button></div><div id="matrix-feedback" aria-live="polite"></div>${revealMatrix?matrixSolution(g):''}`}
 function matrixSolution(g){const br=bestResponses(g),ne=pureEquilibria(g);return `<div class="feedback"><h3>Slik finner du løsningen</h3><p><span class="best-row">Understreket første tall</span>: rads beste respons. <span class="best-col">Markert andre tall</span>: kolonnes beste respons. Grønn celle: begge markeringer, altså ren Nash.</p><ol>${g.cols.map((c,j)=>`<li>Hold ${esc(c)} fast: rads gevinster er ${g.rows.map((r,i)=>`${esc(r)}=${g.payoffs[i][j][0]}`).join(', ')}. Beste respons: ${g.rows.filter((r,i)=>br.row[i][j]).map(esc).join(', ')}.</li>`).join('')}${g.rows.map((r,i)=>`<li>Hold ${esc(r)} fast: kolonnes gevinster er ${g.cols.map((c,j)=>`${esc(c)}=${g.payoffs[i][j][1]}`).join(', ')}. Beste respons: ${g.cols.filter((c,j)=>br.col[i][j]).map(esc).join(', ')}.</li>`).join('')}</ol><p><strong>${ne.length?'Rene Nash: '+ne.map(k=>{const [i,j]=k.split('-').map(Number);return `(${esc(g.rows[i])}, ${esc(g.cols[j])})`}).join(', '):'Ingen Nash-likevekter i rene strategier.'}</strong></p><p>${esc(g.note)}</p><button class="text-button" data-topic="${g.topic}">Les tilhørende teori →</button></div>`}
 function checkMatrix(){const g=data.games.find(g=>g.id===gameId),ne=pureEquilibria(g);if(!noPure&&!selectedCells.size){document.querySelector('#matrix-feedback').innerHTML='<p>Velg minst én celle, eller velg «Ingen rene likevekter».</p>';return}const correct=ne.length===0?noPure:!noPure&&selectedCells.size===ne.length&&ne.every(k=>selectedCells.has(k));document.querySelector('#matrix-feedback').innerHTML=`<div class="feedback"><strong>${correct?'Riktig – du har funnet alle rene likevekter!':'Ikke helt. Kontroller alle ensidige avvik og eventuelle like gevinster.'}</strong><p>${correct?'Prøv et nytt spill eller vis løsningsstegene.':'Hold motpartens valg fast. Finn første-talls-maksimum i hver kolonne og andre-talls-maksimum i hver rad.'}</p></div>`}
-function writtenPage(){app.innerHTML=head('REGN · FORKLAR · DRØFT',examOnly?'Eksamensoppgaver':'Åpne øvingsoppgaver',examOnly?'Øvingssett etter mønster fra ECO 5026 høst 2025 og vår 2026. Løs delspørsmålene før du åpner løsningsforslaget.':`${data.written.length} oppgaver med trinnvise løsningsforslag. Skriv et eget svar før du åpner løsningen.`)+`<div class="toolbar"><select id="written-area" aria-label="Fag for åpne oppgaver">${areaOptions()}</select></div><div id="written-list"></div>`;listWritten()}
+const examGuidance = {
+ 'exam-dilemma': [
+  ['Beste respons og Pareto', 'Hold den andre spillerens valg fast. Sammenlign egne gevinster før du sammenligner utfall for begge spillerne.', ['Vis beste respons for hver spiller mot begge valg.', 'Finn likevektsutfallet og vis om det finnes et utfall som gjør begge bedre stilt.']],
+  ['Baklengs induksjon', 'Start med spiller 2. Hva velger spilleren etter hvert av de to mulige førstetrekkene?', ['Vis spiller 2s valg ved begge nodene, også den som ikke nås.', 'Oppgi hele strategiprofilen og selve utfallet.']],
+  ['Gjenta spillet', 'Sammenlign gevinsten ved å samarbeide hver periode med gevinsten ved å avvike én gang og bli straffet fra neste periode.', ['Sett opp de to diskonterte gevinstene og utled vilkåret for δ.', 'Forklar hvorfor straffen er troverdig i dette spillet.']]
+ ],
+ 'exam-chicken': [
+  ['Rene likevekter', 'Spiller 1 sammenligner første tall i hver kolonne. Spiller 2 sammenligner andre tall i hver rad.', ['Vis begge spillernes beste responser.', 'Oppgi alle cellene der begge spiller beste respons, med gevinstpar.']],
+  ['Blandet likevekt', 'Skriv opp to forventede gevinster for hver spiller. Husk at spiller 1s indifferens gir en ligning i q.', ['Vis indifferensbetingelsene og finn både p og q.', 'Sett sannsynlighetene tilbake i gevinstuttrykkene for å kontrollere forventet nytte.']],
+  ['Bytt førstetrekker', 'Løs siste trekk i begge grener. Gjenta når spillerne bytter rekkefølge, med gevinstene fortsatt oppgitt som spiller 1 og spiller 2.', ['Oppgi full responsplan og delspillperfekt profil for hver rekkefølge.', 'Sammenlign gevinstparene og begrunn hvem som foretrekker å velge først.']]
+ ],
+ 'exam-mult': [
+  ['Modell og redusert form', 'Sett konsum- og investeringsfunksjonen inn i varemarkedslikevekten. Samle alle ledd med Y på samme side.', ['Skill variabler som bestemmes i modellen fra størrelser som er gitt.', 'Vis sammenhengene i et flytdiagram og vis hvordan du isolerer Y.']],
+  ['Renteeffekt', 'Hold Y fast i første runde. Regn så ut totalvirkningen når inntektsendringen får virke tilbake på konsum og investering.', ['Vis direkte, samlet og indirekte endring med fortegn.', 'Knytt sysselsetting til produksjonen ved å vise til antakelsen i oppgaven.']],
+  ['Åpen økonomi', 'Skill mellom leddet i nettoeksporten som avhenger av Y og leddet som avhenger av renten.', ['Vis hvordan nettoeksporten endrer både telleren og nevneren i endringsformen.', 'Forklar hvorfor samlet effekt blir annerledes med akkurat disse tallene.']]
+ ],
+ 'exam-policy': [
+  ['Renteparitet', 'Skriv opp hvilken vei kursen er målt og hold forventet fremtidig kurs fast i sammenligningen.', ['Vis formel, tallinnsetting og kurs før og etter renteøkningen.', 'Skill mellom endringen i dagens kronekurs og forventet endring etterpå.']],
+  ['Transmisjonskanalene', 'Skriv én årsakskjede for hver kanal, fra rentevedtaket til prisveksten.', ['Forklar etterspørsels-, valuta- og forventningskanalen hver for seg.', 'Vis hvordan virkningene kan komme med etterslep og avhenge av hvordan økonomien reagerer.']],
+  ['Tilbudssjokk og avveiing', 'Vurder først hva sjokket gjør med produksjon og inflasjon. Vurder deretter hva en renteøkning kan gjøre med begge.', ['Forklar hvorfor målene om stabil inflasjon og aktivitet kan trekke i ulik retning.', 'Drøft hvordan varigheten av sjokket og inflasjonsforventningene påvirker avveiingen.']]
+ ]
+};
+
+let examPosition = null;
+const examPartKey = (exercise, part) => exercise.id + ':del-' + part;
+const examPartsDone = exercise => exercise.parts.filter((_, part) => saved.examDone[examPartKey(exercise, part)] === true).length;
+
+function examExercises(area) {
+ return data.written.filter(exercise => exercise.exam && matches(topicBy(exercise.topic), area));
+}
+
+function setExamPosition(exercise, part, focus = false) {
+ examPosition = {id:exercise.id, part};
+ saved.examPosition = examPosition;
+ persist();
+ examPage();
+ if(focus) document.querySelector('#exam-part-heading')?.focus();
+}
+
+function examPage() {
+ const area = studyArea || 'alle';
+ const exercises = examExercises(area);
+ const position = examPosition || saved.examPosition;
+ const exercise = exercises.find(item => item.id === position?.id) || exercises.find(item => examPartsDone(item)<item.parts.length) || exercises[0];
+ const intro = head('ECO 5026','Eksamensøving','Skriv ditt eget svar, sjekk løsningsforslaget og marker delen når du har gjennomgått den.');
+ if(!exercise){
+  app.innerHTML = intro + '<p>Ingen eksamensoppgaver i dette faget ennå.</p>';
+  return;
+ }
+ const pendingPart = exercise.parts.findIndex((_, part) => !saved.examDone[examPartKey(exercise, part)]);
+ const part = position?.id === exercise.id && Number.isInteger(position.part)
+  ? Math.max(0,Math.min(position.part,exercise.parts.length-1))
+  : Math.max(0,pendingPart);
+ examPosition = {id:exercise.id,part};
+ if(history.state?.page==='eksamen' && !history.state.topic) history.replaceState({...history.state,examPosition},'');
+ const index = exercises.indexOf(exercise);
+ const game = data.games.find(item => item.id===exercise.game);
+ const key = examPartKey(exercise,part);
+ const [title,hint,checks] = examGuidance[exercise.id]?.[part] || ['Delspørsmål','Start med å skrive opp det oppgaven gir deg.',[]];
+ const partLetter = i => String.fromCharCode(97+i);
+ const done = saved.examDone[key]===true;
+ const partButtons = exercise.parts.map((_, i) => `<button type="button" class="secondary" data-exam-part="${i}" aria-pressed="${i===part}" aria-label="Del ${partLetter(i)}${saved.examDone[examPartKey(exercise,i)]?' gjennomgått':''}">${partLetter(i)}${saved.examDone[examPartKey(exercise,i)]?' ✓':''}</button>`).join('');
+ const areas=[['alle','Alle oppgaver'],['mikro','Mikroøkonomi'],['makro','Makroøkonomi']];
+ app.innerHTML = intro + `<div class="exam-parts exam-areas" role="group" aria-label="Filtrer eksamensoppgaver">
+  ${areas.map(([value,label])=>`<button type="button" class="secondary" data-exam-area="${value}" aria-pressed="${area===value}">${label}</button>`).join('')}
+ </div><div class="exam-toolbar">
+  <div class="exam-picker"><label for="exam-select">Velg oppgave</label>
+   <select id="exam-select">${exercises.map(item=>`<option value="${esc(item.id)}" ${item===exercise?'selected':''}>${esc(item.title.replace(/^Oppgave \d+ · /,''))}</option>`).join('')}</select>
+  </div>
+  <div class="exam-progress"><span>Oppgave ${index+1} av ${exercises.length}</span><strong id="exam-progress-label" aria-live="polite">${examPartsDone(exercise)} av ${exercise.parts.length} deler gjennomgått</strong></div>
+ </div>
+ <section class="card exam-context">
+  <p class="exam-kicker">${category(topicBy(exercise.topic).category)} · Oppgavegrunnlag</p>
+  <h2>${esc(exercise.title.replace(/^Oppgave \d+ · /,''))}</h2>
+  <p>${esc(exercise.prompt)}</p>
+  ${game?matrixTable(game,false,false,mixedExerciseIds.has(exercise.id)):''}
+  ${saved.drafts[exercise.id]?.trim()?`<details><summary>Tidligere kladd for hele oppgaven</summary><p class="exam-legacy-draft">${esc(saved.drafts[exercise.id])}</p></details>`:''}
+ </section>
+ <section class="card exam-part" aria-labelledby="exam-part-heading">
+  <div class="exam-part-top"><p class="exam-kicker">Del ${part+1} av ${exercise.parts.length}</p><div class="exam-parts" role="group" aria-label="Delspørsmål">${partButtons}</div></div>
+  <h2 id="exam-part-heading" tabindex="-1">${partLetter(part)}) ${esc(title)}</h2>
+  <p class="exam-question">${esc(exercise.parts[part])}</p>
+  <label class="exam-label" for="exam-draft">Ditt svar</label>
+  <textarea id="exam-draft" data-draft="${esc(key)}" rows="5" placeholder="Vis fremgangsmåten og begrunn konklusjonen.">${esc(saved.drafts[key]||'')}</textarea>
+  <p class="hint exam-save-note">Kladden lagres i denne nettleseren.</p>
+  <details class="exam-disclosure"><summary>Vis et hint</summary><p>${esc(hint)}</p></details>
+  <details class="exam-disclosure"><summary>Vis løsningsforslag</summary>
+    <p>${esc(exercise.solution[part])}</p>
+    ${solutionVisual(exercise,part)}
+    ${checks.length?`<h3>Sjekk din egen besvarelse</h3><ul>${checks.map(check=>`<li>${esc(check)}</li>`).join('')}</ul>`:''}
+    <button class="text-button" data-topic="${esc(exercise.topic)}">Les tilhørende teori →</button>
+  </details>
+  <label class="topic-check exam-done"><input type="checkbox" id="exam-done" ${done?'checked':''}> Marker del ${partLetter(part)} som gjennomgått</label>
+  <div class="exam-controls">
+   ${part>0?'<button class="secondary" data-exam-part="'+(part-1)+'">← Forrige del</button>':index>0?'<button class="secondary" data-exam-task="'+esc(exercises[index-1].id)+'">← Forrige oppgave</button>':'<span></span>'}
+   ${part+1<exercise.parts.length?'<button class="primary" data-exam-part="'+(part+1)+'">Neste del →</button>':index+1<exercises.length?'<button class="primary" data-exam-task="'+esc(exercises[index+1].id)+'">Neste oppgave →</button>':'<button class="secondary" data-exam-top>Til oppgavevalg ↑</button>'}
+  </div>
+ </section>
+ <p class="hint exam-source">Bearbeidede øvingsoppgaver etter mønster fra ECO 5026 høst 2025 og vår 2026. Avkryssingen viser egen gjennomgang.</p>`;
+}
+
+function selectExamExercise(id) {
+ const exercise = examExercises(studyArea || 'alle').find(item => item.id===id);
+ if(!exercise) return;
+ const firstPending = exercise.parts.findIndex((_, part)=>!saved.examDone[examPartKey(exercise,part)]);
+ setExamPosition(exercise,Math.max(0,firstPending),true);
+}
+
+function markExamPart(checked) {
+ const exercise = data.written.find(item=>item.id===examPosition?.id);
+ if(!exercise) return;
+ const part=examPosition.part;
+ const key=examPartKey(exercise,part);
+ if(checked) saved.examDone[key]=true;
+ else delete saved.examDone[key];
+ persist();
+ document.querySelector('#exam-progress-label').textContent=`${examPartsDone(exercise)} av ${exercise.parts.length} deler gjennomgått`;
+ const button=document.querySelector('.exam-parts [data-exam-part="'+part+'"]');
+ const letter=String.fromCharCode(97+part);
+ button.textContent=letter+(checked?' ✓':'');
+ button.setAttribute('aria-label','Del '+letter+(checked?' gjennomgått':''));
+}
+
+function writtenPage(){app.innerHTML=head('REGN · FORKLAR · DRØFT','Åpne øvingsoppgaver',`${data.written.length} oppgaver med trinnvise løsningsforslag. Skriv et eget svar før du åpner løsningen.`)+`<div class="toolbar"><select id="written-area" aria-label="Fag for åpne oppgaver">${areaOptions()}</select></div><div id="written-list"></div>`;listWritten()}
 
 function solutionVisual(exercise, part){
  const game=exercise.game && data.games.find(item=>item.id===exercise.game);
@@ -522,7 +645,7 @@ function solutionVisual(exercise, part){
  return '';
 }
 
-function listWritten(){const area=document.querySelector('#written-area').value,items=data.written.filter(w=>matches(topicBy(w.topic),area)&&(!examOnly||w.exam));document.querySelector('#written-list').innerHTML=items.length?items.map(w=>`<article class="card written-card">${badge(topicBy(w.topic))}<span class="level-label">${esc(w.level)}</span><h2>${esc(w.title)}</h2><p>${esc(w.prompt)}</p>${w.game?matrixTable(data.games.find(g=>g.id===w.game),false,false,mixedExerciseIds.has(w.id)):''}${w.parts?`<ol type="a">${w.parts.map(part=>`<li>${esc(part)}</li>`).join('')}</ol>`:''}<label for="draft-${w.id}">Ditt resonnement (lagres lokalt)</label><textarea id="draft-${w.id}" data-draft="${w.id}" rows="5" placeholder="Skriv forutsetninger, fremgangsmåte, utregning og konklusjon …">${esc(saved.drafts[w.id]||'')}</textarea><details><summary>Vis trinnvis løsningsforslag</summary><ol ${w.exam?'type="a"':''}>${w.solution.map((s,part)=>`<li>${esc(s)}${solutionVisual(w,part)}</li>`).join('')}</ol><p class="hint">Egenvurdering: Har du angitt forutsetningene, brukt riktige gevinster/variabler og kontrollert konklusjonen? Tekstsvar blir ikke automatisk vurdert.</p></details><button class="text-button" data-topic="${w.topic}">Les tilhørende teori →</button></article>`).join(''):'<p>Ingen oppgaver i dette utvalget. Velg et bredere fagfilter.</p>'}
+function listWritten(){const area=document.querySelector('#written-area').value,items=data.written.filter(w=>matches(topicBy(w.topic),area));document.querySelector('#written-list').innerHTML=items.length?items.map(w=>`<article class="card written-card">${badge(topicBy(w.topic))}<span class="level-label">${esc(w.level)}</span><h2>${esc(w.title)}</h2><p>${esc(w.prompt)}</p>${w.game?matrixTable(data.games.find(g=>g.id===w.game),false,false,mixedExerciseIds.has(w.id)):''}${w.parts?`<ol type="a">${w.parts.map(part=>`<li>${esc(part)}</li>`).join('')}</ol>`:''}<label for="draft-${w.id}">Ditt resonnement (lagres lokalt)</label><textarea id="draft-${w.id}" data-draft="${w.id}" rows="5" placeholder="Skriv forutsetninger, fremgangsmåte, utregning og konklusjon …">${esc(saved.drafts[w.id]||'')}</textarea><details><summary>Vis trinnvis løsningsforslag</summary><ol ${w.exam?'type="a"':''}>${w.solution.map((s,part)=>`<li>${esc(s)}${solutionVisual(w,part)}</li>`).join('')}</ol><p class="hint">Egenvurdering: Har du angitt forutsetningene, brukt riktige gevinster/variabler og kontrollert konklusjonen? Tekstsvar blir ikke automatisk vurdert.</p></details><button class="text-button" data-topic="${w.topic}">Les tilhørende teori →</button></article>`).join(''):'<p>Ingen oppgaver i dette utvalget. Velg et bredere fagfilter.</p>'}
 function modelPage(){app.innerHTML=head('UTFORSK SAMMENHENGENE','Økonomilab','Se hvordan økt etterspørsel flytter markedets likevekt.')+`<div class="grid"><section class="card"><h2>Tilbud møter etterspørsel</h2><p>En enkel modell med lineære kurver og fri prisdannelse. Alle tall er illustrasjoner.</p><div class="formula">Qd = a − 2P<br>Qs = 10 + P</div><div class="control"><label for="demand">Etterspørselens konstant a <b id="avalue">100</b></label><input id="demand" type="range" min="60" max="120" step="1" value="100"></div><p>Tilbudet holdes uendret. Modellen forutsetter likevekt og ingen andre samtidige endringer.</p><div id="equilibrium" class="feedback"></div></section><section class="card" id="model-chart"></section></div>`;updateModel(100)}
 function updateModel(a){document.querySelector('#avalue').textContent=a;const p=(a-10)/3,q=10+p;document.querySelector('#equilibrium').textContent=`Likevektspris: ${p.toLocaleString('nb-NO',{maximumFractionDigits:2})} · Likevektsmengde: ${q.toLocaleString('nb-NO',{maximumFractionDigits:2})}`;document.querySelector('#model-chart').innerHTML=chart(a)}
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
@@ -532,9 +655,21 @@ document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)r
  if(b.hasAttribute('data-sequence-reveal')){sequenceRevealed=true;drawSequence()}
  if(b.hasAttribute('data-macro-quiz')){go('quiz');document.querySelector('#quiz-area').value='makrokurs';quizCount()}
  if(b.hasAttribute('data-macro-written')){go('oppgaver');document.querySelector('#written-area').value='makrokurs';listWritten()}
- if(b.hasAttribute('data-exam')){examOnly=true;go('oppgaver')}
- if(b.dataset.go==='oppgaver')examOnly=false;
- if(b.dataset.page)go(b.dataset.page);if(b.dataset.go)go(b.dataset.go);
+ if(b.hasAttribute('data-exam')){go('eksamen');return;}
+ if(b.dataset.examArea){
+  studyArea=b.dataset.examArea==='alle'?'':b.dataset.examArea;
+  go('eksamen');
+  document.querySelector('[data-exam-area="'+b.dataset.examArea+'"]')?.focus();
+  return;
+ }
+ if(b.dataset.examTask){selectExamExercise(b.dataset.examTask);return;}
+ if(b.dataset.examPart!==undefined){
+  const exercise=data.written.find(item=>item.id===examPosition?.id);
+  if(exercise)setExamPosition(exercise,Number(b.dataset.examPart),true);
+  return;
+ }
+ if(b.hasAttribute('data-exam-top')){document.querySelector('#exam-select')?.focus();return;}
+ if(b.dataset.page){if(b.dataset.page==='eksamen')studyArea='';go(b.dataset.page);}if(b.dataset.go)go(b.dataset.go);
  if(b.dataset.filter){go('fagstoff');document.querySelector('#filter').value=b.dataset.filter;listTopics()}
  if(b.dataset.openGame){gameId=b.dataset.openGame;selectedCells.clear();noPure=false;revealMatrix=false;go('spill')}
  if(b.dataset.topic)openTopic(b.dataset.topic);
@@ -551,6 +686,6 @@ document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)r
  if(b.hasAttribute('data-reset-matrix')){selectedCells.clear();noPure=false;revealMatrix=false;drawMatrix()}
 });
 document.addEventListener('input',e=>{if(e.target.id==='search')listTopics();if(e.target.id==='demand')updateModel(Number(e.target.value));if(e.target.dataset.draft){saved.drafts[e.target.dataset.draft]=e.target.value;persist()}});
-document.addEventListener('change',e=>{const id=e.target.id;if(e.target.dataset.topicCheck){const topicId=e.target.dataset.topicCheck;setTopicDone(topicId,e.target.checked);listTopics();document.querySelector('[data-topic-check="'+topicId+'"]')?.focus();return;}if(id==='sequence-base'){sequenceBase=e.target.value;sequenceRevealed=false;drawSequence()}if(id==='sequence-first'){sequenceFirst=Number(e.target.value);sequenceRevealed=false;drawSequence()}if(id==='filter')listTopics();if(id.startsWith('quiz-'))quizCount();if(id==='card-area'){cardArea=e.target.value;deck=0;flipped=false;showCard()}if(id==='game-select'){gameId=e.target.value;selectedCells.clear();noPure=false;revealMatrix=false;drawMatrix()}if(id==='written-area')listWritten()});
+document.addEventListener('change',e=>{const id=e.target.id;if(id==='exam-select'){selectExamExercise(e.target.value);return;}if(id==='exam-done'){markExamPart(e.target.checked);return;}if(e.target.dataset.topicCheck){const topicId=e.target.dataset.topicCheck;setTopicDone(topicId,e.target.checked);listTopics();document.querySelector('[data-topic-check="'+topicId+'"]')?.focus();return;}if(id==='sequence-base'){sequenceBase=e.target.value;sequenceRevealed=false;drawSequence()}if(id==='sequence-first'){sequenceFirst=Number(e.target.value);sequenceRevealed=false;drawSequence()}if(id==='filter')listTopics();if(id.startsWith('quiz-'))quizCount();if(id==='card-area'){cardArea=e.target.value;deck=0;flipped=false;showCard()}if(id==='game-select'){gameId=e.target.value;selectedCells.clear();noPure=false;revealMatrix=false;drawMatrix()}if(id==='written-area')listWritten()});
 async function loadStudyData(){const bundled=()=>JSON.parse(document.querySelector('#study-data').textContent);if(location.protocol==='file:')return bundled();try{const response=await fetch('data.json',{cache:'no-cache'});if(!response.ok)throw Error('data');const result=await response.json();if(result.version!==4)throw Error('version');return result}catch{return bundled()}}
 loadStudyData().then(d=>{data=d;saved.read=[...new Set(saved.read)].filter(id=>d.topics.some(t=>t.id===id));saved.correct=[...new Set(saved.correct)].filter(id=>d.questions.some(q=>q.id===id));saved.wrong=[...new Set(saved.wrong)].filter(id=>d.questions.some(q=>q.id===id));persist();render()}).catch(()=>{app.innerHTML='<h1>Kunne ikke laste fagstoffet</h1><p>Last siden på nytt. Ved filåpning må hele ZIP-filen være pakket ut.</p>'});
